@@ -4,7 +4,7 @@
     { "id": "lab",       "name": "Lab",       "url": "https://lab.crooney.ca" },
     { "id": "phd",       "name": "PhD",       "url": "https://phd.crooney.ca" },
     { "id": "soundtrap", "name": "Soundtrap", "url": "/soundtrap/" },
-    { "id": "aries",     "name": "Aries",     "url": "/aries/" },
+    { "id": "aries",     "name": "Aries",     "url": "https://aries.crooney.ca/overview" },
     { "id": "funding",   "name": "Funding",   "url": "/funding/overview.html" }
   ]
 }
