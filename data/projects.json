@@ -1,0 +1,10 @@
+{
+  "projects": [
+    { "id": "vanisle",   "name": "VanIsle",   "url": "/vanisle/" },
+    { "id": "lab",       "name": "Lab",       "url": "https://lab.crooney.ca" },
+    { "id": "phd",       "name": "PhD",       "url": "https://phd.crooney.ca" },
+    { "id": "soundtrap", "name": "Soundtrap", "url": "/soundtrap/" },
+    { "id": "aries",     "name": "Aries",     "url": "/aries/" },
+    { "id": "funding",   "name": "Funding",   "url": "/funding/overview.html" }
+  ]
+}

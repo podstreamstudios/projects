@@ -96,7 +96,8 @@
     <h1>Projects</h1>
     <div class="desc">Selected work and ongoing initiatives.</div>
     <div class="rule"></div>
-    <nav class="nav-links">
+    <!-- Static fallback. Source of truth: /data/projects.json (rendered by script below). -->
+    <nav class="nav-links" id="nav-links">
         <a href="/vanisle/">VanIsle</a>
         <a href="https://lab.crooney.ca">Lab</a>
         <a href="https://phd.crooney.ca">PhD</a>
@@ -105,5 +106,17 @@
         <a href="/funding/overview.html">Funding</a>
     </nav>
     <footer>projects.crooney.ca</footer>
+    <script>
+        fetch('/data/projects.json', { cache: 'no-cache' })
+            .then(r => r.ok ? r.json() : Promise.reject(r.status))
+            .then(data => {
+                const nav = document.getElementById('nav-links');
+                if (!nav || !Array.isArray(data.projects)) return;
+                nav.innerHTML = data.projects
+                    .map(p => `<a href="${p.url}">${p.name}</a>`)
+                    .join('');
+            })
+            .catch(err => console.warn('projects.json load failed; using static fallback', err));
+    </script>
 </body>
 </html>
