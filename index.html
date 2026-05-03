@@ -20,13 +20,18 @@
             background: var(--cream);
             color: var(--ink);
             font-family: 'Archivo', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+        .hero {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 40px 24px;
+            padding: 60px 24px 40px;
         }
         .tag {
             font-family: 'DM Mono', monospace;
@@ -82,29 +87,142 @@
             border-bottom-color: var(--ink);
         }
         footer {
-            position: fixed;
-            bottom: 24px;
+            border-top: 1px solid var(--rule);
+            padding: 28px 24px;
             font-family: 'DM Mono', monospace;
             font-size: 10px;
             letter-spacing: 0.12em;
             color: var(--rule);
+            text-align: center;
+        }
+
+        /* ── COMPOSITIONS ── */
+        .compositions {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 80px 32px 96px;
+        }
+        .compositions-eyebrow {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 14px;
+        }
+        .compositions h2 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .compositions h2 em { font-style: italic; }
+        .compositions-lead {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(17px, 1.8vw, 21px);
+            font-weight: 300;
+            line-height: 1.65;
+            color: #2a2820;
+            max-width: 720px;
+            margin-bottom: 36px;
+        }
+        .compositions-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2px;
+            background: var(--rule);
+        }
+        @media (min-width: 720px) {
+            .compositions-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .composition-card {
+            background: var(--cream);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .composition-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 24px;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+        }
+        .composition-title em { font-style: italic; color: var(--mid); }
+        .composition-desc {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #2a2820;
+        }
+        .composition-meta {
+            display: flex;
+            gap: 16px;
+            margin-top: auto;
+            padding-top: 8px;
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--mid);
+        }
+        .composition-meta a {
+            color: var(--mid);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 1px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .composition-meta a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+        .composition-note {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            color: var(--mid);
+            margin-top: 24px;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
-    <div class="tag">crooney.ca</div>
-    <h1>Projects</h1>
-    <div class="desc">Selected work and ongoing initiatives.</div>
-    <div class="rule"></div>
-    <!-- Static fallback. Source of truth: /data/projects.json (rendered by script below). -->
-    <nav class="nav-links" id="nav-links">
-        <a href="/vanisle/">VanIsle</a>
-        <a href="https://lab.crooney.ca">Lab</a>
-        <a href="https://phd.crooney.ca">PhD</a>
-        <a href="/soundtrap/">Soundtrap</a>
-        <a href="https://aries.crooney.ca/overview">Aries</a>
-        <a href="/funding/overview.html">Funding</a>
-    </nav>
+    <section class="hero">
+        <div class="tag">crooney.ca</div>
+        <h1>Projects</h1>
+        <div class="desc">Selected work and ongoing initiatives.</div>
+        <div class="rule"></div>
+        <!-- Static fallback. Source of truth: /data/projects.json (rendered by script below). -->
+        <nav class="nav-links" id="nav-links">
+            <a href="/vanisle/">VanIsle</a>
+            <a href="https://lab.crooney.ca">Lab</a>
+            <a href="https://phd.crooney.ca">PhD</a>
+            <a href="/soundtrap/">Soundtrap</a>
+            <a href="https://aries.crooney.ca/overview">Aries</a>
+            <a href="/funding/overview.html">Funding</a>
+        </nav>
+    </section>
+
+    <section class="compositions">
+        <div class="compositions-eyebrow">System Compositions</div>
+        <h2>Where projects <em>combine</em></h2>
+        <p class="compositions-lead">Some projects gain new meaning when composed. Each composition produces a system architecture neither component could realize alone.</p>
+
+        <div class="compositions-grid">
+            <article class="composition-card">
+                <div class="composition-title">IslandCamp <em>&times;</em> VICSS</div>
+                <p class="composition-desc">Car-free camping experiences embedded with Vancouver Island craft distillery visits — converting place-based experience into export-ready spirits as a coherent collectible artifact.</p>
+                <div class="composition-meta">
+                    <a href="/vanisle/">IslandCamp</a>
+                    <span>&times;</span>
+                    <a href="/vanisle/">VICSS</a>
+                </div>
+            </article>
+        </div>
+
+        <p class="composition-note">Working name: <em>VanIsleCamp</em> (provisional).</p>
+    </section>
+
     <footer>projects.crooney.ca</footer>
     <script>
         fetch('/data/projects.json', { cache: 'no-cache' })
