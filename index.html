@@ -197,6 +197,99 @@
             margin-top: 24px;
             font-style: italic;
         }
+
+        /* ── MITACS PROJECTS ── */
+        .mitacs {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 80px 32px 0;
+        }
+        .mitacs-eyebrow {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 14px;
+        }
+        .mitacs h2 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .mitacs h2 em { font-style: italic; }
+        .mitacs-lead {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(17px, 1.8vw, 21px);
+            font-weight: 300;
+            line-height: 1.65;
+            color: #2a2820;
+            max-width: 720px;
+            margin-bottom: 36px;
+        }
+        .mitacs-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1px;
+            background: var(--rule);
+            border: 1px solid var(--rule);
+        }
+        @media (min-width: 720px) {
+            .mitacs-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (min-width: 1024px) {
+            .mitacs-grid { grid-template-columns: 1fr 1fr 1fr; }
+        }
+        .mitacs-tile {
+            background: var(--cream);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .mitacs-tile-umbrella {
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+        }
+        .mitacs-tile-name {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 22px;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            line-height: 1.2;
+        }
+        .mitacs-tile-desc {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #2a2820;
+        }
+        .mitacs-tile-link {
+            margin-top: auto;
+            padding-top: 4px;
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--mid);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 1px;
+            align-self: flex-start;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .mitacs-tile-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
+        .mitacs-tile-placeholder {
+            background: var(--parchment);
+        }
+        .mitacs-tile-placeholder .mitacs-tile-name { color: var(--mid); }
+        .mitacs-tile-placeholder .mitacs-tile-desc { color: var(--mid); font-style: italic; }
     </style>
 </head>
 <body>
@@ -214,6 +307,50 @@
             <a href="https://aries.crooney.ca/overview">Aries</a>
             <a href="/funding/overview.html">Funding</a>
         </nav>
+    </section>
+
+    <section class="mitacs">
+        <div class="mitacs-eyebrow">Mitacs Projects</div>
+        <h2>Individual <em>projects</em></h2>
+        <p class="mitacs-lead">Each project is a research initiative within the Crooney / Carleton TIM ecosystem &mdash; components that compose into the larger systems below.</p>
+
+        <div class="mitacs-grid">
+            <article class="mitacs-tile">
+                <div class="mitacs-tile-umbrella">VanIsle</div>
+                <h3 class="mitacs-tile-name">IslandCamp</h3>
+                <p class="mitacs-tile-desc">Operating system for car-free camping on Vancouver Island. Coordinates transport, gear, and multi-day travel logistics.</p>
+                <a class="mitacs-tile-link" href="https://vanisle.crooney.ca">vanisle.crooney.ca &rarr;</a>
+            </article>
+            <article class="mitacs-tile">
+                <div class="mitacs-tile-umbrella">VanIsle</div>
+                <h3 class="mitacs-tile-name">VICSS</h3>
+                <p class="mitacs-tile-desc">Vancouver Island Craft Spirits Society &mdash; value-encoding layer that translates place-based experience into exportable artifact.</p>
+                <a class="mitacs-tile-link" href="https://vanisle.crooney.ca">vanisle.crooney.ca &rarr;</a>
+            </article>
+            <article class="mitacs-tile">
+                <div class="mitacs-tile-umbrella">VanIsle</div>
+                <h3 class="mitacs-tile-name">Megaband</h3>
+                <p class="mitacs-tile-desc">Distributed cultural performance system structuring regional expression across Vancouver Island communities and events.</p>
+                <a class="mitacs-tile-link" href="https://vanisle.crooney.ca">vanisle.crooney.ca &rarr;</a>
+            </article>
+            <article class="mitacs-tile">
+                <div class="mitacs-tile-umbrella">Soundtrap</div>
+                <h3 class="mitacs-tile-name">Audiofish</h3>
+                <p class="mitacs-tile-desc">Card deck encoding the monthly theming system (Pearl Jamuary &rarr; AC/DCember) developed through Seven Inning Stretch.</p>
+                <a class="mitacs-tile-link" href="https://soundtrap.crooney.ca">soundtrap.crooney.ca &rarr;</a>
+            </article>
+            <article class="mitacs-tile">
+                <div class="mitacs-tile-umbrella">Soundtrap</div>
+                <h3 class="mitacs-tile-name">The National Archives</h3>
+                <p class="mitacs-tile-desc">Archive project anchored in recorded interpretations of The National's catalogue &mdash; <em>About Today</em> (Dec 2022) is the inaugural session.</p>
+                <a class="mitacs-tile-link" href="https://soundtrap.crooney.ca">soundtrap.crooney.ca &rarr;</a>
+            </article>
+            <article class="mitacs-tile mitacs-tile-placeholder">
+                <div class="mitacs-tile-umbrella">More</div>
+                <h3 class="mitacs-tile-name">+ in development</h3>
+                <p class="mitacs-tile-desc">Additional Mitacs projects to be added.</p>
+            </article>
+        </div>
     </section>
 
     <section class="compositions">
