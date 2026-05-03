@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aries | Projects | Crooney</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=DM+Mono:wght@300;400;500&family=Archivo:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --ink: #0e0d0b;
+            --parchment: #f2ede4;
+            --cream: #faf7f2;
+            --mid: #7a7268;
+            --rule: #d4cdc0;
+            --serif: 'Cormorant Garamond', Georgia, serif;
+            --mono: 'DM Mono', monospace;
+            --sans: 'Archivo', sans-serif;
+        }
+        body {
+            background: var(--cream);
+            color: var(--ink);
+            font-family: var(--sans);
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .breadcrumb {
+            padding: 32px 48px 0;
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--mid);
+        }
+        .breadcrumb a {
+            color: var(--mid);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .breadcrumb a:hover {
+            color: var(--ink);
+            border-bottom-color: var(--ink);
+        }
+        .breadcrumb-sep { padding: 0 8px; color: var(--rule); }
+        main {
+            flex: 1;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 80px 48px 120px;
+            width: 100%;
+        }
+        .tag {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-family: var(--serif);
+            font-size: clamp(42px, 6vw, 64px);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+        }
+        .lead {
+            font-family: var(--serif);
+            font-size: clamp(17px, 2vw, 21px);
+            font-weight: 300;
+            line-height: 1.65;
+            color: #2a2820;
+            max-width: 640px;
+            margin-bottom: 40px;
+        }
+        .placeholder {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--mid);
+            margin-bottom: 32px;
+        }
+        .primary-link {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+            border-bottom: 1px solid var(--ink);
+            padding-bottom: 2px;
+        }
+        footer {
+            border-top: 1px solid var(--rule);
+            padding: 24px 48px;
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            color: var(--rule);
+            text-align: right;
+        }
+        @media (max-width: 720px) {
+            main { padding: 48px 24px 80px; }
+            .breadcrumb { padding: 24px 24px 0; }
+            footer { padding: 24px; text-align: left; }
+        }
+    </style>
+</head>
+<body>
+    <div class="breadcrumb">
+        <a href="/">Projects</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>Aries</span>
+    </div>
+    <main>
+        <div class="tag">Project</div>
+        <h1>Aries</h1>
+        <p class="lead">Project overview &mdash; to be written.</p>
+        <p class="placeholder">Content placeholder.</p>
+        <a class="primary-link" href="https://aries.crooney.ca">Visit aries.crooney.ca &rarr;</a>
+    </main>
+    <footer>projects.crooney.ca</footer>
+</body>
+</html>
