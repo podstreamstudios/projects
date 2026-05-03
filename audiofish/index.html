@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audiofish x Fish.Audio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #040d1a;
+  --paper: #e8f4ff;
+  --cyan: #00b4d8;
+  --cyan-light: #48cae4;
+  --cyan-bright: #90e0ef;
+  --deep: #023e8a;
+  --rule: rgba(0,180,216,0.2);
+  --card-bg: #061a2e;
+  --serif: 'Playfair Display', Georgia, serif;
+  --mono: 'DM Mono', 'Courier New', monospace;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(4,13,26,0.95);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+}
+
+.nav-brand {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--cyan);
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13px;
+  color: rgba(232,244,255,0.6);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--cyan-light); }
+
+section {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.hero {
+  max-width: 100%;
+  padding: 7rem 2rem 5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0,180,216,0.15) 0%, transparent 65%),
+    radial-gradient(ellipse at 20% 80%, rgba(2,62,138,0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(0,119,182,0.2) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.brand-overlap {
+  display: inline-block;
+  position: relative;
+}
+
+.audio { color: var(--paper); }
+.fish { color: var(--cyan-bright); }
+.brand-overlap .dot-audio { color: var(--cyan-light); font-style: italic; }
+.brand-overlap .domain { color: rgba(232,244,255,0.5); font-style: italic; }
+
+.hero-sub {
+  font-size: 1.15rem;
+  color: rgba(232,244,255,0.7);
+  max-width: 560px;
+  margin: 0 auto 2.5rem;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.cta-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--cyan);
+  color: var(--ink);
+}
+
+.btn-primary:hover { background: var(--cyan-bright); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--paper);
+  border: 1px solid rgba(232,244,255,0.2);
+}
+
+.btn-ghost:hover { border-color: var(--cyan-light); color: var(--cyan-light); }
+
+h2 {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  color: var(--paper);
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+p { color: rgba(232,244,255,0.82); margin-bottom: 1.25rem; }
+p:last-child { margin-bottom: 0; }
+
+strong { color: var(--paper); font-weight: 500; }
+
+.lead {
+  font-size: 1.15rem;
+  color: rgba(232,244,255,0.9);
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 2.5rem 0;
+}
+
+.card {
+  background: #061a2e;
+  padding: 1.75rem;
+}
+
+.card-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 0.75rem;
+}
+
+.card h3 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  color: var(--paper);
+}
+
+.card p {
+  font-size: 14px;
+  color: rgba(232,244,255,0.6);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.three-layer {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0;
+  margin: 2.5rem 0;
+}
+
+.layer-row {
+  display: contents;
+}
+
+.layer-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  align-items: flex-start;
+  padding-top: 1.5rem;
+}
+
+.layer-content {
+  padding: 1.25rem 0 1.25rem 1.5rem;
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+
+.layer-content h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--paper);
+  margin-bottom: 0.25rem;
+}
+
+.layer-content p {
+  font-size: 14px;
+  color: rgba(232,244,255,0.6);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.rank-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 13px;
+  margin: 2rem 0;
+}
+
+.rank-table th {
+  text-align: left;
+  padding: 0.6rem 1rem;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  border-bottom: 1px solid var(--rule);
+  font-weight: 400;
+}
+
+.rank-table td {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid rgba(0,180,216,0.1);
+  color: rgba(232,244,255,0.75);
+  vertical-align: top;
+}
+
+.rank-table td:first-child {
+  color: var(--cyan);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.rank-table tr:last-child td { border-bottom: none; }
+.rank-table tr:hover td { background: rgba(0,180,216,0.05); }
+
+.sponsor-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 0;
+  margin: 2rem 0;
+}
+
+.sponsor-name {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--cyan-light);
+  padding: 1.5rem 1.5rem 1.5rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.sponsor-desc {
+  padding: 1.5rem 0 1.5rem 1.5rem;
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+
+.sponsor-desc p {
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.sponsor-desc .role {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+blockquote {
+  border-left: 3px solid var(--cyan);
+  padding: 1rem 0 1rem 1.5rem;
+  margin: 2rem 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: rgba(232,244,255,0.85);
+  line-height: 1.7;
+}
+
+blockquote cite {
+  display: block;
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--cyan);
+  margin-top: 0.75rem;
+}
+
+.footer {
+  border-top: 1px solid var(--rule);
+  padding: 3rem 2rem;
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-brand {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--cyan);
+  margin-bottom: 0.5rem;
+}
+
+.footer-meta {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: rgba(232,244,255,0.4);
+  line-height: 1.8;
+}
+
+.footer-links {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 2;
+}
+
+.footer-links a {
+  color: rgba(232,244,255,0.5);
+  text-decoration: none;
+  display: block;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--cyan); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero > * {
+  animation: fadeUp 0.6s ease both;
+}
+
+.eyebrow { animation-delay: 0.1s; }
+.hero h1 { animation-delay: 0.2s; }
+.hero-sub { animation-delay: 0.3s; }
+.cta-row { animation-delay: 0.4s; }
+
+@media (max-width: 600px) {
+  .sponsor-row { grid-template-columns: 1fr; }
+  .sponsor-name { border-top: 1px solid var(--rule); padding: 1rem 0 0.25rem; }
+  .sponsor-desc { border-left: none; padding: 0.5rem 0 1rem; }
+  .three-layer { grid-template-columns: 1fr; }
+  .layer-tag { border-top: 1px solid var(--rule); padding-bottom: 0; }
+  .layer-content { border-left: none; padding-top: 0.25rem; }
+  nav .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-brand">Audiofish</a>
+  <ul class="nav-links">
+    <li><a href="#format">The format</a></li>
+    <li><a href="#ranks">Card ranks</a></li>
+    <li><a href="#partnership">Partnership</a></li>
+    <li><a href="#ecosystem">Ecosystem</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="mitacs-proposal.html" style="color:var(--cyan-light);">Mitacs proposal ↗</a></li>
+  </ul>
+</nav>
+
+<div id="hero" class="hero">
+  <p class="eyebrow">Audiofish x Fish.Audio — a partnership proposal</p>
+  <h1>
+    <span class="brand-overlap">
+      <span class="audio">Audio</span><span class="fish">fish</span>
+    </span>
+    <span class="audio"> &amp; </span>
+    <span class="brand-overlap">
+      <span class="fish">Fish</span><span class="audio">.</span><span class="fish">audio</span>
+    </span>
+  </h1>
+  <p class="hero-sub">Audiofish (the game) meets Fish.Audio (the platform) — serving songs to local communities through brand activation, amplification, and interactive FUN!</p>
+  <div class="cta-row">
+    <a href="#partnership" class="btn btn-primary">Fish.audio's role</a>
+    <a href="#format" class="btn btn-ghost">See the format</a>
+  </div>
+</div>
+
+<hr class="rule">
+
+<section id="format">
+  <span class="section-label">The format</span>
+  <h2>A new social format for mixed audiences</h2>
+  <p class="lead">Part pub quiz, part card game, part karaoke — or even live band karaoke, if you want to add your own local music community. Audiofish is the first format where trivia players and performers are in the same room, playing the same game from different angles.</p>
+
+  <p>Pub quiz excludes performers. Karaoke excludes the audience that wants to participate without singing. Music bingo is passive — you listen and mark a card. Audiofish connects all three into a single continuous experience where every person in the venue has a reason to be there.</p>
+
+  <div class="three-layer">
+    <div class="layer-row">
+      <div class="layer-tag">Tactics</div>
+      <div class="layer-content">
+        <h3>Music trivia rounds</h3>
+        <p>All participants compete — no limit. Teams answer questions across 13 themed artist months. Every correct answer earns credits. Deeper cultural knowledge earns more: album titles, key lyrics, soundtrack connections, seasonal associations.</p>
+      </div>
+    </div>
+    <div class="layer-row">
+      <div class="layer-tag">Strategy</div>
+      <div class="layer-content">
+        <h3>The Audiofish card game</h3>
+        <p>Credits buy access to the table. Six singers play Go Fish — card ranks map to themed artist months. Collecting four cards of the same rank earns a performance slot. Singers negotiate, coalition-build, compete for the right to sing.</p>
+      </div>
+    </div>
+    <div class="layer-row">
+      <div class="layer-tag">Goals</div>
+      <div class="layer-content">
+        <h3>Live performance — or cash out</h3>
+        <p>Complete a book: choose your song and perform it. Or cash out credits for prizes. Or pledge them to a friend. Or donate to HeadsUpGuys. The credits economy governs how value flows through the room.</p>
+      </div>
+    </div>
+  </div>
+
+  <p>The format works with any existing karaoke host's song catalogue — Singa, KaraFun, a laptop library — and requires no live band to get started. Add a musician community later and you have something different again: the AI voice host coordinating a live band assembled song by song from registered local musicians. That's the advanced tier. The game mechanics are identical.</p>
+</section>
+
+<hr class="rule">
+
+<section id="ranks">
+  <span class="section-label">The 13 card ranks</span>
+  <h2>The Rockaoke themed months</h2>
+  <p>The card ranks were developed over a decade of live events by <strong>Rockaoke Live! feat. The Naturals</strong> — a Vancouver live band karaoke platform, 2013–2024 — and documented across 12 Spotify playlists. Each rank is a cultural field, not a strict artist discography: songs qualify by artist name, album title, key lyric, soundtrack association, or seasonal cultural calendar. Mapping 12 months onto 13 card ranks required one solution: May splits into two, and Queen cards are wild.</p>
+
+  <table class="rank-table">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Theme</th>
+        <th>Cultural field</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>A</td><td>Pearl Jamuary</td><td>Pearl Jam ecosystem — Mad Season, Temple of the Dog, Eddie Vedder, Janis Joplin</td></tr>
+      <tr><td>2</td><td>FebWHOary</td><td>The Who / "Who" in title or lyric — The Guess Who, Leonard Cohen, Gord Downie</td></tr>
+      <tr><td>3</td><td>Fleetwood March</td><td>Fleetwood Mac / March — Stevie Nicks solo, White Rabbit (March Hare / Alice in Wonderland)</td></tr>
+      <tr><td>4</td><td>April Winehouse</td><td>Amy Winehouse / wine / houses / April showers</td></tr>
+      <tr><td>5</td><td>Maytallica Flowers</td><td>Metallica / flowers and bloom songs</td></tr>
+      <tr><td>6</td><td>Dark Side of the June</td><td>Pink Floyd / space and cosmic — Bowie, Counting Crows (Recovering the Satellites)</td></tr>
+      <tr><td>7</td><td>National Anthems of July</td><td>The National / national anthems — Canada Day, July 4th</td></tr>
+      <tr><td>8</td><td>Dog Days of August</td><td>Canine field / August and Everything After / Reservoir Dogs soundtrack</td></tr>
+      <tr><td>9</td><td>Zepptember</td><td>Led Zeppelin / back-to-school season</td></tr>
+      <tr><td>10</td><td>Ozztober</td><td>Ozzy Osbourne / Black Sabbath / Halloween field</td></tr>
+      <tr><td>J</td><td>Nirvember</td><td>Nirvana / Remembrance Day — Foo Fighters, Hole, war-themed songs</td></tr>
+      <tr><td>Q ★</td><td>The Royal Month of May</td><td>Royalty field — Prince, QOTSA, Kings of Leon, ABBA, Beyoncé / Wild card / Victoria Day</td></tr>
+      <tr><td>K</td><td>AC/DCember</td><td>AC/DC / December and Christmas — The Decemberists, A Long December</td></tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:13px; color: rgba(232,244,255,0.5);">★ Queen cards are wild — they complete any book. The framework is locally adaptable: a licensed operator in Seoul or São Paulo builds their own 13 ranks around their own cultural calendar.</p>
+</section>
+
+<hr class="rule">
+
+<section id="partnership">
+  <span class="section-label">Fish.audio's role</span>
+  <h2>Why this partnership is structural, not decorative</h2>
+
+  <p class="lead">Fish.Audio powers the AI voice host that makes Audiofish run. The name says it all.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">The brand</div>
+      <h3>The name</h3>
+      <p>Every event, every press mention, every social post carries a name that echoes yours. Not acknowledgement — identity.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">The technology</div>
+      <h3>The AI voice host</h3>
+      <p>Fish.audio powers the AI emcee: announcing results, managing the queue, keeping energy moving — in any language.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">The scale</div>
+      <h3>Global licensing</h3>
+      <p>Your multilingual voice AI is what makes the framework deployable without English-speaking hosts. Every new market is a Fish.audio deployment.</p>
+    </div>
+  </div>
+
+  <p>Your CEO has written that community usage drives model quality — Arabic speakers arrived, Arabic improved, enterprise followed. Audiofish events are emotionally engaged, musically contextual, real-time voice interactions. Not enterprise demos. Not podcast recordings. The "creation and companionship" contexts you identified as underserved. Every Audiofish event is a Fish.audio case study in the wild.</p>
+</section>
+
+<hr class="rule">
+
+<section id="ecosystem">
+  <span class="section-label">The ecosystem</span>
+  <h2>Four structural partners</h2>
+
+  <div class="sponsor-row">
+    <div class="sponsor-name">Fish.audio</div>
+    <div class="sponsor-desc">
+      <span class="role">AI voice infrastructure</span>
+      <p>Powers the AI voice host. The Audiofish brand name echoes the Fish.audio product at the platform's identity level. Multilingual capability enables global licensed deployment without English-language host dependency.</p>
+    </div>
+  </div>
+
+  <div class="sponsor-row">
+    <div class="sponsor-name">Singa</div>
+    <div class="sponsor-desc">
+      <span class="role">Karaoke catalogue</span>
+      <p>The song catalogue layer. The Audiofish card deck is generated from Singa's available songs organized by the 13 themed month ranks. Direct access to KJs and venue operators who make platform purchasing decisions. For songs not yet part of Singa's catalogue, <strong>Musical AI</strong> — which raised $4.5M in January 2025 to build attribution and licensing infrastructure for AI-assisted music platforms — provides the rights management layer that makes expanding the catalogue feasible at scale.</p>
+    </div>
+  </div>
+
+  <div class="sponsor-row">
+    <div class="sponsor-name">Soundtrap</div>
+    <div class="sponsor-desc">
+      <span class="role">Onboarding + community development</span>
+      <p>Authentication and onboarding layer. Audiofish registration automatically creates a Soundtrap account; existing users sign in with Soundtrap credentials. A creative audio workspace for building original content and nurturing the local music communities — singers and musicians — that make future versions of Audiofish possible... but with a live band on demand!</p>
+    </div>
+  </div>
+
+  <div class="sponsor-row">
+    <div class="sponsor-name">HeadsUpGuys</div>
+    <div class="sponsor-desc">
+      <span class="role">Confirmed charity partner</span>
+      <p>The world's leading men's mental health resource — 5M+ global visitors, 10,000 weekly users in 50+ countries, funded entirely by private donations. The donation mechanic is built into the credits economy: participants pledge credits to HeadsUpGuys with a single tap. The venue music audience is predominantly male. The format's community-building design is the kind of supportive social environment HeadsUpGuys advocates for.</p>
+    </div>
+  </div>
+
+  <div class="sponsor-row">
+    <div class="sponsor-name">DNDA</div>
+    <div class="sponsor-desc">
+      <span class="role">Methodology partner</span>
+      <p>Don Norman Design Award — a US 501(c)(3) public charity and global Humanity-Centered Design movement. Provides the HCD+ evaluative framework for the paper prototype and iterative design phases. Partners include the Nielsen Norman Group and UC San Diego Design Lab.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="research">
+  <span class="section-label">The research backing</span>
+  <h2>Mitacs Accelerate Entrepreneur</h2>
+
+  <p class="lead">Audiofish is the applied component of a research project submitted to <strong>Mitacs Accelerate Entrepreneur</strong>, in partnership with 1730 Technology Consulting (industry partner) and Carleton University's Sprott School of Business, TIM program (academic partner).</p>
+
+  <p>The research applies a theoretical correction to IDEO's widely adopted design thinking framework — substituting Christensen's Resources/Processes/Values (RPV) model — to the design of community platform ecosystems for live music events. The practitioner origin is a decade of operational experience with Rockaoke Live! feat. The Naturals in Vancouver (2013–2024): the platform that generated the 13 themed months, the catalogue methodology, and the diagnosis of why a single-band live karaoke format with 500+ songs eventually fails at the infrastructure layer.</p>
+
+  <blockquote>
+    "Find an activity setting where you can be both participant and analyst. Enter into the process of helping things grow in the activity system you have entered. Take your ability to create and sustain effective systems as evidence of your theory's adequacy."
+    <cite>— Michael Cole, Cultural Psychology (1996), pp. 349–350</cite>
+  </blockquote>
+
+  <p>The BC proof-of-concept runs across two venue partners: The Alcove Lounge, East Vancouver (target: May–September) and Match Public House at Chances Casino, Campbell River (October–February). Paper prototype testing precedes digital deployment — the core game mechanics are validated with printed card decks and a whiteboard credits economy before any technology integration is required.</p>
+
+  <p>Sponsors are acknowledged in the peer-reviewed research output as infrastructure partners — academic visibility that outlasts any single event activation.</p>
+
+  <div class="cta-row" style="margin-top: 2.5rem; justify-content: flex-start;">
+    <a href="mitacs-proposal.html" class="btn btn-primary">Read the full proposal</a>
+    <a href="/cdn-cgi/l/email-protection#b0dadfd5dcf0818783809ed3d1" class="btn btn-ghost">Get in touch</a>
+    <a href="https://1730.ca" class="btn btn-ghost">1730.ca</a>
+  </div>
+
+<hr class="rule">
+
+<footer class="footer">
+  <div>
+    <div class="footer-brand">Audiofish</div>
+    <div class="footer-meta">
+      A Stratalab™ format<br>
+      1730 Technology Consulting Inc.<br>
+      Campbell River · Vancouver · BC
+    </div>
+  </div>
+  <div class="footer-links">
+    <a href="https://fish.audio">fish.audio</a>
+    <a href="https://singa.com">singa.com</a>
+    <a href="https://soundtrap.com">soundtrap.com</a>
+    <a href="https://headsupguys.org">headsupguys.org</a>
+    <a href="https://dnda.design">dnda.design</a>
+  </div>
+</footer>
+</body>
+</html>
