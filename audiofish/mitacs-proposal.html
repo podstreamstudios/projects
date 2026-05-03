@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mitacs Proposal · Audiofish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #040d1a;
+  --paper: #e8f4ff;
+  --cyan: #00b4d8;
+  --cyan-light: #48cae4;
+  --cyan-bright: #90e0ef;
+  --deep: #023e8a;
+  --rule: rgba(0,180,216,0.2);
+  --card-bg: #061a2e;
+  --serif: 'Playfair Display', Georgia, serif;
+  --mono: 'DM Mono', 'Courier New', monospace;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.proposal-topbar {
+  border-bottom: 1px solid var(--rule);
+  padding: 1.25rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.proposal-topbar a {
+  color: var(--cyan-light);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.proposal-topbar a:hover { color: var(--cyan-bright); border-bottom-color: var(--cyan-bright); }
+.proposal-topbar .crumb { color: rgba(232,244,255,0.45); }
+.proposal-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--cyan-light);
+  text-transform: uppercase;
+}
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 4.5rem 2rem 6rem;
+}
+main h1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+  margin: 0.5rem 0 1.25rem;
+}
+main h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3.2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--paper);
+  margin: 3rem 0 1.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+main h2:first-of-type { border-top: none; padding-top: 0; }
+main h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--cyan-bright);
+  margin: 2rem 0 0.85rem;
+}
+main h4 {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cyan-light);
+  margin: 1.5rem 0 0.75rem;
+}
+main p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--paper);
+  margin: 0 0 1.15rem;
+}
+main p strong { color: var(--cyan-bright); font-weight: 500; }
+main p em { color: rgba(232,244,255,0.85); font-style: italic; }
+main a {
+  color: var(--cyan-light);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(0,180,216,0.45);
+  transition: color 0.2s, border-color 0.2s;
+}
+main a:hover { color: var(--cyan-bright); border-bottom-color: var(--cyan-bright); }
+main ul, main ol {
+  margin: 0 0 1.25rem 1.5rem;
+  padding: 0;
+}
+main li {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--paper);
+  margin-bottom: 0.45rem;
+}
+main li::marker { color: var(--cyan); }
+main hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 3rem 0;
+}
+main blockquote {
+  border-left: 3px solid var(--cyan);
+  padding: 0.5rem 1.5rem;
+  margin: 1.5rem 0;
+  background: var(--card-bg);
+  font-style: italic;
+  color: rgba(232,244,255,0.9);
+}
+main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 14px;
+  background: var(--card-bg);
+}
+main th, main td {
+  padding: 0.7rem 0.9rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--rule);
+}
+main th {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan-light);
+  background: rgba(0,180,216,0.06);
+  border-bottom: 1px solid var(--cyan);
+}
+main tr:last-child td { border-bottom: none; }
+main code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  background: var(--card-bg);
+  padding: 0.1rem 0.35rem;
+  border-radius: 2px;
+  color: var(--cyan-bright);
+}
+main pre {
+  background: var(--card-bg);
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1.25rem 0;
+  border-left: 2px solid var(--cyan);
+}
+main pre code { background: none; padding: 0; color: var(--paper); font-size: 13px; }
+.proposal-foot {
+  border-top: 1px solid var(--rule);
+  padding: 2rem;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(232,244,255,0.45);
+  text-align: center;
+}
+.proposal-foot a {
+  color: var(--cyan-light);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.proposal-foot a:hover { color: var(--cyan-bright); border-bottom-color: var(--cyan-bright); }
+@media (max-width: 720px) {
+  main { padding: 3rem 1.25rem 4rem; }
+  .proposal-topbar { padding: 1rem 1.25rem; flex-wrap: wrap; gap: 0.75rem; }
+}
+</style>
+</head>
+<body>
+<div class="proposal-topbar">
+  <span><a href="/audiofish/">&larr; Audiofish</a> <span class="crumb">/ Mitacs Proposal</span></span>
+  <span class="proposal-eyebrow">Research Proposal</span>
+</div>
+<main>
+<h1>Mitacs Accelerate Entrepreneur</h1>
+<h2>Research Proposal</h2>
+<p><strong>Project Title:</strong> Miscategorized by Design: A Theoretical Correction to IDEO&#39;s DFV Continuous Innovation Framework Using Christensen&#39;s RPV Theory, with Empirical Grounding in Live Optimization Platform Design</p>
+<p><strong>Applicant:</strong> Joel [Last Name], PhD Candidate
+<strong>Institution:</strong> [Host University — TBD]
+<strong>Industry Partner:</strong> 1730 Technology Consulting (1730.ca)
+<strong>Program:</strong> Mitacs Accelerate Entrepreneur</p>
+<hr>
+<h2>1. Executive Summary</h2>
+<p>This research produces two co-equal outputs: a peer-reviewed journal article intervening in the design thinking and innovation management literature, and the empirical deployment of <strong>Stratalab™</strong>, a portfolio of live optimization-driven community experience platforms developed by <strong>1730 Technology Consulting</strong>. Each output grounds and legitimizes the other — the theoretical argument requires empirical testing, and the platform deployment requires a theoretical framework rigorous enough to generate publishable findings.</p>
+<p>The theoretical intervention targets IDEO&#39;s widely adopted Desirability, Feasibility, Viability (DFV) framework. This research does not reject DFV&#39;s identification as a continuous innovation framework — that framing is correct. The argument is more precise: IDEO&#39;s three categories are <strong>miscategorized</strong>. IDEO correctly identifies three dimensions of innovation but misidentifies what each dimension actually is. Feasibility is framed as technological capability, when it is properly a question of human skills and processes — what people can achieve using viable tools. Viability is framed as economic sustainability, when economic return is a terminal outcome the system is optimizing toward, not a precondition assessable independently of resources and processes. And desirability is framed as user preference, when it is properly the values question: what outcomes — sociocultural, aesthetic, intrinsic, and economic — is the system as a whole organized to produce? All three miscategorizations have material consequences for how innovation systems are designed, evaluated, and diagnosed when they fail.</p>
+<p>Drawing on Clayton Christensen&#39;s Resources, Processes, and Values (RPV) theory — reconceptualized as a coordinated system of analytical lenses (Flynn, 2010) through Stafford Beer&#39;s Viable System Model and a three-part extension of Walter Benjamin&#39;s exhibition value / cult value dialectic that introduces exchange value as the governing third lens (Flynn, 2006) — this research proposes a theoretically grounded reordering of the DFV categories and tests it against the design and live deployment of Stratalab™.</p>
+<p>Stratalab™ currently comprises three active formats — <strong>Audiofish™</strong> (an interactive music trivia and card game platform), <strong>Stratagames™</strong> (live strategy and trivia competition), and <strong>Megaband™</strong> (live music optimization with a registered musician community) — providing a comparative multi-case structure for the research. The proof-of-concept deployment proceeds in two phases: Phase 1 deploys Audiofish™ at existing karaoke venues in Vancouver (The Alcove Lounge, May–September) and Campbell River (Match Public House at Chances Casino, October–February), requiring no live band or musician registry. Phase 2 activates the Megaband™ live band format once a regional musician registry reaches critical mass — informed by demand data generated through Phase 1 Audiofish™ events.</p>
+<p>The Megaband™ format is of particular theoretical relevance as it operationalizes the RPV/DFV framework at the level of individual participant behaviour: musicians submit song lists ranked by both desire and proficiency, explicitly surfacing the tension between desirability and feasibility at the micro level, constrained by the resource viability of the available lineup.</p>
+<p>The research is supported by a confirmed ecosystem of technology and community partners — Fish.audio (AI voice infrastructure), Singa (karaoke catalogue), Soundtrap (musician onboarding and development), and HeadsUpGuys Society (confirmed charity partner for fundraiser event activations) — whose structural roles in the platform provide additional empirical grounding for the research&#39;s applied contributions.</p>
+<hr>
+<h2>2. Background and Motivation</h2>
+<h3>2.1 The IDEO DFV Framework</h3>
+<p>In the early 2000s, Tim Brown and IDEO introduced the Desirability, Feasibility, Viability (DFV) framework as a practical model for human-centred innovation. In IDEO&#39;s canonical formulation, design thinking &quot;brings together what is desirable from a human point of view with what is technologically feasible and economically viable&quot; (Brown, 2008). The three criteria are presented as co-equal dimensions of an innovation &quot;sweet spot,&quot; visualized as a Venn diagram where successful innovation sits at the intersection of all three.</p>
+<p>The framework has achieved extraordinary influence. It has been adopted across design, business strategy, UX, and entrepreneurship education, generating over 800,000 search results for the core terminology and forming the backbone of design thinking curricula at institutions including Stanford&#39;s d.school and IDEO U.</p>
+<p>Despite this influence, the framework has attracted growing criticism. Published critiques have noted that the Venn diagram representation &quot;implies if you follow a simple three-step sequential process, successful innovation pops out&quot; — a characterization that critics argue misrepresents both the complexity and the causal logic of innovation (Explorer Labs, 2024). The framework has been described as &quot;overly abstract and simple&quot; — useful as an introductory heuristic but insufficient as an analytical or design tool.</p>
+<p>This research takes that critique further, arguing that the problem is not merely one of simplicity but of theoretical misclassification.</p>
+<h3>2.2 The Core Critique: Three Miscategorized Dimensions</h3>
+<p>IDEO&#39;s framework presents desirability, feasibility, and viability as co-equal filters in a continuous innovation process — a product concept must satisfy all three simultaneously to reach the innovation &quot;sweet spot.&quot; This research argues that all three categories are miscategorized: IDEO correctly identifies three dimensions of innovation but misidentifies what each dimension actually <em>is</em>. The miscategorization is not superficial. It produces a systematic misreading of where innovation systems succeed and fail.</p>
+<p><strong>Feasibility miscategorized as technological:</strong> IDEO defines feasibility as what is &quot;technologically feasible&quot; — framing it as a question of what the technology can do. But technology is a resource, not a process. Feasibility is properly a question of what skilled people can achieve <em>using</em> available tools and technologies — it is the human capability and process layer, in Christensen&#39;s terms the routines, methods, and coordinated skills through which resources are deployed to get jobs done. A technology may exist without any organization having the processes or people capable of applying it reliably. Locating feasibility in the technology rather than in the human processes that use it misidentifies the actual locus of execution risk.</p>
+<p><strong>Viability miscategorized as economic outcome:</strong> IDEO defines viability as economic viability — the financial sustainability of the product or service. This research argues that economic sustainability is not a precondition of the same logical type as feasibility. It is a <strong>terminal outcome</strong> — something the system is optimizing toward — not a filter that can be applied independently of whether the organization has the resources and processes to produce value in the first place. Treating economic return as a co-equal input inverts the causal sequence: sustainable economics are what you achieve <em>if</em> the resource and process layers are correctly structured; they are not a condition you assess <em>before</em> understanding those layers.</p>
+<p><strong>Desirability miscategorized as user preference:</strong> IDEO&#39;s human-centred framing positions desirability as what users want — a preference or need at the individual level. This research argues that desirability is properly the values question: what outcomes is the system as a whole optimizing toward? This is broader than user preference. It includes sociocultural value, aesthetic value, intrinsic value (including what makes a song worth playing regardless of its commercial performance), and yes, economic sustainability — all understood as outcomes the system exists to produce and protect, not as filters applied at the outset. In Christensen&#39;s terms, the Values layer defines the criteria by which an organization decides what matters and what trade-offs are acceptable. That is a governance and design question, not a user research question.</p>
+<p>Taken together, the three miscategorizations produce a systematic diagnostic error: IDEO&#39;s framework locates execution risk in the wrong layers, assesses outcomes as preconditions, and reduces a governance question to a preference question. The consequence, as the Rockaoke Live! feat. The Naturals case demonstrates, is a framework that can clear a failing system as viable, feasible, and desirable right up until the moment of collapse.</p>
+<h3>2.3 The RPV Reordering</h3>
+<p>Christensen, Anthony, and Roth&#39;s (2004) Resources, Processes, and Values (RPV) framework provides a theoretically grounded basis for reordering the DFV categories. In Christensen&#39;s formulation:</p>
+<ul>
+<li><strong>Resources</strong> are what an organization has — assets, infrastructure, people, technology</li>
+<li><strong>Processes</strong> are what an organization does — the routines, methods, and capabilities through which resources are deployed to create value</li>
+<li><strong>Values</strong> are what an organization optimizes for — the criteria by which decisions are made and outcomes are prioritized</li>
+</ul>
+<p>This research proposes a direct mapping:</p>
+<table>
+<thead>
+<tr>
+<th>IDEO DFV</th>
+<th>Reordered RPV Mapping</th>
+<th>Beer VSM</th>
+<th>Logical Role</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Viable</td>
+<td>Resources</td>
+<td>Potentiality</td>
+<td>Precondition: do we have what&#39;s needed?</td>
+</tr>
+<tr>
+<td>Feasible</td>
+<td>Processes</td>
+<td>Capability</td>
+<td>Can we coordinate and execute reliably?</td>
+</tr>
+<tr>
+<td>Desirable</td>
+<td>Values</td>
+<td>Actuality</td>
+<td>What outcome are we optimizing toward?</td>
+</tr>
+</tbody></table>
+<p>The third column draws on Stafford Beer&#39;s Viable System Model (VSM), specifically the Potentiality / Capability / Actuality framework presented in <em>Designing Freedom</em> (1973) and elaborated in <em>Brain of the Firm</em> (1972). Beer&#39;s three-level recursive model describes how a viable system moves from what it could produce (Potentiality — the resource base), through what it can coordinate and execute (Capability — the operational processes), to what it actually delivers (Actuality — the realized output). This maps directly onto the RPV reordering: Resources establish what is possible, Processes determine what can be coordinated and executed, and Values define what the system is actually optimizing toward.</p>
+<p>Beer&#39;s <strong>Law of Requisite Variety</strong> (drawn from Ashby, 1956) provides a further theoretical anchor. For a system to remain stable, its regulatory variety must match the variety generated by the system it is managing. Applied to Megaband™: the optimization engine must have sufficient regulatory variety — enough registered musicians, sufficient instrument coverage, adequate song overlap — to absorb the variety generated by participant requests, availability changes, and real-time inputs throughout the event. A registry that is too sparse creates exactly Beer&#39;s &quot;mismatched relaxation time&quot; condition: the system is perturbed faster than it can restabilize, and the optimization degrades.</p>
+<p>Under this reordering, value creation is repositioned within the Values layer as the <strong>desirable outcome</strong> the system is optimizing toward — and is understood broadly, not narrowly as economic return. Value in Megaband™ is sociocultural (a song&#39;s place in a community&#39;s shared memory), aesthetic (the intrinsic quality of the composition), and performative (what happens when the right musicians play the right song live). The normative principle that unifies these is the Megaband™ motto: <strong>serve the song</strong>. Economic sustainability is one desirable outcome among several, achievable only when the viable resources and feasible processes are in place to produce value in the first place.</p>
+<p>This reordering is not a rejection of IDEO&#39;s framework. It is a proposal that RPV theory — grounded in Beer&#39;s viable systems thinking and Christensen&#39;s organizational theory — provides the missing theoretical foundation for what DFV is attempting to articulate, and that this foundation has material consequences for how innovation systems are designed and evaluated.</p>
+<hr>
+<h2>3. Research Questions</h2>
+<p>This research is organized around three questions:</p>
+<p><strong>RQ1 (Theoretical):</strong> How does Christensen&#39;s RPV framework reorder the causal logic of IDEO&#39;s DFV framework, and what are the implications of this reordering for innovation system design?</p>
+<p><strong>RQ2 (Applied):</strong> How do the RPV-reordered categories (Resources/Viability, Processes/Feasibility, Values/Desirability) manifest in the design and operation of Stratalab&#39;s live optimization formats?</p>
+<p><strong>RQ3 (Behavioural):</strong> How do individual participants within the Megaband™ format navigate the tension between desirability (songs they most want to perform) and feasibility (songs they are most proficient in), constrained by the resource viability of the available lineup — and what does this reveal about the RPV framework at the micro level?</p>
+<hr>
+<h2>4. Practitioner Origin: Rockaoke Live! feat. The Naturals (2014–2024)</h2>
+<p>This research does not begin with theory. It begins with a decade of operational practice in the Vancouver live music and hospitality events industry — and a design problem that theory eventually helped name.</p>
+<p>From 2014 to 2024, the principal researcher served as <strong>lead singer, host/emcee, and manager</strong> of <strong>Rockaoke Live! feat. The Naturals</strong> — a live band karaoke event format in which audience members perform by singing with a live rock band rather than to a backing track. Rockaoke Live! was founded in Vancouver in 2013; the principal researcher joined in 2014 following a corporate event engagement as lead singer for an afterparty at the <strong>2014 PGA Trade Show in Orlando</strong> — an experience that demonstrated the format&#39;s commercial viability in the conference and corporate event market before the Vancouver weekly residency model was established. That first corporate engagement established the format&#39;s reach: live band karaoke was not a bar format looking for a wider audience, it was already a premium experiential entertainment product with direct application to the high-value conference, trade show, and brand activation market.</p>
+<p>This role placed the researcher simultaneously at all three RPV layers in real time: managing Resources (band members, catalogue, bookings, venue relationships), running Processes (hosting, setlist coordination, on-the-night song management, substitution logistics), and embodying Values (the DIY rock ethos, the community participation spirit, the normative principle of serving the song) — all while on stage in front of an audience.</p>
+<p><strong>The Naturals</strong> also operated as a hireable cover band independent of the Rockaoke Live! format, performing at local venues across Vancouver with a curated setlist and standard cover band delivery. This dual operational mode is itself a diagnostic data point: in cover band mode, The Naturals operated with variety attenuation — a bounded, rehearsed catalogue, consistent delivery, manageable complexity. In Rockaoke Live! mode, the same ensemble attempted variety amplification — a 500-song open catalogue, unrehearsed spontaneity, real-time song coordination — with insufficient infrastructure to sustain it. The musicians were capable. The format was validated in both modes. Only one mode had the Resources layer to scale.</p>
+<p>The format occupied the same broad market category as other Vancouver event bands — weddings, corporate events, local engagements — but was categorically different in its structure and aesthetic. Where professionalized event bands like <strong>Side One</strong> (sideone.ca) deliver <em>to</em> an audience with a curated setlist, polished production, and systematized service packages at premium fees, Rockaoke Live! feat. The Naturals pulled the audience <em>onto the stage</em>. The community participation element was structurally built into the format: performers were unknown until they walked up to the mic, songs were chosen in the moment, and the event&#39;s energy came from the unrepeatable collision of whoever showed up with whatever songs they wanted to sing.</p>
+<p>A 2015 CBC News feature on the format — broadcast on <em>On the Coast</em> and published February 14, 2015, when the catalogue stood at over 400 songs — documented both the community dynamics and the real-time coordination challenge that would eventually prove unsustainable at scale. Bassist Justin Brown described the sign-up process: regulars were &quot;basically climbing over [the host&#39;s] shoulders, trying to get on the sign-up list and causing him no end of grief while he&#39;s trying to put together a set list that has a bit of a flow to it&quot; (Christiansen, CBC News, 2015). The manual, human-managed process of assembling a coherent setlist from real-time participant requests — balancing flow, song availability, band readiness, and singer desire — is precisely what the Megaband™ optimization engine is designed to formalize, automate, and scale across a distributed community registry.</p>
+<p>The same feature captured the format&#39;s core value proposition in the principal researcher&#39;s own words at the time: &quot;There&#39;s a bit more freedom in terms of the song and how it breathes on stage. You still have to have your chops down if you want to pull it off, but the guys are flexible enough to be able to adapt.&quot; This adaptive, real-time accommodation of variable singer performance is not a secondary feature of the format — it is the primary source of its community value, and it is what makes the information management problem categorically more complex than a standard cover band setlist. The band must be simultaneously prepared for any song in the catalogue and responsive to the unrepeatable particularity of each singer&#39;s performance of it.</p>
+<p>This difference in format produced a fundamentally different information management problem. Side One can rehearse a fixed repertoire, refine delivery over thousands of events, and build scalable operational systems around a stable and bounded catalogue. Rockaoke Live! feat. The Naturals could not plan a setlist in advance — the value proposition <em>was</em> the openness. The loose, DIY rock aesthetic, the participatory spirit, the sense that any song might happen: these were not production deficiencies relative to Side One. They were the product.</p>
+<h3>The Market Context: A Format Ahead of Its Infrastructure</h3>
+<p>Live band karaoke — also known as &quot;rockstar karaoke&quot; or &quot;rockaoke&quot; — has since shifted from a niche novelty to a recognized and growing segment of the global karaoke market, valued at approximately $5.78 billion in 2024 and projected to reach $6.8 billion by 2032. Unlike traditional karaoke using pre-recorded tracks, the live band format features a backing band, creating what the industry now describes as a &quot;real-time musical connection&quot; that transforms a standard night out into a high-energy participatory performance.</p>
+<p>Industry analysis of the format&#39;s growth identifies several drivers that directly validate the Rockaoke Live! feat. The Naturals value proposition in retrospect:</p>
+<ul>
+<li><strong>Experiential nightlife demand</strong>: modern audiences prioritize experiences over passive consumption, making live band karaoke a structural fit for the IRL community experience economy</li>
+<li><strong>Corporate and private event adoption</strong>: the format&#39;s capacity to &quot;break the ice&quot; and build trust among participants has made it a growing category in brand activations and team-building events</li>
+<li><strong>Technological integration</strong>: the growth of the format is now supported by digital infrastructure — smartphone apps for song requests, real-time pitch correction, wireless systems — that did not exist or was not accessible in the 2014 operational window</li>
+<li><strong>Community building</strong>: regular events foster tight-knit communities of regulars, creating customer loyalty and increased venue dwell time</li>
+<li><strong>Musician revenue diversification</strong>: for professional musicians, live band karaoke has become a viable way to remain competitive and increase revenue outside traditional gig contexts</li>
+</ul>
+<p>The market has also validated the themed event model that Rockaoke Live! feat. The Naturals used as a mitigation strategy: specialized nights (genre-specific, era-specific, artist-specific) are now identified as a key growth driver, attracting dedicated demographic communities to recurring events.</p>
+<p>This market context establishes a critical point for the research: <strong>Rockaoke Live! feat. The Naturals was not a format failure. It was a Resources-layer failure in a format the market has since validated at scale.</strong> The operational window of 2014–2024 preceded the technological infrastructure that now makes the format sustainable. The failure is not evidence that the concept was wrong — it is evidence that the concept was ahead of its infrastructure, which is precisely the diagnostic that the RPV reordering framework produces and that IDEO&#39;s DFV framework cannot.</p>
+<p>What failed was not the concept. It was the infrastructure required to sustain it.</p>
+<h3>The Catalogue Problem</h3>
+<p>At its peak, Rockaoke Live! feat. The Naturals maintained a catalogue of over 500 songs — a figure that functioned simultaneously as the event&#39;s primary value proposition and its central operational liability. The size of the catalogue was the pitch: audiences and organizers booked the event precisely because any song, from any era, might be available. But a catalogue of 500 songs concentrated in a single band is, in Beer&#39;s terms, a system with insufficient regulatory variety. As core members were replaced by alternates, the effective catalogue contracted significantly — degrading the very value proposition that had generated the booking.</p>
+<p>Mitigations were attempted. Monthly themed events focused on particular artists or genres, temporarily reducing the active catalogue to a manageable subset. But without a proper information system — for lyrics management, song notes, key transposition, onstage display, and dynamic setlist coordination across substituting musicians — the complexity of a qualitatively and quantitatively expansive catalogue remained unsustainable. The project failed not because the format lacked audience value, but because the <strong>Resources layer</strong> (technology infrastructure, systematic onboarding for substitute musicians, catalogue management tooling) could not support the <strong>Processes layer</strong> (real-time song coordination, consistent delivery across a shifting ensemble) required to realize the <strong>Values</strong> the event was organized to produce.</p>
+<p>This is precisely the failure mode that IDEO&#39;s DFV framework cannot diagnose. By IDEO&#39;s account, Rockaoke Live! feat. The Naturals was viable (it generated revenue and paid well), feasible (the band could play), and desirable (every audience loved it). The Venn diagram said the system was working. The system was not working. The collapse was a Resources failure — a mismatch between the variety the system promised and the regulatory variety it could actually sustain — that propagated upward through Processes and ultimately undermined the Values the event existed to deliver.</p>
+<h3>The Market Comparison: Three Architectural Responses to the Same Problem</h3>
+<p>The live band karaoke format produced three distinct operational responses to the same underlying challenge — how do you manage catalogue variety reliably enough to deliver a consistent, high-quality participatory live music experience? — each of which represents a different architectural decision with different sustainability consequences.</p>
+<p><strong>Side One</strong> (sideone.ca, Vancouver) represents <strong>variety attenuation</strong>: a professionalized ensemble with a curated, rehearsed catalogue, systematized delivery processes, and scalable operations across multiple cities. Stability achieved by constraining variety. This is a legitimate and commercially successful architectural decision — but it solves the catalogue management problem by not attempting the participatory format. Side One delivers <em>to</em> an audience; it does not pull the audience onto the stage.</p>
+<p><strong>Good Enough Live Karaoke</strong> (GELK, Toronto, founded December 2013) represents <strong>roster amplification</strong>: the same format as Rockaoke Live!, founded simultaneously in Toronto, which reached a catalogue of 250–400 songs and at its peak expanded to 17 active members drawing from the same shared repertoire — always performing as a 4 or 5-piece band. GELK&#39;s operational history is extensively documented across more than 1,000 shows and 200+ events per year pre-pandemic. Critically, GELK&#39;s co-founders Tim McCready and Jenn were at peak operation manually scheduling &quot;2x or 3x different 4-piece versions of the band playing different locations in a single night&quot; — essentially performing by hand, in real time, the multi-configuration optimization that the Megaband™ engine is designed to automate. GELK hit the same catalogue ceiling as Rockaoke Live! feat. The Naturals and responded by expanding the roster rather than the architecture. The ceiling held: the catalogue fluctuated between 250 and 400 songs across a decade of operation, never breaking through the single-ensemble constraint.</p>
+<p><strong>Rockaoke Live! feat. The Naturals</strong> (Vancouver, 2013–2024) attempted <strong>variety amplification</strong> — a 500-song catalogue, open participation, unrehearsed spontaneity — without the information infrastructure to support it at that scale. The format was right. The infrastructure wasn&#39;t there yet.</p>
+<p>The GELK comparison is particularly significant for this research because it demonstrates that the catalogue ceiling is not a local operational failure specific to Vancouver — it is a <strong>structural constraint of the single-band live karaoke model</strong>, reproduced independently in Canada&#39;s largest city across a decade of professional operation. No single band, regardless of roster size or operational sophistication, has broken through the 400-song ceiling while maintaining the participatory format at consistent quality. The ceiling is not a management problem. It is an architectural one.</p>
+<p><strong>Megaband™</strong> is the architectural response that neither Side One, GELK, nor Rockaoke Live! feat. The Naturals could attempt without the community infrastructure and AI-assisted information management that now makes it feasible: distributing the catalogue across a registered community of musicians — each contributing a manageable repertoire — and using an optimization engine to assemble the best possible lineup from available participants for each song in the setlist. The community model achieves requisite variety not by attenuation (Side One), not by roster amplification (GELK), but by <strong>variety distribution</strong>: the system&#39;s regulatory variety matches the catalogue&#39;s variety because the catalogue <em>is</em> the community.</p>
+<h3>The Hypothesis: Community Model + AI as the Missing Infrastructure</h3>
+<p>The Megaband™ concept emerges directly from this failure as a reframing of the design problem. Rather than concentrating catalogue management in a single band, Megaband™ distributes it across a registered community of musicians — each contributing a manageable repertoire of up to 10 songs per instrument — and uses an optimization engine to assemble the best possible lineup from available participants for each song in the setlist. The community model achieves requisite variety not by attenuation but by distribution: the system&#39;s regulatory variety matches the catalogue&#39;s variety because the catalogue <em>is</em> the community.</p>
+<p>Critically, the advances in AI tools for information management — lyrics systems, real-time coordination, participant interface design, optimization algorithms — that did not exist or were not accessible in the 2014–2024 operational window now make the Processes layer feasible in a way it was not before. The hypothesis this research tests is therefore precise:</p>
+<blockquote>
+<p><em>A community league model for live band karaoke — in which catalogue management is distributed across a registered musician network and coordinated by an AI-assisted optimization engine — is better suited to sustaining the participatory live karaoke format than a single band attempting to maintain an expansive catalogue alone.</em></p>
+</blockquote>
+<p>Mitacs Accelerate Entrepreneur funding is the mechanism that makes the Resources layer viable for the first time: providing the research infrastructure to design, build, and empirically test the information system that Rockaoke Live! feat. The Naturals needed but could not access.</p>
+<hr>
+<h2>5. Industry Context: Market Validation</h2>
+<p>Two concurrent developments in the live music and music technology sectors provide direct market validation for the research premises underlying this proposal — one confirming the format thesis, the other confirming the infrastructure thesis.</p>
+<h3>5.1 The IRL Music Community Experience as an Investment Category</h3>
+<p>In January 2025, Mark Cuban made a significant investment in <strong>Burwoodland</strong>, a company that produces touring themed nightlife experiences including Emo Night Brooklyn, Gimme Gimme Disco, Broadway Rave, and All Your Friends (<em>Billboard</em>, January 2025). Burwoodland&#39;s portfolio is built entirely on genre- and community-specific participatory music events — the same format category that Rockaoke Live! feat. The Naturals occupied and that Megaband™ is designed to scale.</p>
+<p>Cuban&#39;s public statement accompanying the investment is directly relevant to the theoretical framing of this research:</p>
+<blockquote>
+<p>&quot;It&#39;s time we all got off our asses, left the house and had fun. Alex and Ethan know how to create amazing memories and experiences that people plan their weeks around. In an AI world, what you do is far more important than what you prompt.&quot;</p>
+</blockquote>
+<p>This is a capital-level endorsement of the value proposition that underpins both the Burgar taste argument and the Megaband™ design thesis: in a moment of accelerating AI capability, the irreplaceable human experience of being physically present in a room making music together is not a niche market — it is where serious investment is moving. The experiences Cuban is backing are not produced by AI; they are produced by communities of people who show up.</p>
+<p>The investment also signals a consolidation dynamic in the themed live nightlife sector. Burwoodland&#39;s past strategic partners include figures from Brooklyn Bowl and Split Second, indicating that the sector is professionalizing and attracting institutional capital. Megaband™ is positioned at the community-entry layer of this market: the platform that builds the musician registry and event infrastructure from which larger-scale activations can eventually be sourced.</p>
+<h3>5.2 AI Infrastructure for Music Rights and Catalogue Management</h3>
+<p>In January 2025, <strong>Musical AI</strong> — a rights management platform for generative AI — raised $4.5 million in funding led by Heavybit, with participation from BDC and Build Ventures (<em>Billboard</em>, January 2025). Musical AI&#39;s proprietary attribution technology identifies the sources behind AI-generated outputs to enable accurate licensing and royalty payments, and CEO Sean Power has characterized the company&#39;s mission as making attribution &quot;simple and turnkey&quot; — pushing back on the assumption that AI and music licensing are structurally incompatible.</p>
+<p>This is directly relevant to the Resources layer argument in the Megaband™ proposal. The information infrastructure problem that Rockaoke Live! feat. The Naturals could not solve — catalogue management, attribution, rights clarity, and real-time song coordination across a shifting ensemble — is now an active investment category. The tools that did not exist or were not accessible in the 2014–2024 operational window are arriving. Musical AI&#39;s raise is evidence that the sector has identified AI-assisted catalogue and rights management as a viable and fundable infrastructure problem, not a peripheral one.</p>
+<p>The Megaband™ system does not require generative AI output — its catalogue is built from songs musicians already know and want to play. But the attribution and management infrastructure Musical AI is building is precisely the category of tooling that makes a distributed, community-sourced catalogue feasible at scale. The $4.5M raise confirms that the market has recognized the problem; Megaband™ proposes a community-model solution to a parallel instance of it.</p>
+<p>Taken together, these two market signals — Cuban&#39;s investment in participatory live music experiences and Musical AI&#39;s raise for music information infrastructure — validate the two core premises of this research: that the demand for community-driven live music events is growing and attracting serious capital, and that the AI tools required to make the Megaband™ information system feasible are now within reach.</p>
+<hr>
+<h2>6. Case Context: Audiofish™ and the Stratalab™ Platform</h2>
+<h3>6.1 Market Context: Three Established Formats, One Missing Combination</h3>
+<p>The Audiofish™ platform emerges from three well-established venue entertainment markets, each with its own proven community-building dynamics and its own structural limitation:</p>
+<p><strong>Karaoke</strong> — a $5.78 billion global market (2024), projected to reach $6.8 billion by 2032 — is the foundational participatory music format. Its value is performative and social: the irreproducible encounter between a willing singer and a room of supportive strangers. Its structural limitation is allocation: the sign-up list is first-come-first-served, the host manages coordination manually, and the audience between songs has nothing to do.</p>
+<p><strong>Pub trivia and quiz nights</strong> are the established venue format for knowledge-based community competition. Teams compete in rounds, points accumulate, and the format builds regulars through the combination of intellectual engagement and social reward. Its structural limitation is exclusion: the format serves those who want to compete and observe, but offers no participation pathway for those who want to perform rather than recall.</p>
+<p><strong>Card-based games</strong> — and specifically Go Fish, the foundational children&#39;s card game — provide the negotiation mechanic that connects the two formats. Go Fish is universally known, requires no gambling infrastructure, and operates through social negotiation rather than chance. Its adaptation into a music context is the core Audiofish™ design innovation.</p>
+<p><strong>Music bingo</strong> is the closest existing hybrid — a format that combines passive music listening with active participation in a licensed venue context, building regulars and driving dwell time without falling into gambling regulation. Music bingo demonstrates that a music-knowledge game can function as a community-building format in pubs and bars. Its limitation is passivity: players listen and mark a card, but they do not negotiate, strategize, or earn anything. There is no stakes mechanic connecting music knowledge to a meaningful outcome.</p>
+<p><strong>The missing combination</strong> — the gap that Audiofish™ fills — is a format that:</p>
+<ul>
+<li>Engages the full room, not just singers or just trivia competitors</li>
+<li>Connects music knowledge performance (tactics) to strategic resource acquisition (strategy) to live performance allocation (goals)</li>
+<li>Works with any existing karaoke catalogue, at any venue, without requiring a live band or a musician registry</li>
+<li>Is deployable in licensed premises without gambling regulation risk</li>
+<li>Generates community dynamics where trivia players and performers are interdependent rather than parallel</li>
+</ul>
+<p>This is the format that does not yet exist — and that Audiofish™ is designed to create.</p>
+<h3>6.2 The Audiofish™ Format: A New Social Experience</h3>
+<p>Audiofish™ is an interactive music entertainment platform combining music trivia competition and a Go Fish-based card game into a single continuous event experience. It runs on participants&#39; phones and integrates with any existing karaoke host&#39;s song catalogue — whether drawn from a streaming platform (Singa, KaraFun), a licensed laptop library, or another format.</p>
+<p>The format operates in three sequential layers that map directly onto the Sloss (2026) tactics/strategy/goals framework and the RPV reordering:</p>
+<p><strong>Tactics — Music Trivia Rounds (Resources acquisition)</strong>
+All participants compete in music trivia rounds organized around the 13 Audiofish™ themed card ranks. Teams answer questions about artists, albums, lyrics, and cultural connections associated with each rank. Correct answers earn credits — the platform&#39;s exchange value currency. Knowledge of deep cuts, album titles, key lyrics, soundtrack associations, and seasonal cultural connections earns more credits than surface-level recognition. The format rewards genuine music literacy across the full range of the themed month cultural fields.</p>
+<p>There is no limit on trivia participants. Every person in the venue can compete, regardless of whether they want to sing. This is the format&#39;s first community-building mechanism: the trivia round is a shared, full-room experience that creates common ground before the card game begins.</p>
+<p><strong>Strategy — The Audiofish™ Card Game (Processes)</strong>
+Between trivia rounds, a single table of up to six singers plays Audiofish™: a digital Go Fish card game where card ranks map to 13 themed artist months. Each singer is dealt five cards. A card&#39;s rank is a themed artist month — Pearl Jamuary (Ace) through AC/DCember (King). Collecting four cards of the same rank earns a performance slot for a song from that cultural field.</p>
+<p>Singers ask each other &quot;do you have any Zepptember?&quot; — building coalitions around shared song desires, negotiating card exchanges, and competing for the right to perform — while the rest of the room watches, cheers, and strategizes about their own bids.</p>
+<p>Access to the Audiofish™ table is earned, purchased, or bid on using credits accumulated through the trivia rounds. This is the tactics-to-strategy conversion: music knowledge becomes strategic access. A participant who doesn&#39;t want to sing can pledge their credits to another player as a social gift — the most generous player in the room is as celebrated as the highest scorer.</p>
+<p><strong>Goals — Live Performance (Values)</strong>
+Completing an Audiofish™ book earns a performance slot: the singer chooses a song from their completed rank&#39;s cultural field and performs it with the karaoke system. This is the event&#39;s terminal value layer — the live, unrepeatable moment that Benjamin&#39;s cult value describes: the irreproducible encounter between this singer, this song, and this room, on this night.</p>
+<p>Alternatively, participants can cash out their credits for venue prizes — drink tickets, merchandise, or event rewards — or donate them directly to the confirmed charity partner, HeadsUpGuys Society.</p>
+<p><strong>The credits economy</strong> links all three layers:</p>
+<ul>
+<li>Trivia rounds → credits earned (tactics generate resources)</li>
+<li>Credits → bid on Audiofish™ seat, cash out for prizes, pledge to another player, or donate to HeadsUpGuys (strategy governs how resources are deployed)</li>
+<li>Audiofish™ book → performance slot (values realized through the live karaoke moment)</li>
+</ul>
+<h3>6.3 The 13 Card Ranks: The Rockaoke Eligibility Framework</h3>
+<p>The 13 Audiofish™ card ranks were developed over a decade of live events by <strong>Rockaoke Live! feat. The Naturals</strong> — a Vancouver live band karaoke platform active from 2013 to 2024 — and are documented across 12 publicly accessible Spotify playlists curated by the platform&#39;s host under the practitioner identity <strong>Doctor Obscurity</strong>. Mapping 12 months onto 13 card ranks required one design solution: May was split into two distinct themed fields, and Queen cards function as wild cards that can complete any book.</p>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Theme</th>
+<th>Month</th>
+<th>Primary Cultural Field</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ace</td>
+<td>Pearl Jamuary</td>
+<td>January</td>
+<td>Pearl Jam ecosystem — Mad Season, Temple of the Dog, Eddie Vedder solo, Janis Joplin</td>
+</tr>
+<tr>
+<td>2</td>
+<td>FebWHOary</td>
+<td>February</td>
+<td>The Who / &quot;Who&quot; in title, lyric, or artist name — The Guess Who, Leonard Cohen, Gord Downie</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Fleetwood March</td>
+<td>March</td>
+<td>Fleetwood Mac / March cultural associations — Stevie Nicks solo, White Rabbit (March Hare / Alice in Wonderland)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>April Winehouse</td>
+<td>April</td>
+<td>Amy Winehouse / wine / houses / April showers</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Maytallica Flowers</td>
+<td>May (1)</td>
+<td>Metallica / flower and bloom songs — May flowers, not April showers</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Dark Side of the June</td>
+<td>June</td>
+<td>Pink Floyd / space and cosmic imagery — Bowie, Counting Crows (<em>Recovering the Satellites</em>), satellite songs</td>
+</tr>
+<tr>
+<td>7</td>
+<td>National Anthems of July</td>
+<td>July</td>
+<td>The National / national anthems — Canada Day, July 4th, international anthems</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Dog Days of August</td>
+<td>August</td>
+<td>Canine field / Counting Crows (<em>August and Everything After</em>) / <em>Reservoir Dogs</em> soundtrack</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Zepptember</td>
+<td>September</td>
+<td>Led Zeppelin / back-to-school season</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Ozztober</td>
+<td>October</td>
+<td>Ozzy Osbourne / Black Sabbath / Halloween field</td>
+</tr>
+<tr>
+<td>J</td>
+<td>Nirvember</td>
+<td>November</td>
+<td>Nirvana / Remembrance Day — Foo Fighters, Hole, war and military themed songs</td>
+</tr>
+<tr>
+<td>Q</td>
+<td>The Royal Month of May</td>
+<td>May (2)</td>
+<td>Royalty field — Prince, Queens of the Stone Age, Kings of Leon, ABBA, Beyoncé / Wild card: completes any book / Victoria Day</td>
+</tr>
+<tr>
+<td>K</td>
+<td>AC/DCember</td>
+<td>December</td>
+<td>AC/DC / Christmas and holiday field — The Decemberists, <em>A Long December</em></td>
+</tr>
+</tbody></table>
+<p><strong>The Rockaoke Eligibility Framework</strong> governs which songs belong in each rank&#39;s cultural field. The framework is intentionally loose — each rank is a cultural field, not a strict artist discography — with six documented eligibility pathways:</p>
+<ol>
+<li><strong>Artist name</strong> — Three Dog Night, Temple of the Dog</li>
+<li><strong>Song title</strong> — Dog Days Are Over, Hound Dog, Diamond Dogs</li>
+<li><strong>Album title</strong> — Counting Crows&#39; <em>August and Everything After</em> (Dog Days of August), <em>Recovering the Satellites</em> (Dark Side of the June)</li>
+<li><strong>Key lyric</strong> — Pink Floyd&#39;s <em>Time</em> (&quot;ticking away the moments that make up the dog days&quot;), Johnny Cash&#39;s <em>Rusty Cage</em> (&quot;when the dogs are looking for their bones&quot;)</li>
+<li><strong>Seasonal / cultural calendar</strong> — back-to-school (Zepptember), Halloween (Ozztober), Remembrance Day (Nirvember), Christmas (AC/DCember), Victoria Day (The Royal Month of May)</li>
+<li><strong>Soundtrack association</strong> — <em>Reservoir Dogs</em> soundtrack qualifying Little Green Bag, Hooked on a Feeling, and Magic Carpet Ride for Dog Days of August</li>
+</ol>
+<p>Each rank also carries dual seasonal loads: Zepptember includes back-to-school songs alongside Led Zeppelin; Ozztober includes a Halloween supplementary field; Nirvember includes war and military songs for Remembrance Day; AC/DCember includes a Christmas and holiday field. The playlists are live documents — actively maintained and expandable as the community and the platform grow.</p>
+<p>The looseness is not incidental. It is a designed feature that follows the ARIES MC1 principle: tertiary artifacts need to be loose enough to generate productive misreading. A Pearl Jamuary card that contains Mad Season&#39;s <em>River of Deceit</em> is not a miscategorization — it is an invitation to discover the Seattle grunge ecosystem, to learn something about musical lineage, and to expand what Pearl Jam means as a cultural field. This curatorial looseness is what makes the Stratagames™ trivia layer genuinely skill-differentiated: questions can be calibrated by which eligibility pathway the inclusion uses, from surface-level artist recognition to expert-tier album and lyric knowledge.</p>
+<p>The framework is also <strong>locally adaptable</strong>. The 13 Rockaoke themed month ranks are the reference implementation for English-speaking Canadian markets. A licensed operator in Seoul, São Paulo, or Lagos can build 13 ranks around their own cultural calendar and artist fields — the Audiofish™ game mechanic is language-agnostic and culturally portable.</p>
+<h3>6.4 Paper Prototyping as Phase 0: Design Before Deployment</h3>
+<p>A critical methodological principle of the Audiofish™ research design is that the core game mechanics must be testable, iterable, and refinable without any technology dependency. Following Moggridge&#39;s (2007) interaction design methodology — specifically his ten-element iterative process of constraints, synthesis, framing, ideation, envisioning, uncertainty, selection, visualization, prototyping, and evaluation — the research begins with a paper prototype phase before any digital deployment.</p>
+<p>The paper prototype requires only:</p>
+<ul>
+<li>A printed or hand-written card deck organized by the 13 ranked themed months</li>
+<li>An existing karaoke host&#39;s song catalogue (any format)</li>
+<li>A whiteboard or paper scoreboard for the credits economy</li>
+<li>Willing participants at a venue already running karaoke nights</li>
+</ul>
+<p>This is not a compromise or a temporary workaround. It is the correct methodological starting point for a format that has no direct precedent. Moggridge (2007) is precise: when designing something genuinely new, &quot;prototype as quickly and roughly as possible, just enough to communicate each concept to one another. Then evaluate the designs. They are most likely really bad solutions, so try again.&quot; The paper prototype phase is designed to surface the design problems — the moments where the trivia-to-credits-to-card-game-to-performance arc breaks, where participants misunderstand the rules, where the timing between rounds and game play disrupts the event flow — before any of these become technology problems.</p>
+<p>The paper prototype also functions as a <strong>boundary object</strong> in Carlile&#39;s (2002) sense: a shared artifact that karaoke hosts, singers, trivia players, venue operators, and technology partners can all engage with and evaluate without requiring technical expertise. The Don Norman Design Award (DNDA) methodology framework — Humanity-Centered Design (HCD+) — explicitly values iterative, people-centred prototyping as the foundation of good design. The paper prototype phase is where the Audiofish™ format earns its HCD+ credentials before the digital platform is built.</p>
+<p>The evaluation criterion Moggridge (2007) identifies is the key research signal: <em>&quot;When their response changes from critique to involvement in the result, you can start to hope that you are on the right track.&quot;</em> When karaoke regulars stop questioning the format and start negotiating their Audiofish™ strategy — debating which rank to collect, deciding whether to pledge their credits to a friend, calculating whether to bid for a seat or cash out — the paper prototype has validated the core mechanic.</p>
+<p>Paper prototype deployment also separates two distinct research problems that the digital platform conflates:</p>
+<ul>
+<li><strong>Game design research:</strong> Does the trivia-to-credits-to-Go Fish-to-performance arc produce the community dynamics, engagement patterns, and value exchange the theory predicts?</li>
+<li><strong>Technology design research:</strong> Does the digital interface — the web app, the AI voice agent, the Singa catalogue integration, the Soundtrap onboarding — support and enhance those dynamics without introducing friction that disrupts them?</li>
+</ul>
+<p>Phase 0 (paper prototype) answers the first question. Phases 3a and 3b (digital deployment) answer the second. The research can publish findings from Phase 0 independently of the technology development timeline — which de-risks the Mitacs research schedule and provides an early empirical output.</p>
+<h3>6.5 BC Proof-of-Concept: Phased Deployment Strategy</h3>
+<p>The BC proof-of-concept proceeds across two venue partners in two cities, providing comparative data across urban and regional community contexts:</p>
+<p><strong>Phase 0 — Paper Prototype (pre-deployment)</strong>
+Paper prototype testing at existing karaoke venues in Vancouver and Campbell River. Core game mechanics validated through iterative play-testing with karaoke hosts, singers, and trivia participants before digital platform deployment. HCD+ evaluation criteria applied using the DNDA methodology framework.</p>
+<p><strong>Phase 3a — Audiofish™ Digital Deployment</strong></p>
+<p><em>Vancouver: The Alcove Lounge, East Vancouver (target: May–September)</em>
+Urban launch venue. Audiofish™ digital platform deployed alongside existing karaoke format. Stratagames™ trivia rounds integrated as the tactics layer. HeadsUpGuys fundraiser activation tested as a tertiary artifact governing the credits economy. Singa catalogue integration; Fish.audio AI voice agent; Soundtrap onboarding.</p>
+<p><em>Campbell River: Match Public House at Chances Casino (target: October–February)</em>
+Regional community venue. Same digital platform, different community context — testing whether the format&#39;s community-building dynamics hold and scale beyond the urban launch market. Cross-venue comparison generates the research&#39;s first controlled contrast.</p>
+<p><strong>Phase 3b — Megaband™ + Audiofish™ (musician registry threshold)</strong>
+Once sufficient musician registrations exist in a region — informed by Phase 3a demand data identifying which songs and artists the local community most wants — the Megaband™ live band tier activates. Audiofish™ transitions from karaoke backing track to live band performance allocation. This is the advanced tier: the same game mechanics, the same credits economy, the same community dynamics — elevated by the live band format that Rockaoke Live! feat. The Naturals established as the aspirational endpoint of the platform.</p>
+<h3>6.6 The Technology Partner Ecosystem</h3>
+<p>The Audiofish™ platform is supported by a confirmed ecosystem of technology and methodology partners, each contributing a specific structural layer:</p>
+<p><strong>Fish.audio — AI Voice Infrastructure</strong>
+Fish.audio&#39;s conversational voice AI powers the AI emcee channel: the tertiary artifact layer that coordinates the event in real time, announces trivia results, calls Audiofish™ game outcomes, manages the performance queue, and keeps energy moving between human moments. The Audiofish™ brand name directly echoes the Fish.audio product — a structural naming connection that signals the technology partnership at the platform&#39;s identity level. Fish.audio&#39;s multilingual capability makes the licensed framework deployable in non-English markets without English-language host dependency.</p>
+<p><strong>Singa — Karaoke Catalogue Infrastructure</strong>
+Singa provides the song catalogue layer for Audiofish™ deployment. The Audiofish™ card deck is generated from Singa&#39;s available songs organized by the 13 themed month ranks. Singa&#39;s API integration enables dynamic card deck generation from their live catalogue, making Singa the default catalogue infrastructure for Stratalab events globally.</p>
+<p><strong>Soundtrap — Onboarding and Musician Development</strong>
+Soundtrap provides the authentication and onboarding layer. Audiofish™ event registration automatically creates a Soundtrap account; existing Soundtrap users sign into the platform using their Soundtrap credentials. For musicians participating in the Megaband™ tier, Soundtrap is the creative workspace where they practice registered songs, collaborate on arrangements, and develop their repertoire between events. Soundtrap credits can be integrated into the platform&#39;s exchange value redemption system.</p>
+<p><strong>Don Norman Design Award (DNDA) — Methodology Partner</strong>
+DNDA (dnda.design) is the methodology partner for the research&#39;s design process validation. DNDA&#39;s Humanity-Centered Design (HCD+) framework provides the evaluative criteria against which the Audiofish™ design is assessed at each iterative prototype stage — from paper prototype through digital deployment. DNDA&#39;s partnership with the UCSD Design Lab connects this research to the HCI lineage of Don Norman and the interaction design tradition that Moggridge (2007) documents — the same tradition from which IDEO&#39;s DFV framework emerged, and against which this research&#39;s RPV reordering is positioned. DNDA is a registered 501(c)(3) public charity in the United States.</p>
+<p><strong>HeadsUpGuys Society — Confirmed Charity Partner</strong>
+HeadsUpGuys (headsupguys.org) is the confirmed charity partner for the fundraiser activation case study. A UBC program transitioning to independent non-profit status as HeadsUpGuys Society, HeadsUpGuys reaches over 5,000,000 global visitors and serves 10,000 users per week across 50+ countries, funded exclusively through private donations. Its mission — men&#39;s depression awareness and suicide prevention — aligns structurally with the Audiofish™ community demographic. The donation mechanic is built into the credits economy: participants can pledge their credits directly to HeadsUpGuys with a single tap, converting music knowledge into charitable support. HeadsUpGuys has an existing partnership with US-based Rock Mental (music and mental wellness), extending the potential reach of the fundraiser into the North American music and mental health ecosystem.</p>
+<h3>6.7 The Four-Register Value Framework and Anti-Aestheticization Principle</h3>
+<p>The Audiofish™ platform creates value across four interdependent registers — a theoretical contribution that extends the RPV reordering into the specific value question the platform is designed to navigate:</p>
+<p><strong>Intrinsic value</strong> — the song deserves to be well performed, regardless of its commercial popularity or the performer&#39;s skill level. The format exists to serve the song.</p>
+<p><strong>Performative value</strong> — the live performance moment is irreproducible. Benjamin&#39;s cult value applies directly: the specific encounter between this singer, this song, and this room on this night cannot be streamed, replicated, or purchased. It can only be experienced.</p>
+<p><strong>Community value</strong> — the credits economy, the coalition-building in the card game, the pledge mechanic, the shared trivia knowledge — all generate community as a byproduct of participation. The registry grows, the cultural knowledge deepens, and the community becomes more valuable to each of its members over time.</p>
+<p><strong>Exchange value</strong> — the governed layer determining who benefits, how the system sustains itself, and what the credits economy rewards. This is the layer the research is most directly investigating: how can the exchange value architecture be designed so that it reinforces rather than colonizes the other three registers?</p>
+<p><strong>The Anti-Aestheticization Principle</strong> governs the exchange value architecture. Drawing on Benjamin&#39;s (1935) analysis of how the aestheticization of politics produces spectacle at the expense of substance, the principle states: the competitive mechanics of the credits economy must not transform the community experience into a performance competition where music becomes merely a vehicle for prize accumulation.</p>
+<p>The failure mode is well-documented: karaoke competition formats — and television formats like <em>The Voice</em> and <em>American Idol</em> — represent the complete aestheticization of music performance. The song becomes a vehicle for the competitive spectacle. The room divides into performers and judges. The community dynamic that makes regular karaoke nights sticky — the supportive audience, the collective energy, the room that cheers for the nervous first-timer — disappears.</p>
+<p>The Anti-Aestheticization Principle is therefore <strong>anti-ranking, not anti-prize</strong>. Attractive prizes and incentives draw participants in — that is a feature, not a failure. The design constraint is that competitive dynamics must operate between participants and the catalogue (can I complete this Audiofish™ book?) rather than between participants competing for public status against each other. No public leaderboards ranking singing quality. The pledge mechanic — where a trivia player transfers their hard-earned credits to a friend who wants to sing — is the Anti-Aestheticization Principle made operational in a single game mechanic. A room where players are pledging credits to each other is a community. A room where every player optimizes only their own total is an audience watching a competition.</p>
+<p>The research investigates whether the governance architecture can sustain this balance across both the Audiofish™ standalone deployment (karaoke backing tracks) and the Megaband™ advanced tier (live band) — and whether the fundraiser tertiary artifact (HeadsUpGuys) and the community payback tertiary artifact (credits economy) produce measurably different community dynamics when deployed in the same primary and secondary artifact environment.</p>
+<h3>6.8 Megaband™: The Advanced Live Band Tier</h3>
+<p>The Megaband™ format is the advanced tier of the Stratalab platform — the destination the Audiofish™ deployment is building toward, not the starting point. It activates once a regional musician community has registered sufficient repertoire to enable viable optimized setlists.</p>
+<p>In Megaband™, the Audiofish™ card game mechanic operates identically — singers still compete for performance slots through the Go Fish card game. The difference is what happens when a book is completed: instead of a karaoke backing track, the singer performs with a live band assembled song-by-song from the registered musician community.</p>
+<p>The optimization problem at the Megaband™ layer is the one that originally motivated this research: given a registered community of musicians, each with up to 10 songs per instrument ranked by both desire and proficiency, what is the best possible band lineup for each song in the Audiofish™ determined setlist? This is the RPV reordering demonstrated at micro level — Resources (who is available, what they can play) constrain Processes (what the optimization engine can coordinate) in service of Values (what participants and the event are optimizing toward: serve the song).</p>
+<p>The full Megaband™ HCI architecture — web app (primary artifact / Resources), venue screens (secondary artifact / Processes), and AI voice agent (tertiary artifact / Values and governance) — maps directly onto Wartofsky&#39;s three artifact levels, with the Fish.audio-powered AI voice agent functioning as the metaphrame that governs the conditions under which the live performance becomes possible.</p>
+<p>Megaband™ is the theoretical contribution made most operationally precise — and it is where the RPV reordering argument generates its most directly empirically testable predictions. But it is Phase 3b, not Phase 0. The research builds toward it through the foundation that Audiofish™ establishes.</p>
+<hr>
+<h2>7. Theoretical Framework</h2>
+<h3>7.1 Primary Sources</h3>
+<p><strong>Christensen, C.M., Anthony, S.D., and Roth, E.A. (2004).</strong> <em>Seeing What&#39;s Next.</em> Harvard Business School Press.
+— Primary source for the RPV framework. The Resources, Processes, and Values categorization (diagram p. xviii; comparative analysis p. 33) provides the theoretical foundation for the proposed DFV reordering.</p>
+<p><strong>Beer, S. (1973).</strong> <em>Designing Freedom.</em> CBC Massey Lectures. Anansi Press.
+— Primary source for the Viable System Model&#39;s Potentiality / Capability / Actuality framework and the Law of Requisite Variety (drawing on Ashby, 1956). Beer&#39;s recursive model of viable systems — and his argument that institutions fail when their regulatory variety cannot match the variety generated by the systems they govern — provides the cybernetic grounding for the RPV reordering and the Megaband™ optimization engine design. See also: Beer, S. (1972). <em>Brain of the Firm.</em> Allen Lane / Penguin Press.</p>
+<p><strong>Benjamin, W. (1935).</strong> <em>The Work of Art in the Age of Mechanical Reproduction.</em> [Various translations.]
+— Source for the two-part exhibition value / cult value dialectic. Benjamin&#39;s 1935 essay held these two lenses in tension but did not resolve them into a third. Flynn (2006) extended the dialectic into a three-part system by introducing exchange value as the economic and governance layer — the domain that determines whose exhibition value is distributed, whose cult value is protected, and who controls the conditions under which both operate. In the RPV reordering, exchange value (Flynn, 2006) maps onto the Values layer: it is the governed layer that determines whose value circulates, on what terms, and under whose permission architecture — not a filter applied at the outset, but the desirable outcome the system is organized to produce and protect.</p>
+<p><strong>Brown, T. (2008).</strong> IDEO Design Thinking. designthinking.ideo.com.
+— Primary source for the DFV framework and its canonical definition of desirability, feasibility, and viability as co-equal filters in a continuous innovation framework.</p>
+<h3>7.2 Prior Work by the Principal Researcher</h3>
+<p>The three publications below constitute the documented intellectual lineage of the current research. Together they establish a 20-year research program — from the 2006 MASc thesis through the 2010 MBA project — that this Mitacs proposal extends into live empirical deployment.</p>
+<p><strong>Flynn, J. (2006).</strong> <em>Travels in Intertextuality: The Autopoietic Identity of Remix Culture.</em> MASc Thesis, School of Interactive Arts and Technology, Simon Fraser University. Available: academia.edu/1320506
+— The foundational work. Establishes the coordinated lenses methodology (via Cole, 1996) and applies Wartofsky&#39;s three levels of cultural artifacts — primary (tools of direct production), secondary (representations of how primary artifacts are used: practices, conventions, rules), and tertiary (artifacts that restructure perception and govern the conditions of cultural production: permission architectures, governance frameworks, metaphrames) — to the analysis of remix culture and digital media ecosystems. The thesis extends Benjamin&#39;s exhibition value / cult value dialectic into a three-part system by introducing exchange value as the tertiary-level lens: the economic and governance layer that maps onto Wartofsky&#39;s third level and onto the Values layer of the RPV reordering. The thesis also applies the coordinated lenses framework specifically to the perspective of the musician (Table 5) — a direct intellectual ancestor of the Megaband™ participant submission and proficiency ranking model. The Cole methodology — &quot;a coordinated set of lenses through which to interpret the world&quot; — provides the epistemological foundation for treating RPV as a system of lenses rather than three independent categories.</p>
+<p><strong>Flynn, J. (2006/2007).</strong> <em>Metaphrames and Interaction: This is &quot;How it Goes.&quot;</em> Conference paper emerging from the MASc thesis. Available: academia.edu/1324801
+— Introduces the concept of &quot;metaphrames&quot; as a named instance of Wartofsky&#39;s tertiary artifact: the third-level cultural object that functions not as a tool for doing (primary artifact) or a representation of practice (secondary artifact), but as a framing system that restructures perception and governs the conditions under which lower-order objects are organized, sequenced, and made meaningful. In Wartofsky&#39;s schema, tertiary artifacts can come to define what is possible within a cultural system — they are the permission architecture, the governance layer, the frame within which primary and secondary artifacts acquire their meaning and value.</p>
+<p>Applied to Megaband™: a musician&#39;s submitted song list is a primary artifact (a direct tool of production — what they can play). The optimization engine&#39;s assembled setlist is a secondary artifact (a representation of practice — how the available resources are coordinated into a performable sequence). The Megaband™ platform itself — its registration system, community governance rules, proficiency ranking interface, and optimization logic — is the tertiary artifact, the metaphrame: it does not perform the music, it governs the conditions under which music becomes performable by this community in this room on this night. This is also Beer&#39;s autopoietic layer: the system that reproduces the conditions of its own operation. The metaphrame concept thus provides the precise theoretical name for what the Megaband™ platform is doing at the Values / governance layer of the RPV reordering — a connection traceable from Wartofsky (1973) through Flynn (2006/2007) to the current research.</p>
+<p><strong>Flynn, J. (2010).</strong> <em>Seedfeed: The Interactive Marketing and Design of a Digital Video Ecosystem.</em> MBA Project, Segal Graduate School of Business, Simon Fraser University. Sponsor: Teradici Corporation. Available: academia.edu/89642973
+— The critical methodological bridge between the 2006 theoretical work and the 2026 applied research. Seedfeed applies the S/E/E/D methodology (Study, Explore, Evaluate, Design — a refinement of Moggridge&#39;s interaction design framework) to a community archive of live concert video content — non-professional recordings of live music events captured with consumer equipment and organized into a digital ecosystem for industry co-op use. The project operationalizes RPV as a coordinated system of lenses applied to a digital media ecosystem, and explicitly maps Christensen&#39;s framework onto Beer&#39;s Viable System Model and Maturana and Varela&#39;s autopoiesis. This is the documented prior contribution that establishes the theoretical foundation for the DFV reordering proposed in the current research. The Seedfeed ecosystem model — a community-sourced archive of live music content governed by interaction design methodology — is the direct precursor to the Megaband™ community registry: where Seedfeed archived what musicians had already performed, Megaband™ registers what musicians can and want to perform, and optimizes the resulting catalogue into live events.</p>
+<h3>7.3 Secondary and Supporting Sources</h3>
+<p><strong>Wartofsky, M.W. (1979).</strong> <em>Models: Representation and the Scientific Understanding.</em> D. Reidel Publishing Company, Dordrecht. (Boston Studies in the Philosophy of Science, vol. 48; Synthese Library, vol. 129.)
+— Source for the three-level artifact framework: primary artifacts (tools of direct production), secondary artifacts (representations of practice — how primary artifacts are used), and tertiary artifacts (artifacts that restructure perception and govern the conditions under which cultural production becomes possible). Applied throughout this research as the artifact-level scaffolding for the RPV reordering: Resources map onto primary artifacts, Processes onto secondary artifacts, and Values — including the Megaband™ platform itself as a metaphrame — onto the tertiary artifact level.</p>
+<p><strong>Cole, M. (1996).</strong> <em>Cultural Psychology: A Once and Future Discipline.</em> Harvard University Press.
+— Source for the methodology as &quot;a coordinated set of lenses through which to interpret the world&quot; (p. 338) — the epistemological foundation for treating RPV as a system rather than three independent categories, established in Flynn (2006) and operationalized in Flynn (2010).</p>
+<p><strong>Flynn, J. (2026).</strong> MC8 — Licensing Architecture, Innovation, and Trust Calibration. ARIES Certificate in Innovation System Orchestration for the Creative Industries, Stack 3. Syllabus v1.6.
+— Source for the Products, Services, and Licences (PSL) framework as applied to live event governance ecosystems. MC8 establishes the five-column structural isomorphism (Wartofsky / RPV / PSL / Benjamin / Functional Expression) that provides the governance design framework for the Megaband™ BC proof-of-concept activation. The MC8 assignment architecture — PSL mapping, process and transparency documentation, innovation calibration analysis, and orchestration balance statement — constitutes the event governance design methodology applied in Phase 2 and Phase 3 of this research.</p>
+<p><strong>Flynn, J. (2026).</strong> MC9 — Capstone Boundary Object Pitch and Governance Performance. ARIES Certificate in Innovation System Orchestration for the Creative Industries, Stack 3. Syllabus v1.0; Assignment v1.1.
+— Source for the autopoietic test as an evaluative framework: <em>if launched, would this studio reproduce itself?</em> Applied to the Megaband™ platform, the MC9 evaluation criteria — resource regeneration, process stabilization, stakeholder re-engagement, trust compounding, and legitimacy endurance — constitute the empirical success criteria for the BC proof-of-concept deployment assessed in Phase 4 of this research. The Alcove Lounge charity fundraiser activation modelled in MC9 is the same prototype venue context as the Megaband™ and Stratagames™ deployment.</p>
+<p><strong>Sloss, D. (2026).</strong> <em>The Strategy Game: A Scientific View</em> (3rd ed.). ResearchGate working paper.
+— Grounds the tactics/strategy/goals separation in Guibert&#39;s military writing; provides the irreversibility/amplification principle used to justify decision window design in the Stratagames™ format.</p>
+<p><strong>Good Enough Live Karaoke (2013–present).</strong> goodenoughlivekaraoke.com.
+— Toronto-based live band karaoke operation founded December 2013, contemporaneous with Rockaoke Live! (Vancouver, 2013). Over 1,000 shows documented; catalogue of 250–400 songs across a decade of professional operation; peak roster of 17 active members performing as 4–5 piece ensembles. Cited in Section 4 as independent evidence that the single-band catalogue ceiling (approximately 400 songs) is a structural constraint of the format rather than a local operational failure — and that the manual multi-configuration scheduling GELK attempted (2x or 3x simultaneous band configurations per night) is the human-managed precursor to the Megaband™ optimization engine.</p>
+<p><strong>HeadsUpGuys Society (2015–present).</strong> headsupguys.org.
+— Confirmed charity partner for the fundraiser activation case study. UBC-based men&#39;s mental health resource transitioning to independent non-profit status; 5,000,000+ global visitors; 10,000 weekly users across 50+ countries; funded exclusively through private donations. Founded 2015 by Dr. John Ogrodniczuk, Professor of Psychiatry, UBC. Mission: reducing stigma, improving mental health literacy, and supporting men&#39;s uptake of mental health services. Existing partnership with US-based Rock Mental (music and mental wellness). Cited as the confirmed institutional charity partner whose mission-community alignment with the Megaband™ musician demographic makes the fundraiser case study structurally coherent rather than incidental.</p>
+<p><strong>Chandler, J. (2026).</strong> &quot;Hamilton karaoke band The Approximators wants to make your &#39;rockstar dreams&#39; come true.&quot; <em>CBC News</em>, January 18, 2026.
+— Documents a 2026 live band karaoke operation in Hamilton, Ontario, with a catalogue of 200+ songs growing by 8–10 songs per show through informal group chat coordination. Confirms that the format&#39;s community dynamics and catalogue management challenges are consistent across geography and time, and that the single-band model&#39;s catalogue ceiling and manual coordination processes remain the operative constraint in the format a decade after Rockaoke Live! feat. The Naturals and GELK established it.
+— Primary journalistic documentation of Rockaoke Live! feat. The Naturals in operation, published when the catalogue stood at over 400 songs. Documents the community dynamics (regulars competing for sign-up list access), the real-time setlist coordination challenge (human-managed flow assembly from participant requests), and the format&#39;s adaptive performance ethic. Cited in Section 4 as contemporaneous evidence of the operational conditions the Megaband™ optimization engine is designed to formalize and scale.</p>
+<p><strong>Flynn, J. / Doctor Obscurity (2013–2024).</strong> &quot;01 - Pearl Jamuary - Rockaoke Live! feat. The Naturals.&quot; Spotify playlist. open.spotify.com/playlist/5cVRbEn15y6s4lMuBmNjwD
+— Primary artifact documenting the Pearl Jamuary cultural field as curated by the principal researcher under the Doctor Obscurity practitioner identity. 30+ songs spanning Pearl Jam core catalogue, side projects (Mad Season, Temple of the Dog), Eddie Vedder solo recordings, and adjacent artists (Janis Joplin, ZZ Top, 54-40). Cited as evidence of the Curatorial Looseness Principle in Audiofish™ rank design: each rank is a cultural field rather than a strict artist discography, and productive looseness in category membership is a designed feature rather than a deficiency.</p>
+<p><strong>Moggridge, B. (2007).</strong> <em>Designing Interactions.</em> MIT Press. Chapter 10: &quot;People and Prototypes,&quot; pp. 724–735.
+— Source for the ten-element iterative interaction design process (constraints, synthesis, framing, ideation, envisioning, uncertainty, selection, visualization, prototyping, evaluation) applied in the Audiofish™ paper prototype phase. Moggridge&#39;s distinction between &quot;designing something new&quot; (no precedent, prototype quickly and roughly) and &quot;designing a new version&quot; (state of the art as starting point) maps onto the dual nature of Audiofish™: a genuinely new format combination with no direct precedent, built from three well-established component formats (karaoke, pub trivia, Go Fish) each with extensive state-of-the-art design knowledge. Moggridge&#39;s evaluation criterion — &quot;when their response changes from critique to involvement in the result, you can start to hope that you are on the right track&quot; — is the signal the paper prototype phase is designed to detect. The principal researcher applied Moggridge&#39;s interaction design framework in undergraduate and graduate courses at Simon Fraser University&#39;s School of Interactive Arts and Technology (SIAT).</p>
+<p><strong>Don Norman Design Award / DNDA (dnda.design).</strong>
+— Methodology partner for the research&#39;s design process validation. DNDA&#39;s Humanity-Centered Design (HCD+) framework provides the evaluative criteria against which the Audiofish™ design is assessed at each iterative prototype stage. DNDA&#39;s partnership network includes the Nielsen Norman Group (Don Norman and Jakob Nielsen — both cited by Moggridge, 2007, as foundational contributors to interaction design principles), Just Noticeably Different (jnd.org — Don Norman&#39;s own platform), and the UC San Diego Design Lab. The UCSD Design Lab connection places DNDA at the intersection of Norman&#39;s HCD tradition and the Laboratory of Comparative Human Cognition (LCHC, lchc.ucsd.edu) — where Michael Cole developed the cultural psychology methodology already cited in this research (Cole, 1996). The principal researcher&#39;s connection to Norman&#39;s work runs through SIAT course delivery and through the LCHC&#39;s influence on the Vygotsky → Leontiev → Engeström → Cole → Wartofsky theoretical lineage that underlies this research&#39;s artifact-level framework. DNDA is a registered 501(c)(3) public charity in the United States.</p>
+<p><strong>Explorer Labs (2024).</strong> Move Over Design Thinking: Desirability, Viability, Feasibility — Time for a Better Approach.
+— Published critique of the DFV framework as overly abstract; provides secondary literature anchor for the critique developed in this research.</p>
+<p>Additional design thinking, innovation systems, and community platform design literature to be identified in consultation with academic supervisor.</p>
+<hr>
+<h2>8. Methodology</h2>
+<p>This research employs a <strong>multi-case study methodology</strong> (Yin, 2018) combined with an iterative interaction design process (Moggridge, 2007) using the Stratalab™ format portfolio as embedded cases within a single industry partner context (1730 Technology Consulting). The epistemological foundation for the practitioner-researcher position — and for treating live platform deployment as research method rather than merely industry application — is provided by Cole (1996):</p>
+<blockquote>
+<p>&quot;Adopt some form of cultural-historical psychology as your theoretical framework. Create a methodology, a systematic way of relating theory to data that draws upon both the natural sciences and the cultural sciences, as befits its hybrid object, human beings. Find an activity setting where you can be both participant and analyst. Enter into the process of helping things grow in the activity system you have entered by bringing to bear all the knowledge gained from both the cultural and natural sciences sides of psychology and allied disciplines. Take your ability to create and sustain effective systems as evidence of your theory&#39;s adequacy.&quot; (Cole, 1996, pp. 349–350)</p>
+</blockquote>
+<p>Each clause of Cole&#39;s methodological statement maps onto this research precisely. The cultural-historical psychology framework is the Vygotsky → Leontiev → Engeström → Cole → Wartofsky lineage through which the three-level artifact framework and the RPV reordering are theoretically grounded. The hybrid methodology draws on quantitative deployment data (credits economy, book completion rates, community formation metrics) alongside qualitative practitioner observation and community ethnography. The activity setting where the researcher is both participant and analyst is Rockaoke Live! feat. The Naturals (2013–2024) — a decade of operational practice as lead singer, host/emcee, and manager that constitutes the primary evidence base for the research. The process of helping things grow is the Audiofish™ deployment itself — not observation from outside the system but active participation in building the community the research studies. And the ability to create and sustain an effective Audiofish™ ecosystem — measured through the autopoietic test criteria of resource regeneration, process stabilization, stakeholder re-engagement, trust compounding, and legitimacy endurance — is taken as evidence of the RPV reordering framework&#39;s adequacy.</p>
+<p>The deployment follows a sequencing that mirrors both the RPV reordering logic and Moggridge&#39;s prototyping principle: paper prototype first, then digital deployment in two phases.</p>
+<p><strong>Phase 0 — Paper Prototype Design and Validation</strong>
+Before any digital platform deployment, the core Audiofish™ game mechanics are tested and refined through paper prototyping at existing karaoke venues in Vancouver and Campbell River. The paper prototype requires only printed card decks organized by the 13 themed month ranks, an existing KJ&#39;s song catalogue, and a whiteboard credits economy. This phase separates the game design research question (does the trivia-to-credits-to-Go Fish-to-performance arc produce the community dynamics the theory predicts?) from the technology design research question (does the digital interface support those dynamics without introducing friction?). DNDA&#39;s Humanity-Centered Design (HCD+) framework provides the evaluative criteria applied at each iterative prototype stage. The key evaluation signal is Moggridge&#39;s (2007) criterion: when participants shift from critique to strategic involvement in the game, the core mechanic is validated.</p>
+<p><strong>Phase 1 — Theoretical Development</strong>
+Critical literature review of the DFV framework and its reception; development of the RPV reordering argument; articulation of the mapping between RPV categories and IDEO&#39;s DFV categories; development of the four-register value framework (intrinsic, performative, community, exchange) and the Anti-Aestheticization Principle as governing design constraints.</p>
+<p><strong>Phase 2 — System Design Documentation</strong>
+Detailed documentation of the Audiofish™, Stratagames™, and Megaband™ system designs as RPV-structured artifacts: how resource constraints, process logic, and value objectives are operationalized in each format and across the Stratalab portfolio. Documentation of the governance architecture applying the ARIES MC8 PSL framework and the DNDA HCD+ evaluation criteria.</p>
+<p><strong>Phase 3a — Digital Deployment: Audiofish™ (Vancouver then Campbell River)</strong>
+Audiofish™ digital platform deployed at The Alcove Lounge, East Vancouver (target: May–September) and Match Public House at Chances Casino, Campbell River (target: October–February). Stratagames™ trivia rounds integrated as the tactics layer. HeadsUpGuys fundraiser activation tested as a tertiary artifact governing the credits economy alongside the community payback model as a comparative case. Collection of Audiofish™ demand data (artist ranks, book completion patterns, duplicate pressure signals), credits economy data, community formation evidence, and cross-venue comparative data. Fish.audio AI voice agent, Singa catalogue integration, and Soundtrap onboarding active across both venues.</p>
+<p><strong>Phase 3b — Digital Deployment: Megaband™ + Audiofish™ (musician registry threshold)</strong>
+Megaband™ live band format activation in BC regions where musician registry reaches critical mass — informed by Phase 3a demand data identifying which songs and artists to prioritize for registration. Collection of participant submission data (song preferences, proficiency rankings, instrument availability, Audiofish™ integration data) as empirical evidence of RPV dynamics at the micro level.</p>
+<p><strong>Phase 4 — Analysis and Framework Validation</strong>
+Analysis of deployment data against the RPV reordering framework; cross-format comparison (Audiofish™ standalone vs. integrated with Megaband™; fundraiser tertiary artifact vs. community payback tertiary artifact); assessment of Anti-Aestheticization Principle design variables; evaluation of community currency and payback model against the four-register value framework; autopoietic test applied to both deployment phases; HCD+ assessment against DNDA evaluation criteria.</p>
+<hr>
+<h2>9. Expected Contributions</h2>
+<p>This research produces two co-equal outputs, each grounding the other.</p>
+<p><strong>Output 1 — Peer-Reviewed Publication</strong>
+A journal article intervening in the design thinking and innovation management literature with the following argument: IDEO&#39;s DFV framework correctly identifies continuous innovation as its purpose, but its three categories are miscategorized. &quot;Viability&quot; — defined by IDEO as economic sustainability — is a terminal outcome misplaced as a precondition. RPV theory, grounded in Beer&#39;s viable systems thinking and demonstrated through prior work reconceptualizing RPV as a coordinated system of lenses (Flynn, 2010), provides the correct theoretical foundation for the same continuous innovation framework. The paper targets interdisciplinary journals spanning design studies and innovation management, with the Stratalab™ deployment providing the empirical case that grounds the theoretical argument.</p>
+<p><strong>Output 2 — Stratalab™ Platform Deployment (BC Proof-of-Concept)</strong>
+A live, documented deployment of the Megaband™ and Stratagames™ formats across three BC regions, generating empirical data on RPV dynamics at the participant level. The deployment produces: a functioning musician registry, event activation data, participant submission records (song preferences, proficiency rankings, instrument availability), and cross-format comparison data between Megaband™ and Stratagames™. This constitutes the industry contribution and provides the empirical foundation for the theoretical argument in Output 1.</p>
+<p><strong>Output 3 — Methodological Contribution</strong>
+A documented methodology for applying the RPV-reordered framework as a product design tool for optimization-driven community experience platforms — extending the theoretical argument into a practical instrument for platform designers and innovation practitioners.</p>
+<hr>
+<h2>10. Industry Partner: 1730 Technology Consulting</h2>
+<p>1730 Technology Consulting (1730.ca) is a Canadian Controlled Private Corporation (CCPC) operating as the systems integration and product development entity for the Stratalab™ platform portfolio. 1730 is the industry partner for this Mitacs Accelerate Entrepreneur proposal, with the principal serving simultaneously as PhD candidate and industry partner lead.</p>
+<p>The industry contribution includes access to the Stratalab™ platform, participation data from live deployments, and the operational infrastructure for the BC proof-of-concept.</p>
+<p><strong>Confirmed Community Partner: HeadsUpGuys Society</strong></p>
+<p>HeadsUpGuys (headsupguys.org) is confirmed as the charity partner for the fundraiser activation case study (Case Study A). A program of the University of British Columbia transitioning to independent non-profit status, HeadsUpGuys is the world&#39;s leading men&#39;s mental health resource, reaching over 5,000,000 visitors globally and 10,000 users per week across 50+ countries, funded exclusively through private donations. The partnership provides the research with a confirmed, institutionally credible charity partner whose mission — men&#39;s depression awareness and suicide prevention — aligns structurally with the Megaband™ musician community demographic. HeadsUpGuys&#39; existing partnership with US-based Rock Mental extends the potential reach of the fundraiser case study into the North American music and mental wellness ecosystem.</p>
+<hr>
+<h2>11. Timeline (Proposed)</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Activity</th>
+<th>Venue / Location</th>
+<th>Duration</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>Paper prototype design and validation</td>
+<td>Vancouver + Campbell River karaoke venues</td>
+<td>Months 1–2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Theoretical development and literature review</td>
+<td>—</td>
+<td>Months 1–3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>System design documentation (all formats)</td>
+<td>—</td>
+<td>Months 2–4</td>
+</tr>
+<tr>
+<td>3a</td>
+<td>Audiofish™ digital deployment — Vancouver</td>
+<td>The Alcove Lounge, East Vancouver</td>
+<td>May–September</td>
+</tr>
+<tr>
+<td>3a</td>
+<td>Audiofish™ digital deployment — Campbell River</td>
+<td>Match Public House, Chances Casino</td>
+<td>October–February</td>
+</tr>
+<tr>
+<td>3b</td>
+<td>Megaband™ + Audiofish™ deployment (musician registry threshold)</td>
+<td>TBD — BC regions</td>
+<td>Months 5–10</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Data collection and cross-format analysis</td>
+<td>—</td>
+<td>Months 6–11</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Paper drafting and peer review submission</td>
+<td>—</td>
+<td>Months 9–12</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Platform documentation and methodology write-up</td>
+<td>—</td>
+<td>Months 10–12</td>
+</tr>
+</tbody></table>
+<hr>
+<p><em>Submitted by 1730 Technology Consulting in partnership with [Host University — TBD]</em>
+<em>Mitacs Accelerate Entrepreneur Program</em></p>
+
+</main>
+<div class="proposal-foot">
+  Audiofish &middot; A Stratalab&trade; format &middot; <a href="https://1730.ca">1730 Technology Consulting</a>
+</div>
+</body>
+</html>
