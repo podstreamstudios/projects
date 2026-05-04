@@ -198,6 +198,42 @@
             font-style: italic;
         }
 
+        /* ── PORTFOLIO INTRO ── */
+        .portfolio-intro {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 80px 32px 0;
+        }
+        .portfolio-intro-eyebrow {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 14px;
+        }
+        .portfolio-intro h2 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: 28px;
+            line-height: 1.2;
+        }
+        .portfolio-intro h2 em { font-style: italic; }
+        .portfolio-intro p {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(17px, 1.8vw, 20px);
+            font-weight: 300;
+            line-height: 1.7;
+            color: #2a2820;
+            margin-bottom: 1.1rem;
+        }
+        .portfolio-intro p:last-child { margin-bottom: 0; }
+        .portfolio-intro p em { font-style: italic; color: var(--mid); }
+        .portfolio-intro p strong { color: var(--ink); font-weight: 500; }
+
         /* ── MITACS PROJECTS ── */
         .mitacs {
             max-width: 1080px;
@@ -320,10 +356,18 @@
         </nav>
     </section>
 
+    <section class="portfolio-intro">
+        <div class="portfolio-intro-eyebrow">Applied Cultural Innovation Portfolio</div>
+        <h2>From metaphrames to <em>microcredentials</em></h2>
+        <p>A portfolio, not a list. Each tile below is a research initiative within an evolving ecosystem of applied cultural innovation &mdash; a tool, framework, platform, or venue for translating theory into usable artifacts that accumulate, recombine, and refine over time.</p>
+        <p>Projects are grouped under four umbrellas &mdash; <strong>VanIsle</strong>, <strong>Stratalab</strong>, <strong>1730</strong>, and <strong>Soundtrap</strong> &mdash; organizing them by parent entity and strategic context. The System Compositions further down show where pairs of projects combine into architectures neither component could realize alone.</p>
+        <p>Mitacs-supported engagements have served as institutional infrastructure across multiple cycles (2010, 2021, 2025), structuring time, accountability, and translation between academic theory and applied artifact production. The portfolio that emerges is not a sequence of one-off interventions but a tool ecology designed for continuity.</p>
+    </section>
+
     <section class="mitacs">
         <div class="mitacs-eyebrow">Mitacs Projects</div>
         <h2>Individual <em>projects</em></h2>
-        <p class="mitacs-lead">Each project is a research initiative within the Crooney / Carleton TIM ecosystem &mdash; components that compose into the larger systems below.</p>
+        <p class="mitacs-lead">Each tile is a research initiative &mdash; tool, framework, or platform. Components of the portfolio above; building blocks of the System Compositions below.</p>
 
         <div class="mitacs-grid">
             <article class="mitacs-tile">
