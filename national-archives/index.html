@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The National Archives · Mitacs Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0d0d0e;
+  --surface: #1a1a1c;
+  --card-bg: #1f1f21;
+  --card-deep: #141416;
+  --paper: #ede5d5;
+  --paper-soft: #b8a78c;
+  --paper-mid: rgba(237,229,213,0.7);
+  --accent: #c89656;
+  --accent-deep: #8a6438;
+  --rule: rgba(237,229,213,0.15);
+  --rule-strong: rgba(237,229,213,0.4);
+  --serif: 'Playfair Display', Georgia, serif;
+  --mono: 'DM Mono', 'Courier New', monospace;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+.proposal-topbar {
+  border-bottom: 1px solid var(--rule);
+  padding: 1.25rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.proposal-topbar a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.proposal-topbar a:hover { color: var(--paper); border-bottom-color: var(--paper); }
+.proposal-topbar .crumb { color: var(--paper-mid); }
+.proposal-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 4.5rem 2rem 6rem;
+}
+main h1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+  margin: 0.5rem 0 1.25rem;
+}
+main h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3.2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--paper);
+  margin: 3rem 0 1.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+main h2:first-of-type { border-top: none; padding-top: 0; }
+main h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--accent);
+  margin: 2rem 0 0.85rem;
+}
+main h4 {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 1.5rem 0 0.75rem;
+}
+main p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--paper);
+  margin: 0 0 1.15rem;
+}
+main p strong { color: var(--accent); font-weight: 500; }
+main p em { color: var(--paper); font-style: italic; }
+main a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent-deep);
+  transition: color 0.2s, border-color 0.2s;
+}
+main a:hover { color: var(--paper); border-bottom-color: var(--paper); }
+main ul, main ol {
+  margin: 0 0 1.25rem 1.5rem;
+  padding: 0;
+}
+main li {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--paper);
+  margin-bottom: 0.5rem;
+}
+main li::marker { color: var(--accent); }
+main hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 3rem 0;
+}
+main blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 0.75rem 1.5rem;
+  margin: 1.5rem 0;
+  background: var(--card-bg);
+  font-style: italic;
+  color: var(--paper);
+}
+main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 14px;
+  background: var(--card-bg);
+}
+main th, main td {
+  padding: 0.75rem 0.9rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--rule);
+}
+main th {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(200,150,86,0.06);
+  border-bottom: 1px solid var(--accent);
+}
+main tr:last-child td { border-bottom: none; }
+main code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  background: var(--card-bg);
+  padding: 0.1rem 0.35rem;
+  border-radius: 2px;
+  color: var(--accent);
+}
+main pre {
+  background: var(--card-bg);
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1.25rem 0;
+  border-left: 2px solid var(--accent);
+}
+main pre code { background: none; padding: 0; color: var(--paper); font-size: 13px; }
+.proposal-foot {
+  border-top: 1px solid var(--rule);
+  padding: 2rem;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--paper-mid);
+  text-align: center;
+}
+.proposal-foot a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.proposal-foot a:hover { color: var(--paper); border-bottom-color: var(--paper); }
+@media (max-width: 720px) {
+  main { padding: 3rem 1.25rem 4rem; }
+  .proposal-topbar { padding: 1rem 1.25rem; flex-wrap: wrap; gap: 0.75rem; }
+}
+</style>
+</head>
+<body>
+<div class="proposal-topbar">
+  <span><a href="/">&larr; Projects</a> <span class="crumb">/ The National Archives</span></span>
+  <span class="proposal-eyebrow">Mitacs Accelerate Entrepreneur</span>
+</div>
+<main>
+<h1>The National Archives</h1>
+<h2>Mitacs Accelerate Entrepreneur — Research Proposal</h2>
+<p><strong>Industry Partner:</strong> 1730 Technology Consulting<br><strong>Technical Partner:</strong> Multimodal Media Lab (MML)<br><strong>Researcher:</strong> Joel Flynn<br><strong>Proposed HQP:</strong> Kendyll Carr, UBC (audio producer / sound designer)<br><strong>Academic Supervisor:</strong> Dr. Patrick Parra Pennefather, UBC Theatre and Film / Master of Digital Media Program (proposed; on sabbatical until January 2027 — aligned with project start date)<br><strong>Showcase Venue:</strong> BCIT Tech Collider, 555 Seymour Street, Vancouver BC<br><strong>Portal:</strong> thecommodore.com</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Program</td>
+<td>Mitacs Accelerate Entrepreneur</td>
+</tr>
+<tr>
+<td>Industry Partner</td>
+<td>1730 Technology Consulting (CCPC)</td>
+</tr>
+<tr>
+<td>Technical Partner</td>
+<td>Multimodal Media Lab, 375 Water Street, Room 645, Vancouver BC</td>
+</tr>
+<tr>
+<td>Academic Institution</td>
+<td>University of British Columbia (preferred) — Carleton University (Sprott / TIM) or Fairleigh Dickinson University Vancouver as contingency</td>
+</tr>
+<tr>
+<td>Academic Supervisor</td>
+<td>Dr. Patrick Parra Pennefather, UBC Theatre and Film / Master of Digital Media Program (proposed; on sabbatical until January 2027 — aligned with project activation timeline)</td>
+</tr>
+<tr>
+<td>Proposed HQP</td>
+<td>Kendyll Carr — UBC audio producer and sound designer; spatial audio, cinematic and immersive sound, audio storytelling; under Pennefather&#39;s supervision; interest confirmed, formal confirmation pending</td>
+</tr>
+<tr>
+<td>External Collaborator</td>
+<td>Sean O&#39;Brien — Grammy-winning producer and vocal engineer, Los Angeles CA (Best Alternative Music Album, 60th Grammy Awards, 2018, for The National&#39;s <em>Sleep Well Beast</em>); aware of AI backing track playlist project via Matt Berninger; full project scope to be introduced through the developing collaboration relationship</td>
+</tr>
+<tr>
+<td>Production Platform</td>
+<td>Soundtrap (remote collaborative DAW) + Fish.audio (AI voice and audio processing infrastructure)</td>
+</tr>
+<tr>
+<td>Funding Mechanism</td>
+<td>Mitacs Accelerate Entrepreneur + SR&amp;ED 35% enhanced refundable ITC</td>
+</tr>
+<tr>
+<td>Archival Dataset</td>
+<td>The National Archives — 19 filmed live performance recordings plus 1 audio-only capture, 2005–2011. Four multi-camera Vancouver productions (Sonar 2005, Richards on Richards 2006, Commodore Ballroom 2007, Malkin Bowl Sep 10 2010); fifteen single-camera club, theatre, and festival recordings across North America (Cambridge MA, New York, Seattle, Oakland, San Francisco, Austin, and others). Venue arc: 300-capacity clubs to major festival stages.</td>
+</tr>
+<tr>
+<td>Primary Showcase Venue</td>
+<td>BCIT Tech Collider, 555 Seymour Street, Vancouver BC</td>
+</tr>
+</tbody></table>
+<hr>
+<h1>1. Executive Summary</h1>
+<p>This research has its origin in a course. From 2002 to 2006, Joel Flynn taught Cultural Icons &amp; Popular Art at Simon Fraser University — a course asking how culture becomes identifiable, and how these cultural identities become produced, circulated, and recognized over time as icons.</p>
+<p>The National are a band now in 2026 that can be considered part of the iconography of popular culture. Their songs are the foundational artifacts, their relationships to other iconic artists — from Bon Iver to St. Vincent to Radiohead — form the community of practice behind their work. Their tours generate the familiar fan anticipation of where and when they&#39;ll be playing next, if you can get a ticket, as well as how each show will unfold as a setlist: which songs will be played, which songs from early albums have been &#39;retired&#39;, whether or not the band is &#39;tight&#39; that night, and even the awkward yet requisite stage banter. The performances are the process, that is the secondary artifacts built from the portfolio logic of an ever expanding catalogue that has grown out of the cycles of studio sessions to record releases to touring and promotion, and then back into the studio... rinse and repeat. Meanwhile, venues become something more than just rooms full of people: they become tertiary spaces of cultural memory and community identity, places where people imagine being within the moment and part of a shared cultural experience.</p>
+<p>When Flynn began filming The National in 2005 — the same year Jayme Cochrane was completing his studies at SFU — the band were not yet any of these things. They were a good band trying to become all of that — or just trying to survive the next studio-album-tour cycle. The archive captures that transformation in progress: from a supporting slot at a 300-capacity club to worldwide tours in the same social circles as Taylor Swift. You cannot go back and film The National in 2005. The Commodore Ballroom recording of October 3, 2007 — made with a student team that included Cochrane as camera operator — sits at the hinge point of that arc, four months after the iPhone launch that would change how live music was captured forever, and the same year Boxer was released: the album that completed the transformation.</p>
+<p>This proposal requests a Mitacs Accelerate Entrepreneur internship to develop and validate an AI-assisted multimodal workflow for transforming archival live performance recordings into commercially viable creative industry outputs. The project is anchored to a unique archival dataset — The National Archives — comprising multi-camera and single-camera live performance recordings of American indie rock band The National, captured between 2005 and 2011 by researcher and filmmaker Joel Flynn as part of graduate research at Simon Fraser University.</p>
+<p>The project is structured for a January 2027 start date — a deliberate strategic decision, not a constraint. Dr. Patrick Parra Pennefather (UBC Theatre and Film / Master of Digital Media Program), the proposed academic supervisor, returns from sabbatical in January 2027, making that the natural activation point for the formal Mitacs internship. The intervening period is not idle: 2026 is dedicated to establishing the broader innovation ecosystem within which the project will operate. This includes active coordination with Multimodal Media Lab on parallel Mitacs projects, development of the BCIT and Carleton TIM institutional partnerships, completion of the ARIES Certificate curriculum framework, and the establishment of the collaborator relationships — including Sean O&#39;Brien — through which the project will generate its highest-value outcomes. The Grammy-winning producer and vocal engineer Sean O&#39;Brien is currently on tour with Matt Berninger and unavailable until at least July 2026; the relationship is being cultivated through a separate but connected project and will be ready for formal engagement on the National Archives timeline. The 2027 start date allows every element of the ecosystem to be properly in place before the Mitacs internship activates.</p>
+<p>The research deploys the ARIES methodology (Autopoietic Remix for Intertextual and Experiential Systems) across three sequential phases — audio restoration, visual enhancement and installation design, and ecosystem commercialization — mapping directly onto the three-stack architecture of the ARIES Certificate program currently under evaluation for integration with BCIT&#39;s Bachelor of Creative Industries (BCI) program.</p>
+<p>All intellectual property developed through the research will be held by the CCPC industry partner, 1730 Technology Consulting, positioning the methodology and resulting creative assets for post-internship licensing, exhibition, and multi-venue commercialization. The BCIT Tech Collider serves as the primary demonstration and showcase venue, with the BCI program providing an applied learning cohort and internship pipeline.</p>
+<hr>
+<h1>2. Research Problem and Knowledge Gap</h1>
+<h2>Central Research Question</h2>
+<p>What are the comparative value propositions for The National Archives and how can they be explored, demonstrated, and strategically evaluated?</p>
+<h2>Problem Context</h2>
+<p>Archival live performance recordings represent a significant and largely underexplored category of cultural and commercial IP. Recorded before modern production standards, these materials — camera microphone audio, multi-source video from consumer-grade cameras, mixed-quality multi-track recordings — contain irreplaceable cultural content that is frequently unusable in its raw state for contemporary exhibition, broadcast, or commercial release.</p>
+<p>Recent advances in AI-assisted audio separation and visual enhancement have dramatically shifted what is technically possible. Peter Jackson&#39;s restoration of the Beatles&#39; 1969 mono recordings for the Get Back documentary (Disney+, 2021) demonstrated that machine learning systems could isolate individual instruments and voices from degraded mono sources — unlocking material previously considered unusable. Similar AI approaches are now emerging for video upscaling, colour correction, and generative visual enhancement.</p>
+<p>However, no published framework currently addresses the full creative industry pathway from archival restoration through to commercialization across multiple output formats — documentary film, touring art installation, and platform-distributed content — using AI workflows at each stage. This gap prevents cultural institutions, independent researchers, and creative industry practitioners from systematically realizing the value embedded in archival performance material.</p>
+<h2>Specific Knowledge Gaps Addressed</h2>
+<ul>
+<li><strong>Audio separation fidelity</strong> — what quality thresholds are achievable when applying AI stem separation to multi-source camera microphone recordings from live performance environments, and how do results compare across tool generations (2021–2026)?</li>
+<li><strong>Visual enhancement limits</strong> — at what point does AI upscaling, colour grading, and frame interpolation produce perceptually convincing results for exhibition-quality presentation of consumer-grade archival footage?</li>
+<li><strong>Multi-pathway value mapping</strong> — how does the same archival dataset generate differentiated commercial and cultural value across a documentary film pathway, a touring art installation pathway, and a platform content pathway, and what IP governance architecture best captures value across all three?</li>
+<li><strong>AI workflow reproducibility</strong> — can the methodology developed through The National Archives be documented as a reproducible, scalable framework applicable to other archival performance datasets held by cultural institutions, independent researchers, and creative industry practitioners?</li>
+</ul>
+<hr>
+<h1>3. Research Objectives and Methodology</h1>
+<p>The project is structured using the ARIES methodological framework, which integrates Engeström&#39;s Cultural-Historical Activity Theory (CHAT), Wartofsky&#39;s three-level artifact model, and Flynn&#39;s original theoretical contribution mapping journalism&#39;s 5Ws+H onto Engeström&#39;s six-node expanded activity triangle — demonstrating interrogative completeness of activity theory. This framework ensures that technical AI research outcomes are evaluated against real creative industry and audience experience criteria at each phase.</p>
+<h2>Three-Phase Research Architecture</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Focus</th>
+<th>Key Activities</th>
+<th>Deliverables</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Phase 1 — Audio Restoration</td>
+<td>AI stem separation and audio restoration from camera mic and mixed live sources</td>
+<td>Tool evaluation (Sieve, AudioShake, Demucs/Roformer, iZotope RX); training on band sonic signature; restoration of Commodore 2007 primary dataset</td>
+<td>Exhibition-quality stereo mix; AI audio workflow documentation; comparative tool evaluation report</td>
+</tr>
+<tr>
+<td>Phase 2 — Visual Enhancement and Installation</td>
+<td>AI upscaling, colour grading, installation design</td>
+<td>Topaz Video AI upscaling; colour grading pipeline; 7-screen installation design; Casey Reas generative visual collaboration</td>
+<td>Exhibition-ready 7-screen installation package; visual enhancement methodology report</td>
+</tr>
+<tr>
+<td>Phase 3 — Ecosystem and Commercialization</td>
+<td>IP governance, distribution pipeline, BCI curriculum integration</td>
+<td>Legal framework; distribution strategy across four pathways; ARIES Certificate case study development</td>
+<td>IP governance framework; distribution plan; reproducible methodology document; BCI learning object</td>
+</tr>
+</tbody></table>
+<h2>Creative Industry Output Precedents</h2>
+<p>The four commercialization pathways are grounded in documented precedents from The National&#39;s own creative history:</p>
+<ul>
+<li><strong>Documentary film pathway</strong> — <em>A Skin, A Night</em> (dir. Vincent Moon, 2008): an art film operating at the album level, inhabiting <em>Boxer</em> as aesthetic object rather than explaining it. Not a &#39;making of&#39; documentary — closer to what you would encounter in a gallery installation than a music documentary. The value proposition is aesthetic and archival; the expectation of conventional documentary value is deliberately frustrated in favour of presence and texture.</li>
+<li><strong>Meta-narrative film pathway</strong> — <em>Mistaken for Strangers</em> (dir. Tom Berninger, 2013): self-reflexive tour documentary operating at the tour level, named from a song on <em>Boxer</em> but documenting the <em>High Violet</em> touring cycle. Tom Berninger — heavy-metal-loving brother of lead singer Matt — as unreliable documentarian. The self-reflexivity is the film&#39;s subject. Wide audience, clear emotional arc, 92% on Rotten Tomatoes.</li>
+<li><strong>Touring art installation pathway</strong> — <em>A Lot of Sorrow</em> (Ragnar Kjartansson + The National, MoMA PS1, 2013): a single song (&#39;Sorrow&#39; from <em>High Violet</em>) performed on loop for six hours, stripped of album context and setlist logic until repetition itself becomes the object. Durational and experiential value. Subsequently exhibited at the Metropolitan Museum of Art, Art Institute of Chicago, Louisiana Museum of Modern Art, and institutions in Beijing, Montreal, and Berlin.</li>
+<li><strong>Live document as release</strong> — <em>Rome</em> (The National, 2024): the full catalogue reduced to a curated setlist, documented as a specific time and place in the band&#39;s history. The setlist itself is the curatorial argument — which songs are included, which are retired, which rarities surface. The venue (Auditorium Parco della Musica Ennio Morricone, Rome) is part of the artifact, not a neutral container. Released as a live album alongside an &#39;official&#39; fan video on the band&#39;s YouTube channel — the band sanctioning the unauthorised aesthetic as the authorised form.</li>
+</ul>
+<p>The National Archives proposes to develop pathways in dialogue with all four precedents from the same archival dataset, using AI-assisted workflows at each stage, with the ARIES methodology providing analytical coherence across the full creative industry arc. Flynn&#39;s archive predates three of the four precedents — the footage existed before the industry established what these objects could be.</p>
+<hr>
+<h1>4. The Archival Dataset — The National Archives</h1>
+<p>The National Archives comprises 19 filmed live performance recordings of The National made by Joel Flynn between 2005 and 2011, created as primary research artifacts for graduate study at Simon Fraser University (MASc, Interactive Arts and Technology, 2006; MBA applied research, 2010). One additional show (Fox Theater, Oakland, May 26, 2010) was captured as audio only. The recordings span the band&#39;s trajectory from small club performances to major festival headliner status — from 300-capacity venues like TT the Bear&#39;s in Cambridge MA to the Hollywood Bowl. The IP in these recordings is held by Joel Flynn and will be contributed to 1730 Technology Consulting as the foundational dataset for this research.</p>
+<p>Four of the nineteen video recordings are multi-camera productions — every Vancouver production in the archive: Sonar 2005, Richards on Richards 2006, Commodore Ballroom 2007, and Malkin Bowl 2010. The multi-camera capability in Vancouver was a direct function of Flynn&#39;s position as an instructor at Simon Fraser University, where a local student team was available to support production. Out-of-town recordings — festivals, clubs, and theatres across North America — were made solo on a single camera. The four Vancouver productions form a coherent local cultural production arc tracking the band&#39;s full trajectory through Vancouver&#39;s live music ecosystem. The remaining fifteen recordings are single-camera, spanning indoor club, theatre, and outdoor festival environments across North America.</p>
+<h2>Complete Filmed Archive</h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Venue</th>
+<th>City</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sep 9, 2005</td>
+<td>Bowery Ballroom</td>
+<td>New York, NY</td>
+<td>Photos only</td>
+</tr>
+<tr>
+<td>Sep 16, 2005</td>
+<td>TT the Bear&#39;s</td>
+<td>Cambridge, MA</td>
+<td>Single camera</td>
+</tr>
+<tr>
+<td>Oct 2, 2005</td>
+<td>Sonar (Town Pump)</td>
+<td>Vancouver, BC</td>
+<td>Multi-camera (team)</td>
+</tr>
+<tr>
+<td>Oct 6, 2006</td>
+<td>Richards on Richards</td>
+<td>Vancouver, BC</td>
+<td>Multi-camera (student team)</td>
+</tr>
+<tr>
+<td>Oct 3, 2007</td>
+<td>Commodore Ballroom</td>
+<td>Vancouver, BC</td>
+<td>6 cameras + soundboard audio</td>
+</tr>
+<tr>
+<td>May 24, 2008</td>
+<td>Sasquatch! Festival / The Gorge</td>
+<td>George, WA</td>
+<td>Single camera (consumer HD)</td>
+</tr>
+<tr>
+<td>Sep 19, 2008</td>
+<td>Moore Theatre</td>
+<td>Seattle, WA</td>
+<td>Single camera</td>
+</tr>
+<tr>
+<td>Jul 31, 2009</td>
+<td>All Points West Festival</td>
+<td>Jersey City, NJ</td>
+<td>Single camera</td>
+</tr>
+<tr>
+<td>Aug 28, 2009</td>
+<td>Outside Lands Festival</td>
+<td>San Francisco, CA</td>
+<td>Single camera</td>
+</tr>
+<tr>
+<td>May 26, 2010</td>
+<td>Fox Theater</td>
+<td>Oakland, CA</td>
+<td>Audio only</td>
+</tr>
+<tr>
+<td>May 27, 2010</td>
+<td>Fox Theater</td>
+<td>Oakland, CA</td>
+<td>Single camera</td>
+</tr>
+<tr>
+<td>Sep 9, 2010</td>
+<td>Malkin Bowl, Stanley Park</td>
+<td>Vancouver, BC</td>
+<td>Not filmed</td>
+</tr>
+<tr>
+<td>Sep 10, 2010</td>
+<td>Malkin Bowl, Stanley Park</td>
+<td>Vancouver, BC</td>
+<td>Multi-camera</td>
+</tr>
+<tr>
+<td>Oct 8, 2010</td>
+<td>Austin City Limits Festival</td>
+<td>Austin, TX</td>
+<td>Single camera (partial)</td>
+</tr>
+<tr>
+<td>Oct 13, 2010</td>
+<td>Rialto Theatre</td>
+<td>Tucson, AZ</td>
+<td>Single camera</td>
+</tr>
+<tr>
+<td>Oct 14, 2010</td>
+<td>Marquee Theatre</td>
+<td>Tempe, AZ</td>
+<td>Single camera</td>
+</tr>
+<tr>
+<td>Oct 16, 2010</td>
+<td>Fox Theater</td>
+<td>Pomona, CA</td>
+<td>Single camera</td>
+</tr>
+<tr>
+<td>Nov 30, 2011</td>
+<td>Neptune Theatre</td>
+<td>Seattle, WA</td>
+<td>Single camera</td>
+</tr>
+<tr>
+<td>Dec 1, 2011</td>
+<td>Neptune Theatre</td>
+<td>Seattle, WA</td>
+<td>Single camera</td>
+</tr>
+</tbody></table>
+<h2>Multi-Camera Productions — Primary Installation Datasets</h2>
+<p>The four multi-camera recordings represent the primary datasets for the immersive installation component of The National Archives. All four are Vancouver productions, forming a coherent local cultural production arc spanning 2005–2010:</p>
+<table>
+<thead>
+<tr>
+<th>Recording</th>
+<th>Format</th>
+<th>Significance</th>
+<th>Installation Role</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sonar (Town Pump), Oct 2, 2005</td>
+<td>Multi-camera (team)</td>
+<td>First Vancouver multi-camera production; band in supporting slot; origin of the venue progression arc</td>
+<td>Supporting contextual layer; pre-Boxer material</td>
+</tr>
+<tr>
+<td>Richards on Richards, Oct 6, 2006</td>
+<td>Multi-camera (student team, 3 cameras)</td>
+<td>Boxer pre-production material — songs performed before album completion</td>
+<td>Boxer gestation layer; counterpoint to Commodore 2007</td>
+</tr>
+<tr>
+<td>Commodore Ballroom, Oct 3, 2007</td>
+<td>6 cameras + soundboard audio</td>
+<td>PRIMARY DATASET — hinge point of research arc; Boxer released; band on Arcade Fire tour</td>
+<td>Six primary screens + generative visual 7th panel</td>
+</tr>
+<tr>
+<td>Malkin Bowl, Stanley Park, Sep 10 2010</td>
+<td>Multi-camera</td>
+<td>Outdoor counterpart — contrasting acoustic and visual environment to indoor Commodore</td>
+<td>Split perspective across primary screens; remaining screens carry contextual and generative content</td>
+</tr>
+</tbody></table>
+<h2>The 7-Screen Installation Format</h2>
+<p>The National Archives installation is designed for presentation using the portable self-calibrating panoramic display system developed through 1730 Technology Consulting&#39;s parallel Mitacs Accelerate Entrepreneur project on Portable Self-Calibrating Panoramic Display Systems. That project develops a seven 55-inch panel array with autonomous spatial detection and dynamic content remapping — purpose-built for deployment in hospitality and live event venues without specialist installation.</p>
+<p>The Commodore Ballroom 2007 recording maps with particular precision onto the 7-screen format: six AI-restored camera perspectives distributed across six panels, with the seventh panel carrying a proposed generative visual layer — a collaboration with Casey Reas (co-creator of the Processing programming language and visual designer for The National) is identified as the ideal creative partnership for this component, pending outreach. The result is an immersive, spatially distributed concert environment in which each screen presents a distinct performer or spatial perspective, unified by the AI-restored audio and animated by a real-time generative visual system.</p>
+<p>This integration makes The National Archives the primary content validation dataset for the panoramic display system research, and makes the display system the primary exhibition infrastructure for The National Archives — creating a mutually reinforcing research relationship between the two Mitacs projects.</p>
+<hr>
+<h1>5. Two Co-Equal Research Outputs</h1>
+<p>The National Archives research produces two outputs of equal standing — neither is supplementary to the other.</p>
+<p><strong>Output 1 — The Restored Archive:</strong> AI-assisted audio restoration and visual enhancement of the 2005–2011 concert recordings, culminating in the 7-screen immersive installation premiere at the BCIT Tech Collider. Kendyll Carr (HQP) leads the technical restoration work under Pennefather&#39;s academic supervision. Sean O&#39;Brien contributes production expertise and aesthetic reference as external industry collaborator. The restored Commodore Ballroom 2007 recording is the primary dataset.</p>
+<p><strong>Output 2 — The Production Pipeline Methodology:</strong> A documented remote production workflow for archival live recording restoration using Soundtrap + Fish.audio as the primary toolchain. The pipeline demonstrates how geographically distributed collaborators (Campbell River BC, Vancouver BC, Los Angeles CA) can work on shared archival restoration projects without requiring physical studio co-presence. This methodology is the applied research contribution — a replicable framework applicable to other archival projects held by cultural institutions, independent researchers, and creative industry practitioners.</p>
+<p>Pipeline logic: archival capture → AI-assisted audio separation and restoration → Soundtrap collaborative session → Fish.audio processing → master export → distribution and commercialization.</p>
+<hr>
+<h1>6. Phase 1 — AI Audio Restoration</h1>
+<p>Phase 1 technical work will be led by an AI film production specialist operating within the MML collaborator network. Kevin Friel — whose 25+ years of traditional and AI-native production experience includes work with DNEG, BRON Studios, and MPC, and who brings direct expertise in AI-enhanced scoring and sound design pipelines (Udio, Suno, ElevenLabs) and generative video production workflows — is identified as the preferred collaborator for this phase, pending availability confirmation. MML&#39;s broader network provides alternative specialist capacity should scheduling require it.</p>
+<h2>Technical Approach</h2>
+<p>The primary technical challenge is stem separation and audio restoration from camera microphone sources recorded in a live venue environment — not a studio. Camera microphones capture a blend of direct sound, room reflections, audience noise, and electronic interference that conventional audio tools cannot separate.</p>
+<p>The Peter Jackson / Get Back precedent is directly applicable: Jackson&#39;s team at Park Road Post Production developed machine learning systems trained to recognize individual instruments and voices within 53-year-old mono recordings. The same principle — teaching the AI what specific instruments and voices sound like — applies to the Commodore 2007 recordings, where the band&#39;s sonic signature is well-documented across multiple recordings.</p>
+<h2>AI Tools Under Evaluation</h2>
+<ul>
+<li><strong>Sieve</strong> — cloud-based AI media processing platform with stem separation and audio enhancement capabilities; API-accessible for workflow integration</li>
+<li><strong>AudioShake</strong> — specialist music stem separation trained on commercial releases; strong precedent for isolating instruments from mixed live recordings</li>
+<li><strong>Demucs / Roformer</strong> — open-source stem separation models from Meta AI research; Roformer represents current state-of-the-art for music source separation benchmarks</li>
+<li><strong>iZotope RX</strong> — industry-standard audio repair and restoration suite; noise reduction, de-reverb, dialogue isolation; used in post-production for film and broadcast</li>
+<li><strong>Fish.audio</strong> — AI voice and audio processing infrastructure; co-equal platform with Soundtrap for the remote production pipeline; enables AI-assisted vocal and instrument processing across geographically distributed collaborators</li>
+<li><strong>Soundtrap</strong> — browser-based collaborative DAW (Spotify ecosystem); remote collaboration platform enabling distributed work between Campbell River BC, Vancouver BC, and Los Angeles CA without requiring physical studio co-presence; direct Spotify publishing pipeline</li>
+</ul>
+<h2>Phase 1 Research Questions</h2>
+<ul>
+<li>What combination of AI tools produces the highest-fidelity stem separation from camera microphone sources in a live venue environment?</li>
+<li>How does the availability of soundboard reference audio (partial, Commodore 2007) affect restoration quality when used as a training signal?</li>
+<li>What perceptual quality thresholds distinguish &#39;exhibition-ready&#39; from &#39;archival reference&#39; audio in the context of immersive installation presentation?</li>
+<li>How do restoration results vary across the four multi-camera Vancouver productions, given differences in venue acoustics, recording equipment, and source quality?</li>
+</ul>
+<h2>Phase 1 Deliverables</h2>
+<ul>
+<li>Exhibition-quality stereo mix of the Commodore Ballroom 2007 recording</li>
+<li>Comparative AI tool evaluation report covering Sieve, AudioShake, Demucs/Roformer, and iZotope RX</li>
+<li>Documented restoration methodology applicable to the remaining multi-camera productions</li>
+<li>Technical brief for Phase 2 visual enhancement pipeline</li>
+</ul>
+<hr>
+<h1>7. Phase 2 — Visual Enhancement and Installation Design</h1>
+<p>Phase 2 layers AI-assisted visual enhancement onto the restored audio foundation, and develops the immersive installation design for The National Archives as a touring exhibition work. This phase connects directly to 1730 Technology Consulting&#39;s parallel Mitacs Accelerate Entrepreneur project on Portable Self-Calibrating Panoramic Display Systems — The National Archives becomes the primary content layer for that display technology research.</p>
+<h2>Visual Enhancement Pipeline</h2>
+<ul>
+<li><strong>Topaz Video AI</strong> — frame interpolation, upscaling to 4K, motion deblur; primary tool for converting consumer-grade SD/HD footage to exhibition-quality resolution</li>
+<li><strong>DaVinci Resolve</strong> — colour grading and colour science pipeline; matching colour temperature and exposure across six camera sources from the Commodore 2007 recording</li>
+<li><strong>Generative visual layer</strong> — proposed collaboration with Casey Reas (co-creator of Processing, visual designer for The National) to develop a generative visual system responsive to the restored audio, building on the precedent of <em>A Lot of Sorrow</em></li>
+</ul>
+<h2>Installation Design Principles</h2>
+<ul>
+<li>Each of the six camera sources from Commodore 2007 occupies a dedicated screen panel — one performer or spatial perspective per screen</li>
+<li>The seventh panel carries the Reas generative visual layer, providing a non-documentary visual counterpoint to the archival footage</li>
+<li>Audio is spatially distributed across the room rather than anchored to individual screens — the restored mix is the environment, not a soundtrack</li>
+<li>The installation is designed for the BCIT Tech Collider floor-to-ceiling video wall as premiere venue, with the portable self-calibrating display system enabling subsequent touring deployment</li>
+</ul>
+<h2>Phase 2 Deliverables</h2>
+<ul>
+<li>Exhibition-ready 7-screen installation package (Commodore 2007)</li>
+<li>Visual enhancement methodology report and tool evaluation</li>
+<li>Casey Reas generative visual system (seventh panel)</li>
+<li>Installation deployment documentation for BCIT Tech Collider premiere</li>
+<li>Touring deployment specifications for portable display system integration</li>
+</ul>
+<hr>
+<h1>8. Phase 3 — Ecosystem and Commercialization</h1>
+<h2>Commercialization Pathways</h2>
+<table>
+<thead>
+<tr>
+<th>Pathway</th>
+<th>Format</th>
+<th>Distribution</th>
+<th>AI Role</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Documentary film</td>
+<td>Feature or short documentary (<em>A Skin, A Night</em> precedent)</td>
+<td>Festival circuit, streaming platforms, broadcast</td>
+<td>AI-assisted edit assembly, subtitle generation, distribution pitch automation</td>
+</tr>
+<tr>
+<td>Touring installation</td>
+<td>Multi-venue immersive exhibition (<em>A Lot of Sorrow</em> precedent)</td>
+<td>Museums, galleries, arts festivals, university venues</td>
+<td>Self-calibrating display deployment, generative visual adaptation per venue</td>
+</tr>
+<tr>
+<td>Platform content</td>
+<td>Song-level and show-level clips, enhanced audio releases (<em>Rome</em> precedent)</td>
+<td>YouTube, Spotify, Bandcamp, archive.org</td>
+<td>AI-assisted metadata, clip extraction, platform optimization</td>
+</tr>
+<tr>
+<td>Live document release</td>
+<td>Full-show audio/video release (<em>Rome</em> precedent)</td>
+<td>Streaming, physical media, direct-to-fan</td>
+<td>AI restoration as production value; curatorial setlist framing</td>
+</tr>
+</tbody></table>
+<h2>IP Governance Framework</h2>
+<p>All intellectual property developed through the research — including the AI-restored audio, enhanced video, installation design, generative visual system, and documented methodology — will be held by 1730 Technology Consulting as the CCPC industry partner. The framework will address:</p>
+<ul>
+<li>Rights clearance for archival live performance recordings (performer rights, venue agreements, label considerations)</li>
+<li>Revenue sharing architecture across commercialization pathways</li>
+<li>Licensing structure for methodology documentation and reproducible framework</li>
+<li>SR&amp;ED compliance documentation for 35% enhanced refundable ITC eligibility</li>
+</ul>
+<h2>Four Economic Logics (Engeström)</h2>
+<p>The four economic logics embedded in Engeström&#39;s expanded activity system — Production (capitalist), Exchange (market), Consumption (consumerist), and Distribution (socialist) — provide the analytical framework for evaluating which commercialization pathway is appropriate at each stage of the project&#39;s development. This mapping is an explicit component of the Phase 3 research deliverables.</p>
+<h2>Phase 3 Deliverables</h2>
+<ul>
+<li>IP governance framework document for The National Archives across all four output pathways</li>
+<li>Rights clearance strategy and template agreement documentation</li>
+<li>Distribution plan for each commercialization pathway</li>
+<li>Reproducible methodology document: AI-assisted archival live performance restoration — a framework for cultural institutions and independent researchers</li>
+<li>ARIES Certificate case study: The National Archives as living learning object across MC1–MC9</li>
+</ul>
+<hr>
+<h1>9. BCIT Bachelor of Creative Industries — Curriculum Integration</h1>
+<h2>Three Diagonal Tracks</h2>
+<table>
+<thead>
+<tr>
+<th>Track</th>
+<th>Modules</th>
+<th>Platform</th>
+<th>Integration</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Audio-First Production</td>
+<td>MC1 · MC4 · MC7</td>
+<td>Soundtrap</td>
+<td>Students work with National Archives audio material as primary artifacts — real archive, real tools, real production decisions</td>
+</tr>
+<tr>
+<td>Audio + Previsualisation</td>
+<td>MC2 · MC5 · MC8</td>
+<td>Enhanced media pipeline</td>
+<td>Audio gaining visual dimension; podcasting moving toward television; installation design as MC8 capstone</td>
+</tr>
+<tr>
+<td>Commercialization Ecosystem</td>
+<td>MC3 · MC6 · MC9</td>
+<td>PSL Framework</td>
+<td>1730/Mitacs/SR&amp;ED as live entrepreneurship case; students study the business model they&#39;re working inside</td>
+</tr>
+</tbody></table>
+<h2>BCI Course Mapping</h2>
+<table>
+<thead>
+<tr>
+<th>Course</th>
+<th>Integration Point</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CREA 7020 — Creative Industries Foundations</td>
+<td>ARIES framework; song as activity system; album/tour/venue hierarchy</td>
+</tr>
+<tr>
+<td>CREA 7120 — Digital Media Production</td>
+<td>Phase 1 audio restoration workflow; AI tool evaluation</td>
+</tr>
+<tr>
+<td>CREA 8100 — Growing the Creative Economy</td>
+<td>Transmedia ecosystem design; <em>A Lot of Sorrow</em> / <em>Mistaken for Strangers</em> / <em>Rome</em> precedents</td>
+</tr>
+<tr>
+<td>CREA 8210 — Applied Research in Creative Industries</td>
+<td>Mitacs Accelerate as model; The National Archives as live research case</td>
+</tr>
+<tr>
+<td>CREA 8200 — Capstone</td>
+<td>The National Archives installation as capstone deliverable option</td>
+</tr>
+<tr>
+<td>CREA 8210 — Internship (300hr)</td>
+<td>MML as approved host; placement in AI production pipeline</td>
+</tr>
+</tbody></table>
+<h2>Soundtrap for Education</h2>
+<p>Soundtrap (browser-based collaborative DAW, Spotify ecosystem, direct publishing pipeline) is the proposed audio production platform for MC1/MC4/MC7 across the ARIES Certificate and BCI program overlap. The platform&#39;s recent major interface redesign represents a marketing moment for a flagship Canadian post-secondary integration. Soundtrap&#39;s direct Spotify publishing capability maps onto the PSL ecosystem argument for MC3/MC6/MC9.</p>
+<hr>
+<h1>10. Research Team (Proposed)</h1>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Person</th>
+<th>Background</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Principal Researcher / Industry Partner</td>
+<td>Joel Flynn, 1730 Technology Consulting</td>
+<td>MASc Interactive Arts and Technology (SFU, 2006); MBA (SFU, 2010); instructor Cultural Icons &amp; Popular Art (SFU, 2002–2006); filmmaker, The National Archives dataset 2005–2011</td>
+</tr>
+<tr>
+<td>Academic Supervisor</td>
+<td>Dr. Patrick Parra Pennefather, UBC Theatre and Film / Master of Digital Media Program</td>
+<td>Award-winning sound designer and composer; research in spatial audio, mixed reality, hybrid performance, and collaborative digital experience; co-appointed MDM Program (UBC/SFU/BCIT/ECUAD); existing MML collaborator; on sabbatical until January 2027 — aligned with project activation timeline</td>
+</tr>
+<tr>
+<td>Proposed HQP (Mitacs Intern)</td>
+<td>Kendyll Carr, UBC</td>
+<td>Audio producer, sound designer, and independent artist; cinematic and immersive sound, spatial audio, audio storytelling, audio engineering; under Pennefather&#39;s supervision; interest confirmed, formal confirmation pending</td>
+</tr>
+<tr>
+<td>External Industry Collaborator</td>
+<td>Sean O&#39;Brien, Los Angeles CA</td>
+<td>Grammy-winning producer and vocal engineer (Best Alternative Music Album, 60th Grammy Awards, 2018, The National&#39;s <em>Sleep Well Beast</em>; Album of the Year nomination, 64th Grammy Awards, 2022, Taylor Swift&#39;s <em>Evermore</em>); co-writer with Matt Berninger; long-standing creative partnership with The National; aware of the AI backing track playlist project featuring songs he co-wrote with Berninger (via Joel&#39;s text/email relationship with Matt Berninger), but not yet aware of the full scope of the Double Double vinyl album project, which has emerged through recent AI-assisted development work; formal outreach to follow once the relationship is established through the initial collaboration</td>
+</tr>
+<tr>
+<td>AI Film Production Specialist</td>
+<td>Kevin Friel, MML collaborator network</td>
+<td>25+ years VFX (DNEG, BRON Studios, MPC); AI-enhanced scoring and sound design pipelines; generative video production; preferred collaborator for Phase 1–2 technical work, pending availability</td>
+</tr>
+<tr>
+<td>Generative Visual Designer</td>
+<td>Casey Reas (proposed)</td>
+<td>Co-creator of Processing programming language; visual designer for The National; proposed collaboration for Phase 2 generative visual layer, outreach pending</td>
+</tr>
+<tr>
+<td>Technical Partner</td>
+<td>Multimodal Media Lab (MML)</td>
+<td>375 Water Street, Room 645, Vancouver BC</td>
+</tr>
+<tr>
+<td>Contingency Supervisors</td>
+<td>Dr. Nusa Fain, Carleton TIM / Ramin Shadmehr, FDU Vancouver</td>
+<td>Carleton TIM and FDU Vancouver remain viable academic pathways if UBC/Pennefather timing requires adjustment</td>
+</tr>
+</tbody></table>
+<hr>
+<h1>11. Research Publications and Prior Work</h1>
+<ul>
+<li>Flynn, J. (2006). <em>Travels in Intertextuality</em> — MASc thesis, Simon Fraser University. Wartofsky primary/secondary/tertiary artifacts; autopoietic remix culture. <a href="https://www.academia.edu/1320506/">https://www.academia.edu/1320506/</a></li>
+<li>Flynn, J. (2007). <em>Metaphrames and Interaction: This is &quot;How it Goes&quot;</em> — Our Media &#39;07, February 14, 2007. Introduces &#39;metaphrame&#39; as neologism (metaphor + frame = Wartofsky tertiary artifact). <a href="https://www.academia.edu/1324801/">https://www.academia.edu/1324801/</a></li>
+<li>Flynn, J. (2010a). <em>Seedfeed</em> — MBA applied research, SFU. <a href="https://www.academia.edu/89642973/">https://www.academia.edu/89642973/</a></li>
+<li>Flynn, J. (2010b). <em>A Co-Op in the Clouds: Virtualizing Student-led Video Production at Vancouver&#39;s Commodore Ballroom</em> — Accepted, CCV Conference 2010, Singapore (not presented). Proposes Mitacs Accelerate internship with Teradici Corporation and Live Nation. Acknowledges Matt Berninger, Scott and Bryan Devendorf, Aaron and Bryce Dessner, Padma Newsome, and Vincent Moon as research collaborators. <a href="https://www.academia.edu/1324815/">https://www.academia.edu/1324815/</a></li>
+</ul>
+
+</main>
+<div class="proposal-foot">
+  The National Archives &middot; Joel Flynn &middot; <a href="https://1730.ca">1730 Technology Consulting</a> &middot; portal: <a href="https://thecommodore.com">thecommodore.com</a>
+</div>
+</body>
+</html>
