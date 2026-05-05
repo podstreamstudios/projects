@@ -1,462 +1,483 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | Crooney</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=DM+Mono:wght@300;400;500&family=Archivo:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --ink: #0e0d0b;
-            --parchment: #f2ede4;
-            --cream: #faf7f2;
-            --mid: #7a7268;
-            --rule: #d4cdc0;
-        }
-        body {
-            background: var(--cream);
-            color: var(--ink);
-            font-family: 'Archivo', sans-serif;
-            font-size: 16px;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            min-height: 100vh;
-        }
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 60px 24px 40px;
-        }
-        .tag {
-            font-family: 'DM Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--mid);
-            margin-bottom: 20px;
-        }
-        h1 {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: clamp(36px, 6vw, 64px);
-            font-weight: 300;
-            letter-spacing: -0.02em;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-        .desc {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: clamp(17px, 2vw, 21px);
-            font-weight: 300;
-            line-height: 1.65;
-            color: #2a2820;
-            max-width: 540px;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .rule {
-            width: 48px;
-            height: 2px;
-            background: var(--ink);
-            margin-bottom: 40px;
-        }
-        .nav-links {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .nav-links a {
-            font-family: 'DM Mono', monospace;
-            font-size: 11px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--mid);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            padding-bottom: 2px;
-            transition: border-color 0.2s, color 0.2s;
-        }
-        .nav-links a:hover {
-            color: var(--ink);
-            border-bottom-color: var(--ink);
-        }
-        footer {
-            border-top: 1px solid var(--rule);
-            padding: 28px 24px;
-            font-family: 'DM Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 0.12em;
-            color: var(--rule);
-            text-align: center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Stratalab Research Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Archivo:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Archivo', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+      --color-ink: #0e0d0b;
+      --color-parchment: #f2ede4;
+      --color-cream: #faf7f2;
+      --color-mid: #7a7268;
+      --color-rule: #d4cdc0;
+      --color-processes: #c8692a;
+      --color-resources: #3a6b8a;
+      --color-values: #4a7c59;
+    }
 
-        /* ── COMPOSITIONS ── */
-        .compositions {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 80px 32px 96px;
-        }
-        .compositions-eyebrow {
-            font-family: 'DM Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--mid);
-            margin-bottom: 14px;
-        }
-        .compositions h2 {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: clamp(28px, 4vw, 40px);
-            font-weight: 400;
-            letter-spacing: -0.01em;
-            color: var(--ink);
-            margin-bottom: 18px;
-        }
-        .compositions h2 em { font-style: italic; }
-        .compositions-lead {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: clamp(17px, 1.8vw, 21px);
-            font-weight: 300;
-            line-height: 1.65;
-            color: #2a2820;
-            max-width: 720px;
-            margin-bottom: 36px;
-        }
-        .compositions-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2px;
-            background: var(--rule);
-        }
-        @media (min-width: 720px) {
-            .compositions-grid { grid-template-columns: 1fr 1fr; }
-        }
-        .composition-card {
-            background: var(--cream);
-            padding: 32px;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-        .composition-title {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: 24px;
-            font-weight: 400;
-            letter-spacing: -0.01em;
-            color: var(--ink);
-        }
-        .composition-title em { font-style: italic; color: var(--mid); }
-        .composition-working-name {
-            font-family: 'DM Mono', monospace;
-            font-size: 11px;
-            letter-spacing: 0.04em;
-            color: var(--mid);
-            font-style: italic;
-            margin-top: -8px;
-        }
-        .composition-working-name strong {
-            font-style: normal;
-            font-weight: 500;
-            color: var(--ink);
-        }
-        .composition-desc {
-            font-size: 15px;
-            line-height: 1.7;
-            color: #2a2820;
-        }
-        .composition-meta {
-            display: flex;
-            gap: 16px;
-            margin-top: auto;
-            padding-top: 8px;
-            font-family: 'DM Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--mid);
-        }
-        .composition-meta a {
-            color: var(--mid);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            padding-bottom: 1px;
-            transition: color 0.2s, border-color 0.2s;
-        }
-        .composition-meta a:hover { color: var(--ink); border-bottom-color: var(--ink); }
-        .composition-note {
-            font-family: 'DM Mono', monospace;
-            font-size: 11px;
-            letter-spacing: 0.08em;
-            color: var(--mid);
-            margin-top: 24px;
-            font-style: italic;
-        }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
+    body {
+      background: var(--color-cream);
+      color: var(--color-ink);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+    }
 
-        /* ── PORTFOLIO INTRO ── */
-        .portfolio-intro {
-            max-width: 820px;
-            margin: 0 auto;
-            padding: 80px 32px 0;
-        }
-        .portfolio-intro-eyebrow {
-            font-family: 'DM Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--mid);
-            margin-bottom: 14px;
-        }
-        .portfolio-intro h2 {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: clamp(28px, 4vw, 40px);
-            font-weight: 400;
-            letter-spacing: -0.01em;
-            color: var(--ink);
-            margin-bottom: 28px;
-            line-height: 1.2;
-        }
-        .portfolio-intro h2 em { font-style: italic; }
-        .portfolio-intro p {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: clamp(17px, 1.8vw, 20px);
-            font-weight: 300;
-            line-height: 1.7;
-            color: #2a2820;
-            margin-bottom: 1.1rem;
-        }
-        .portfolio-intro p:last-child { margin-bottom: 0; }
-        .portfolio-intro p em { font-style: italic; color: var(--mid); }
-        .portfolio-intro p strong { color: var(--ink); font-weight: 500; }
+    /* ── TOPBAR ── */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--color-cream);
+      border-bottom: 1px solid var(--color-rule);
+    }
+    .topbar-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center;
+      overflow-x: auto; scrollbar-width: none;
+    }
+    .topbar-inner::-webkit-scrollbar { display: none; }
+    .topbar-home {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--color-mid); text-decoration: none;
+      padding: 1rem 1.25rem 1rem 0;
+      border-right: 1px solid var(--color-rule);
+      white-space: nowrap; transition: color 0.15s;
+    }
+    .topbar-home:hover { color: var(--color-ink); }
+    .subnav { display: flex; flex: 1; overflow-x: auto; scrollbar-width: none; }
+    .subnav::-webkit-scrollbar { display: none; }
+    .subnav-link {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--color-mid); text-decoration: none;
+      padding: 1rem 1.1rem; white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .subnav-link:hover { color: var(--color-ink); }
+    .subnav-link.active { color: var(--color-ink); border-bottom-color: var(--color-ink); }
 
-        /* ── MITACS PROJECTS ── */
-        .mitacs {
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 80px 32px 0;
-        }
-        .mitacs-eyebrow {
-            font-family: 'DM Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--mid);
-            margin-bottom: 14px;
-        }
-        .mitacs h2 {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: clamp(28px, 4vw, 40px);
-            font-weight: 400;
-            letter-spacing: -0.01em;
-            color: var(--ink);
-            margin-bottom: 18px;
-        }
-        .mitacs h2 em { font-style: italic; }
-        .mitacs-lead {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: clamp(17px, 1.8vw, 21px);
-            font-weight: 300;
-            line-height: 1.65;
-            color: #2a2820;
-            max-width: 720px;
-            margin-bottom: 36px;
-        }
-        .mitacs-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1px;
-            background: var(--rule);
-            border: 1px solid var(--rule);
-        }
-        @media (min-width: 720px) {
-            .mitacs-grid { grid-template-columns: 1fr 1fr; }
-        }
-        @media (min-width: 1024px) {
-            .mitacs-grid { grid-template-columns: 1fr 1fr 1fr; }
-        }
-        .mitacs-tile {
-            background: var(--cream);
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .mitacs-tile-umbrella {
-            font-family: 'DM Mono', monospace;
-            font-size: 9px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--mid);
-        }
-        .mitacs-tile-name {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: 22px;
-            font-weight: 400;
-            letter-spacing: -0.01em;
-            color: var(--ink);
-            line-height: 1.2;
-        }
-        .mitacs-tile-desc {
-            font-size: 14px;
-            line-height: 1.7;
-            color: #2a2820;
-        }
-        .mitacs-tile-link {
-            margin-top: auto;
-            padding-top: 4px;
-            font-family: 'DM Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--mid);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            padding-bottom: 1px;
-            align-self: flex-start;
-            transition: color 0.2s, border-color 0.2s;
-        }
-        .mitacs-tile-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
-        .mitacs-tile-placeholder {
-            background: var(--parchment);
-        }
-        .mitacs-tile-placeholder .mitacs-tile-name { color: var(--mid); }
-        .mitacs-tile-placeholder .mitacs-tile-desc { color: var(--mid); font-style: italic; }
-        .mitacs-tile-pending {
-            margin-top: auto;
-            padding-top: 4px;
-            font-family: 'DM Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--mid);
-            font-style: italic;
-            align-self: flex-start;
-        }
-    </style>
+    /* ── HERO ── */
+    .hero {
+      max-width: 1100px; margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+      border-bottom: 1px solid var(--color-rule);
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono); font-size: 9px;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--color-mid); margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 400; line-height: 1.15;
+      letter-spacing: -0.01em; color: var(--color-ink);
+      max-width: 760px; margin-bottom: 1.5rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--color-mid); }
+    .hero-lead {
+      font-family: var(--font-serif);
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      font-weight: 300; line-height: 1.65;
+      color: #2a2820; max-width: 660px;
+    }
+
+    /* ── LAYOUT ── */
+    .page-body { max-width: 1100px; margin: 0 auto; padding: 0 2rem 6rem; }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      padding: 3.5rem 0 2rem;
+      border-top: 1px solid var(--color-rule);
+      margin-top: 2rem;
+    }
+    .section-eyebrow {
+      font-family: var(--font-mono); font-size: 9px;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--color-mid); margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 400; line-height: 1.2;
+      color: var(--color-ink); margin-bottom: 0.75rem;
+    }
+    .section-desc {
+      font-size: 14.5px; color: #3a3830;
+      max-width: 640px; line-height: 1.7;
+    }
+
+    /* ── PROJECT CARDS ── */
+    .projects-grid { display: grid; gap: 0; margin-top: 2rem; }
+    .project-card {
+      border: 1px solid var(--color-rule);
+      border-top: none; padding: 2rem 2rem 1.75rem;
+      background: var(--color-cream);
+      transition: background 0.15s;
+    }
+    .project-card:first-child { border-top: 1px solid var(--color-rule); }
+    .project-card:hover { background: var(--color-parchment); }
+
+    .project-header {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 1.5rem;
+      margin-bottom: 1rem; flex-wrap: wrap;
+    }
+    .project-title-group { flex: 1; }
+    .project-umbrella {
+      font-family: var(--font-mono); font-size: 9px;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .project-title {
+      font-family: var(--font-serif); font-size: 1.4rem;
+      font-weight: 500; line-height: 1.2; color: var(--color-ink);
+    }
+    .mitacs-badge {
+      font-family: var(--font-mono); font-size: 9px;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 4px 10px; border: 1px solid;
+      white-space: nowrap; align-self: flex-start;
+    }
+    .badge-active { color: var(--color-values); border-color: rgba(74,124,89,0.4); }
+    .badge-development { color: var(--color-processes); border-color: rgba(200,105,42,0.4); }
+    .badge-pipeline { color: var(--color-resources); border-color: rgba(58,107,138,0.4); }
+
+    .project-body {
+      font-size: 14px; color: #3a3830;
+      line-height: 1.75; margin-bottom: 1.25rem;
+      max-width: 720px;
+    }
+    .project-body p + p { margin-top: 0.75rem; }
+
+    .project-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+    .tag {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.06em; color: var(--color-mid);
+      border: 1px solid var(--color-rule);
+      padding: 3px 9px; display: inline-block;
+    }
+    .tag-p { color: var(--color-processes); border-color: rgba(200,105,42,0.3); }
+    .tag-r { color: var(--color-resources); border-color: rgba(58,107,138,0.3); }
+    .tag-v { color: var(--color-values); border-color: rgba(74,124,89,0.3); }
+
+    .project-links { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+    .project-link {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; padding-bottom: 1px;
+      border-bottom: 1px solid; transition: color 0.15s, border-color 0.15s;
+      display: inline-flex; align-items: center; gap: 0.3rem;
+    }
+    .link-mitacs { color: var(--color-values); border-color: rgba(74,124,89,0.35); }
+    .link-mitacs:hover { color: var(--color-ink); border-color: var(--color-ink); }
+    .link-site { color: var(--color-resources); border-color: rgba(58,107,138,0.35); }
+    .link-site:hover { color: var(--color-ink); border-color: var(--color-ink); }
+    .link-pending {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--color-mid);
+    }
+
+    /* ── COMPOSITIONS ── */
+    .compositions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1px; background: var(--color-rule);
+      border: 1px solid var(--color-rule); margin-top: 2rem;
+    }
+    .composition-card {
+      background: var(--color-cream); padding: 1.75rem;
+      transition: background 0.15s;
+    }
+    .composition-card:hover { background: var(--color-parchment); }
+    .composition-operator {
+      font-family: var(--font-serif); font-size: 1.5rem;
+      font-style: italic; color: var(--color-mid);
+      margin: 0.5rem 0;
+    }
+    .composition-name {
+      font-family: var(--font-mono); font-size: 9px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--color-mid); margin-bottom: 0.6rem;
+    }
+    .composition-title {
+      font-family: var(--font-serif); font-size: 1.15rem;
+      font-weight: 500; color: var(--color-ink);
+      margin-bottom: 0.75rem; line-height: 1.3;
+    }
+    .composition-desc {
+      font-size: 13.5px; color: #3a3830; line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      border-top: 1px solid var(--color-rule);
+      padding: 2.5rem 2rem; max-width: 1100px; margin: 0 auto;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-note {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.12em; color: var(--color-mid);
+    }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-link {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--color-mid); text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-link:hover { color: var(--color-ink); }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 640px) {
+      .hero { padding: 3rem 1.25rem 2.5rem; }
+      .page-body { padding: 0 1.25rem 4rem; }
+      .project-header { flex-direction: column; gap: 0.75rem; }
+    }
+  </style>
 </head>
 <body>
-    <section class="hero">
-        <div class="tag">crooney.ca</div>
-        <h1>Projects</h1>
-        <div class="desc">Selected work and ongoing initiatives.</div>
-        <div class="rule"></div>
-        <!-- Static fallback. Source of truth: /data/projects.json (rendered by script below). -->
-        <nav class="nav-links" id="nav-links">
-            <a href="/vanisle/">VanIsle</a>
-            <a href="https://lab.crooney.ca">Lab</a>
-            <a href="https://phd.crooney.ca">PhD</a>
-            <a href="/soundtrap/">Soundtrap</a>
-            <a href="https://aries.crooney.ca/overview">Aries</a>
-            <a href="/funding/overview.html">Funding</a>
-        </nav>
-    </section>
 
-    <section class="portfolio-intro">
-        <div class="portfolio-intro-eyebrow">Applied Cultural Innovation Portfolio</div>
-        <h2>From metaphrames to <em>microcredentials</em></h2>
-        <p>A portfolio, not a list. Each tile below is a research initiative within an evolving ecosystem of applied cultural innovation &mdash; a tool, framework, platform, or venue for translating theory into usable artifacts that accumulate, recombine, and refine over time.</p>
-        <p>Projects are grouped under four umbrellas &mdash; <strong>VanIsle</strong>, <strong>Stratalab</strong>, <strong>1730</strong>, and <strong>Soundtrap</strong> &mdash; organizing them by parent entity and strategic context. The System Compositions further down show where pairs of projects combine into architectures neither component could realize alone.</p>
-        <p>Mitacs-supported engagements have served as institutional infrastructure across multiple cycles (2010, 2021, 2025), structuring time, accountability, and translation between academic theory and applied artifact production. The portfolio that emerges is not a sequence of one-off interventions but a tool ecology designed for continuity.</p>
-    </section>
+<nav class="topbar">
+  <div class="topbar-inner">
+    <a href="https://crooney.ca" class="topbar-home">crooney.ca</a>
+    <div class="subnav">
+      <a href="#stratalab" class="subnav-link active">Stratalab</a>
+      <a href="#vanisle" class="subnav-link">VanIsle</a>
+      <a href="#compositions" class="subnav-link">Compositions</a>
+      <a href="https://lab.crooney.ca" class="subnav-link">Lab ↗</a>
+      <a href="https://phd.crooney.ca" class="subnav-link">PhD ↗</a>
+      <a href="https://aries.crooney.ca" class="subnav-link">ARIES ↗</a>
+    </div>
+  </div>
+</nav>
 
-    <section class="mitacs">
-        <div class="mitacs-eyebrow">Mitacs Projects</div>
-        <h2>Individual <em>projects</em></h2>
-        <p class="mitacs-lead">Each tile is a research initiative &mdash; tool, framework, or platform. Components of the portfolio above; building blocks of the System Compositions below.</p>
+<header class="hero">
+  <p class="hero-eyebrow">projects.crooney.ca · 1730 Technology Consulting Inc. · Stratalab™</p>
+  <h1>Formal Research Projects<br><em>with Funding Instruments</em></h1>
+  <p class="hero-lead">Mitacs Accelerate Entrepreneur applications, RTRI proposals, and MOU-linked deployments. Each project here has a formal funding instrument or is in active development toward one — linked to the Mitacs review protocol where available.</p>
+</header>
 
-        <div class="mitacs-grid">
-            <article class="mitacs-tile">
-                <div class="mitacs-tile-umbrella">VanIsle</div>
-                <h3 class="mitacs-tile-name">IslandCamp</h3>
-                <p class="mitacs-tile-desc">Operating system for car-free camping on Vancouver Island. Coordinates transport, gear, and multi-day travel logistics.</p>
-                <a class="mitacs-tile-link" href="https://vanisle.crooney.ca">vanisle.crooney.ca &rarr;</a>
-            </article>
-            <article class="mitacs-tile">
-                <div class="mitacs-tile-umbrella">VanIsle</div>
-                <h3 class="mitacs-tile-name">VICSS</h3>
-                <p class="mitacs-tile-desc">Vancouver Island Craft Spirits Society &mdash; non-profit pursuing charitable status. Value-encoding layer that translates place-based experience into exportable artifact.</p>
-                <a class="mitacs-tile-link" href="https://vanisle.crooney.ca">vanisle.crooney.ca &rarr;</a>
-            </article>
-            <article class="mitacs-tile">
-                <div class="mitacs-tile-umbrella">Stratalab</div>
-                <h3 class="mitacs-tile-name">Megaband</h3>
-                <p class="mitacs-tile-desc">Distributed cultural performance system structuring regional expression across Vancouver Island communities and events.</p>
-                <a class="mitacs-tile-link" href="https://vanisle.crooney.ca">vanisle.crooney.ca &rarr;</a>
-            </article>
-            <article class="mitacs-tile">
-                <div class="mitacs-tile-umbrella">Stratalab</div>
-                <h3 class="mitacs-tile-name">Audiofish</h3>
-                <p class="mitacs-tile-desc">Card deck encoding the monthly theming system (Pearl Jamuary &rarr; AC/DCember) developed through Seven Inning Stretch.</p>
-                <a class="mitacs-tile-link" href="/audiofish/">audiofish landing &rarr;</a>
-            </article>
-            <article class="mitacs-tile">
-                <div class="mitacs-tile-umbrella">1730</div>
-                <h3 class="mitacs-tile-name">The National Archives</h3>
-                <p class="mitacs-tile-desc">Joel Flynn's archive of 19 filmed live performances of The National (2005&ndash;2011), four of them multi-camera Vancouver productions. AI-assisted restoration and multi-pathway commercialization across documentary, installation, and live release formats.</p>
-                <a class="mitacs-tile-link" href="/national-archives/">national-archives landing &rarr;</a>
-            </article>
-            <article class="mitacs-tile">
-                <div class="mitacs-tile-umbrella">Stratalab</div>
-                <h3 class="mitacs-tile-name">TableSet</h3>
-                <p class="mitacs-tile-desc">Hospitality booking platform pairing chef and bartender as matched professionals. The Food + Drink register companion to Megaband &mdash; an exchange value app that attenuates between professional cult value and guest preferences.</p>
-                <span class="mitacs-tile-pending">Mitacs proposal in development</span>
-            </article>
-            <article class="mitacs-tile mitacs-tile-placeholder">
-                <div class="mitacs-tile-umbrella">More</div>
-                <h3 class="mitacs-tile-name">+ in development</h3>
-                <p class="mitacs-tile-desc">Additional Mitacs projects to be added.</p>
-            </article>
+<main class="page-body">
+
+  <!-- STRATALAB PROJECTS -->
+  <section id="stratalab">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Stratalab™ · Sound · Food · Drink</p>
+      <h2 class="section-title">Platform Deployments</h2>
+      <p class="section-desc">Three Mitacs Accelerate Entrepreneur applications addressing the |F|D|S|L| platform governance problem across the Sound and Food + Drink registers.</p>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- MEGABAND -->
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-title-group">
+            <p class="project-umbrella" style="color: var(--color-resources);">Stratalab™ · Sound Register · RPV Resources Layer</p>
+            <h3 class="project-title">Megaband™</h3>
+          </div>
+          <span class="mitacs-badge badge-development">Mitacs · In Development</span>
         </div>
-    </section>
-
-    <section class="compositions">
-        <div class="compositions-eyebrow">System Compositions</div>
-        <h2>Where projects <em>combine</em></h2>
-        <p class="compositions-lead">Some projects gain new meaning when composed. Each composition produces a system architecture neither component could realize alone.</p>
-
-        <div class="compositions-grid">
-            <article class="composition-card">
-                <div class="composition-title">IslandCamp <em>&times;</em> VICSS</div>
-                <div class="composition-working-name">working name · <strong>VanIsleCamp</strong></div>
-                <p class="composition-desc">Car-free camping experiences embedded with Vancouver Island craft distillery visits — converting place-based experience into export-ready spirits as a coherent collectible artifact.</p>
-                <div class="composition-meta">
-                    <a href="/vanisle/">IslandCamp</a>
-                    <span>&times;</span>
-                    <a href="/vanisle/">VICSS</a>
-                </div>
-            </article>
-            <article class="composition-card">
-                <div class="composition-title">IslandCamp <em>&times;</em> Megaband</div>
-                <div class="composition-working-name">working name · <strong>CampfireJam</strong></div>
-                <p class="composition-desc">Camping systems integrated with distributed cultural performances across Vancouver Island — the access layer composed with the cultural layer.</p>
-                <div class="composition-meta">
-                    <a href="/vanisle/">IslandCamp</a>
-                    <span>&times;</span>
-                    <a href="/vanisle/">Megaband</a>
-                </div>
-            </article>
+        <div class="project-body">
+          <p>Distributed musician registry that resolves the Resources-layer failure diagnosed in Paper 1 of the dissertation — the concentration of cult value in one irreplaceable performing group. Megaband distributes musician cult value across a registered community; musicians submit ranked song lists by desire and proficiency, surfacing the Desirability/Feasibility tension at the participant level.</p>
+          <p>Phase 3a deployment: The Alcove Lounge, East Vancouver (May–September) and Match Public House, Chances Casino, Campbell River (October–February) — via Evoke International Design as venue integration partner.</p>
         </div>
+        <div class="project-tags">
+          <span class="tag tag-r">Resources Layer</span>
+          <span class="tag">Sound Register</span>
+          <span class="tag">Musician Registry</span>
+          <span class="tag">Alcove Lounge · Match Public House</span>
+          <span class="tag">Evoke International Design</span>
+        </div>
+        <div class="project-links">
+          <span class="link-pending">↳ Mitacs proposal in development</span>
+          <a href="https://projects.crooney.ca/audiofish/" class="project-link link-site">Platform →</a>
+        </div>
+      </div>
 
-        <p class="composition-note">Working names provisional.</p>
-    </section>
+      <!-- AUDIOFISH -->
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-title-group">
+            <p class="project-umbrella" style="color: var(--color-resources);">Stratalab™ · Sound Register · RPV Resources Layer</p>
+            <h3 class="project-title">Audiofish™</h3>
+          </div>
+          <span class="mitacs-badge badge-development">Mitacs · In Development</span>
+        </div>
+        <div class="project-body">
+          <p>Digital karaoke platform deploying the Resources layer of the Stratalab Sound register architecture. The proposed technical architecture centres on a fish.audio Siri-style agentic AI voice interface — a primary artifact whose affordance design is grounded in Norman (1988). The Mitacs research question: does the proposed voice interface architecture produce the predicted affordance outcomes for musician cult value distribution?</p>
+          <p>Companion platform to Megaband — together they form the complete Sound register deployment. Technology partners: fish.audio (AI voice — proposed), Singa (karaoke catalogue), Soundtrap (musician onboarding).</p>
+        </div>
+        <div class="project-tags">
+          <span class="tag tag-r">Resources Layer</span>
+          <span class="tag">Sound Register</span>
+          <span class="tag">fish.audio · Singa · Soundtrap</span>
+          <span class="tag">HCD+ · Anusha AI parallel</span>
+          <span class="tag">Norman (1988) · Affordance</span>
+        </div>
+        <div class="project-links">
+          <span class="link-pending">↳ Mitacs Accelerate Entrepreneur proposal in development</span>
+        </div>
+      </div>
 
-    <footer>projects.crooney.ca</footer>
-    <script>
-        fetch('/data/projects.json', { cache: 'no-cache' })
-            .then(r => r.ok ? r.json() : Promise.reject(r.status))
-            .then(data => {
-                const nav = document.getElementById('nav-links');
-                if (!nav || !Array.isArray(data.projects)) return;
-                nav.innerHTML = data.projects
-                    .map(p => `<a href="${p.url}">${p.name}</a>`)
-                    .join('');
-            })
-            .catch(err => console.warn('projects.json load failed; using static fallback', err));
-    </script>
+      <!-- TABLESET -->
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-title-group">
+            <p class="project-umbrella" style="color: var(--color-processes);">Stratalab™ · Food + Drink Registers · RPV Processes Layer</p>
+            <h3 class="project-title">TableSet</h3>
+          </div>
+          <span class="mitacs-badge badge-development">Mitacs · In Development</span>
+        </div>
+        <div class="project-body">
+          <p>Hospitality booking platform pairing chef and bartender as matched professionals — the Food + Drink register companion to Megaband. TableSet addresses the variety engineering problem at the RPV Processes layer: resources (chefs, bartenders, kitchens) are assumed present; the unsolved problem is governing the encounter between professional cult value and guest preference without destroying what makes the professional irreplaceable.</p>
+          <p>The exchange value app is the attenuation mechanism — specifying the pattern (culinary concept matched to property and guest profile) while delegating content to local professional decision. Pilot property: SeaBaby Estates, Summerlin NV — Blau + Associates as curatorial partner. Beer (1973) Designing Freedom as primary theoretical source — Canadian provenance via CBC Massey Lectures.</p>
+        </div>
+        <div class="project-tags">
+          <span class="tag tag-p">Processes Layer</span>
+          <span class="tag">Food + Drink Registers</span>
+          <span class="tag">Beer / Ashby · Variety Engineering</span>
+          <span class="tag">Chef + Bartender · Matched Professionals</span>
+          <span class="tag">Blau + Associates · SeaBaby Estates</span>
+        </div>
+        <div class="project-links">
+          <span class="link-pending">↳ Mitacs Accelerate Entrepreneur proposal in development</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VANISLE PROJECTS -->
+  <section id="vanisle">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">VanIsle · Campbell River · Coastal BC</p>
+      <h2 class="section-title">VanIsle Ecosystem</h2>
+      <p class="section-desc">Applied research deployments in the Vancouver Island and coastal BC region — anchored at NIC CARTI, Campbell River, under the NIC CARTI / Carleton TIM MOU.</p>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- VICSS -->
+      <div class="project-card reveal">
+        <div class="project-header">
+          <div class="project-title-group">
+            <p class="project-umbrella" style="color: var(--color-values);">VanIsle · All RPV Layers · Chapter 5 Applied Ecosystem</p>
+            <h3 class="project-title">VICSS — VanIsle Cooperative Spirits Society</h3>
+          </div>
+          <span class="mitacs-badge badge-pipeline">RTRI · Mitacs Pipeline</span>
+        </div>
+        <div class="project-body">
+          <p>The VanIsle Cooperative Spirits Society is the dissertation's Chapter 5 applied ecosystem — all three RPV lenses operating simultaneously in uncontrolled conditions. VICSS coordinates Vancouver Island craft distillers through a cooperative governance framework, converting competitive variety among distillers into structural collaboration.</p>
+          <p>Two-level Beer/Ashby attenuation: Level 1 — Regulatory attenuation (LCRB, DFO water rights, zoning, heritage, capital requirements) reduces the on-site distillery concept to white-label production at an established Vancouver Island distillery. Level 2 — VICSS cooperative governance attenuates competitive variety among Island distillers into structural collaboration. The Clearwater Spirits five-expression brand family instantiates the |F|D|S|L| schema at the product design level — each expression a Wartofsky tertiary artifact encoding the collective memory of a site.</p>
+        </div>
+        <div class="project-tags">
+          <span class="tag tag-r">Resources</span>
+          <span class="tag tag-p">Processes</span>
+          <span class="tag tag-v">Values</span>
+          <span class="tag">Two-Level Beer/Ashby Attenuation</span>
+          <span class="tag">Clearwater Spirits · |F|D|S|L|</span>
+          <span class="tag">NIC CARTI · Carleton TIM MOU</span>
+          <span class="tag">Chapter 5 · Dissertation</span>
+        </div>
+        <div class="project-links">
+          <a href="https://projects.crooney.ca/funding/overview.html" class="project-link link-mitacs">Funding overview →</a>
+          <a href="https://vanisle.crooney.ca" class="project-link link-site">VanIsle →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SYSTEM COMPOSITIONS -->
+  <section id="compositions">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">System Compositions · Where Projects Combine</p>
+      <h2 class="section-title">Composed Architectures</h2>
+      <p class="section-desc">Some projects gain new meaning when composed. Each composition produces a system architecture neither component could realize alone. Working names provisional.</p>
+    </div>
+    <div class="compositions-grid reveal">
+
+      <div class="composition-card">
+        <p class="composition-name">IslandCamp × VICSS</p>
+        <p class="composition-operator">×</p>
+        <p class="composition-title">VanIsleCamp</p>
+        <p class="composition-desc">Car-free camping experiences on Vancouver Island embedded with craft distillery visits — converting place-based experience into export-ready Clearwater Spirits expressions as coherent collectible artifacts. The |F|D|S|L| schema operating at the tourism product design level.</p>
+      </div>
+
+      <div class="composition-card">
+        <p class="composition-name">IslandCamp × Megaband</p>
+        <p class="composition-operator">×</p>
+        <p class="composition-title">CampfireJam</p>
+        <p class="composition-desc">Camping systems integrated with distributed cultural performances across Vancouver Island — the access layer composed with the Sound register cult value layer. Megaband's musician registry provides the cultural programme; IslandCamp provides the place-based logistics.</p>
+      </div>
+
+      <div class="composition-card">
+        <p class="composition-name">TableSet × VICSS</p>
+        <p class="composition-operator">×</p>
+        <p class="composition-title">Clearwater Table</p>
+        <p class="composition-desc">Private dining experiences at Campbell River Lodge with Clearwater Spirits pairings — chef and bartender as matched professionals governed by TableSet, with Clearwater expressions as the Drink register tertiary artifact frame. The Food + Drink |F|D|S|L| registers operating with distillery-grounded cult value.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="site-footer">
+    <span class="footer-note">projects.crooney.ca · 1730 Technology Consulting Inc. · Stratalab™</span>
+    <div class="footer-links">
+      <a href="https://lab.crooney.ca" class="footer-link">Lab</a>
+      <a href="https://phd.crooney.ca" class="footer-link">PhD</a>
+      <a href="https://aries.crooney.ca" class="footer-link">ARIES</a>
+      <a href="https://crooney.ca" class="footer-link">crooney.ca</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const sections = ['stratalab', 'vanisle', 'compositions'];
+  const navLinks = document.querySelectorAll('.subnav-link');
+  const sectObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const match = document.querySelector(`.subnav-link[href="#${e.target.id}"]`);
+        if (match) match.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(id => { const el = document.getElementById(id); if (el) sectObserver.observe(el); });
+</script>
 </body>
 </html>
