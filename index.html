@@ -3,33 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projects — Stratalab Research Portfolio</title>
+  <title>Projects — Crooney Interactive Research</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Archivo:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,700;0,800;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
-      --font-sans: 'Archivo', sans-serif;
-      --font-mono: 'DM Mono', monospace;
-      --color-ink: #0e0d0b;
-      --color-parchment: #f2ede4;
-      --color-cream: #faf7f2;
-      --color-mid: #7a7268;
-      --color-rule: #d4cdc0;
-      --color-processes: #c8692a;
-      --color-resources: #3a6b8a;
-      --color-values: #4a7c59;
+      --cream: #faf7f2;
+      --parchment: #f2ede4;
+      --parchment-deep: #e8e0d0;
+      --ink: #0e0d0b;
+      --ink-mid: #7a7268;
+      --ink-light: #b0a898;
+      --rule: #d4cdc0;
+      --gold: #c8692a;
+      --gold-dim: rgba(200,105,42,0.10);
+      --gold-border: rgba(200,105,42,0.28);
+      --slate: #3a6b8a;
+      --slate-dim: rgba(58,107,138,0.10);
+      --slate-border: rgba(58,107,138,0.28);
+      --forest: #2d5a3d;
+      --forest-dim: rgba(45,90,61,0.09);
+      --forest-border: rgba(45,90,61,0.26);
+      --amber: #9e6c1a;
+      --amber-dim: rgba(158,108,26,0.10);
+      --amber-border: rgba(158,108,26,0.28);
+      --max-w: 1020px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; overflow-x: clip; }
+
     body {
-      background: var(--color-cream);
-      color: var(--color-ink);
-      font-family: var(--font-sans);
-      font-size: 16px;
-      line-height: 1.6;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
       overflow-x: clip;
     }
@@ -37,476 +48,1057 @@
     /* ── TOPBAR ── */
     .topbar {
       position: sticky; top: 0; z-index: 50;
-      background: var(--color-cream);
-      border-bottom: 1px solid var(--color-rule);
+      background: rgba(250,247,242,0.95);
+      border-bottom: 1px solid var(--rule);
+      backdrop-filter: blur(12px);
     }
     .topbar-inner {
-      max-width: 1100px; margin: 0 auto; padding: 0 2rem;
-      display: flex; align-items: center;
-      overflow-x: auto; scrollbar-width: none;
+      max-width: var(--max-w); margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; overflow-x: auto; scrollbar-width: none;
     }
     .topbar-inner::-webkit-scrollbar { display: none; }
-    .topbar-home {
-      font-family: var(--font-mono); font-size: 10px;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--color-mid); text-decoration: none;
-      padding: 1rem 1.25rem 1rem 0;
-      border-right: 1px solid var(--color-rule);
-      white-space: nowrap; transition: color 0.15s;
+    .topbar-brand {
+      display: flex; flex-direction: column;
+      padding: 0.7rem 1.4rem 0.7rem 0;
+      border-right: 1px solid var(--rule);
+      text-decoration: none; flex-shrink: 0;
     }
-    .topbar-home:hover { color: var(--color-ink); }
+    .topbar-brand-kicker {
+      font-family: 'DM Mono', monospace; font-size: 8px;
+      letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-mid);
+    }
+    .topbar-brand-name {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px;
+      font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1.1;
+    }
     .subnav { display: flex; flex: 1; overflow-x: auto; scrollbar-width: none; }
     .subnav::-webkit-scrollbar { display: none; }
     .subnav-link {
-      font-family: var(--font-mono); font-size: 10px;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--color-mid); text-decoration: none;
-      padding: 1rem 1.1rem; white-space: nowrap;
-      border-bottom: 2px solid transparent;
-      transition: color 0.15s, border-color 0.15s;
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mid);
+      text-decoration: none; padding: 0 1.1rem; height: 100%;
+      display: flex; align-items: center;
+      border-right: 1px solid var(--rule); transition: color 0.18s;
+      white-space: nowrap; flex-shrink: 0;
     }
-    .subnav-link:hover { color: var(--color-ink); }
-    .subnav-link.active { color: var(--color-ink); border-bottom-color: var(--color-ink); }
+    .subnav-link:hover { color: var(--ink); }
+    .subnav-link.active { color: var(--gold); }
 
-    /* ── HERO ── */
-    .hero {
-      max-width: 1100px; margin: 0 auto;
-      padding: 5rem 2rem 4rem;
-      border-bottom: 1px solid var(--color-rule);
+    /* ── PAGE HEADER ── */
+    .page-header {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 4rem 2rem 3rem; border-bottom: 1px solid var(--rule);
     }
-    .hero-eyebrow {
-      font-family: var(--font-mono); font-size: 9px;
-      letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--color-mid); margin-bottom: 1.5rem;
+    .eyebrow {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
     }
-    .hero h1 {
-      font-family: var(--font-serif);
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 400; line-height: 1.15;
-      letter-spacing: -0.01em; color: var(--color-ink);
-      max-width: 760px; margin-bottom: 1.5rem;
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.1rem, 5vw, 3.4rem);
+      font-weight: 300; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 1.2rem;
     }
-    .hero h1 em { font-style: italic; color: var(--color-mid); }
-    .hero-lead {
-      font-family: var(--font-serif);
-      font-size: clamp(1rem, 1.8vw, 1.25rem);
-      font-weight: 300; line-height: 1.65;
-      color: #2a2820; max-width: 660px;
+    .page-header h1 em { font-style: italic; color: var(--ink-mid); }
+    .page-header-desc {
+      max-width: 660px; font-size: 1rem; color: var(--ink-mid); line-height: 1.78;
     }
 
-    /* ── LAYOUT ── */
-    .page-body { max-width: 1100px; margin: 0 auto; padding: 0 2rem 6rem; }
+    /* ── EV FRAME (three-lens intro) ── */
+    .ev-frame { background: var(--parchment); border-bottom: 1px solid var(--rule); }
+    .ev-frame-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 2.2rem 2rem;
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
+    }
+    .ev-col {
+      padding: 0 1.4rem; border-right: 1px solid var(--rule);
+    }
+    .ev-col:first-child { padding-left: 0; }
+    .ev-col:last-child  { border-right: none; }
+    .ev-col-label {
+      font-family: 'DM Mono', monospace; font-size: 8.5px;
+      letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.5rem;
+    }
+    .ev-col-heading {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.05rem;
+      font-weight: 600; color: var(--ink); margin-bottom: 0.35rem; letter-spacing: -0.01em;
+    }
+    .ev-col-body { font-size: 0.85rem; color: var(--ink-mid); line-height: 1.65; }
+    .ev-footnote {
+      max-width: var(--max-w); margin: 0 auto; padding: 0.9rem 2rem 1.1rem;
+      font-family: 'DM Mono', monospace; font-size: 8.5px;
+      letter-spacing: 0.13em; color: var(--ink-light); border-top: 1px solid var(--rule);
+    }
 
-    /* ── SECTION HEADER ── */
-    .section-header {
-      padding: 3.5rem 0 2rem;
-      border-top: 1px solid var(--color-rule);
-      margin-top: 2rem;
+    /* ── LENS BANNER ── */
+    .lens-banner { border-bottom: 1px solid var(--rule); }
+    .lens-banner-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 1rem 2rem;
+      display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;
     }
-    .section-eyebrow {
-      font-family: var(--font-mono); font-size: 9px;
-      letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--color-mid); margin-bottom: 0.75rem;
+    .lens-banner-label {
+      font-family: 'DM Mono', monospace; font-size: 8.5px;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-light); flex-shrink: 0;
     }
-    .section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.5rem, 2.5vw, 2rem);
-      font-weight: 400; line-height: 1.2;
-      color: var(--color-ink); margin-bottom: 0.75rem;
+    /* shared pill / tag styles */
+    .pill {
+      font-family: 'DM Mono', monospace; font-size: 9px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.22rem 0.6rem; border-radius: 2px;
     }
-    .section-desc {
-      font-size: 14.5px; color: #3a3830;
-      max-width: 640px; line-height: 1.7;
+    .pill.rpv    { background: var(--slate-dim);  color: var(--slate);  border: 1px solid var(--slate-border); }
+    .pill.fdsl   { background: var(--gold-dim);   color: var(--gold);   border: 1px solid var(--gold-border); }
+    .pill.fdsl-l { background: var(--slate-dim);  color: var(--slate);  border: 1px solid var(--slate-border); }
+    .pill.mitacs { background: var(--forest-dim); color: var(--forest); border: 1px solid var(--forest-border); }
+    .pill.dnda   { background: var(--amber-dim);  color: var(--amber);  border: 1px solid var(--amber-border); }
+    .pill.note   { background: transparent; color: var(--ink-light); border: 1px solid var(--rule); font-style: italic; }
+
+    /* ── MAIN ── */
+    .main { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem 6rem; }
+
+    /* ── SECTION DIVIDER ── */
+    .sec {
+      padding: 2.6rem 0 1.4rem; border-bottom: 1px solid var(--rule);
+    }
+    .sec-kicker {
+      font-family: 'DM Mono', monospace; font-size: 9px;
+      letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-light);
+    }
+    .sec h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.5rem;
+      font-weight: 400; letter-spacing: -0.01em; color: var(--ink); margin-top: 0.25rem;
     }
 
-    /* ── PROJECT CARDS ── */
-    .projects-grid { display: grid; gap: 0; margin-top: 2rem; }
-    .project-card {
-      border: 1px solid var(--color-rule);
-      border-top: none; padding: 2rem 2rem 1.75rem;
-      background: var(--color-cream);
-      transition: background 0.15s;
+    /* ── PROJECT CARD ── */
+    .card {
+      border-bottom: 1px solid var(--rule);
+      padding: 3rem 0 2.8rem;
     }
-    .project-card:first-child { border-top: 1px solid var(--color-rule); }
-    .project-card:hover { background: var(--color-parchment); }
+    .card.lead {
+      padding: 3rem 1.6rem 2.8rem; margin: 0 -1.6rem;
+      background: linear-gradient(155deg, rgba(200,105,42,0.04) 0%, transparent 50%);
+      border-left: 2px solid var(--gold);
+    }
 
-    .project-header {
+    /* card head */
+    .card-head {
       display: flex; align-items: flex-start;
-      justify-content: space-between; gap: 1.5rem;
-      margin-bottom: 1rem; flex-wrap: wrap;
+      justify-content: space-between; gap: 1.5rem; margin-bottom: 1.4rem; flex-wrap: wrap;
     }
-    .project-title-group { flex: 1; }
-    .project-umbrella {
-      font-family: var(--font-mono); font-size: 9px;
-      letter-spacing: 0.25em; text-transform: uppercase;
-      margin-bottom: 0.4rem;
+    .card-head-left { display: flex; gap: 1rem; align-items: flex-start; flex: 1; min-width: 0; }
+    .card-num {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: 0.2em; color: var(--ink-light); padding-top: 0.25rem; flex-shrink: 0;
     }
-    .project-title {
-      font-family: var(--font-serif); font-size: 1.4rem;
-      font-weight: 500; line-height: 1.2; color: var(--color-ink);
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.45rem, 3vw, 2.1rem);
+      font-weight: 400; line-height: 1.15; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.25rem;
     }
-    .mitacs-badge {
-      font-family: var(--font-mono); font-size: 9px;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      padding: 4px 10px; border: 1px solid;
-      white-space: nowrap; align-self: flex-start;
+    .card-title em { font-style: italic; color: var(--ink-mid); }
+    .card-org {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.78rem;
+      font-weight: 500; color: var(--ink-mid); letter-spacing: 0.02em;
     }
-    .badge-active { color: var(--color-values); border-color: rgba(74,124,89,0.4); }
-    .badge-development { color: var(--color-processes); border-color: rgba(200,105,42,0.4); }
-    .badge-pipeline { color: var(--color-resources); border-color: rgba(58,107,138,0.4); }
+    .card-badges { display: flex; flex-direction: column; gap: 0.35rem; align-items: flex-end; flex-shrink: 0; }
 
-    .project-body {
-      font-size: 14px; color: #3a3830;
-      line-height: 1.75; margin-bottom: 1.25rem;
-      max-width: 720px;
+    /* badges */
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.38rem;
+      font-family: 'DM Mono', monospace; font-size: 8.5px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 0.22rem 0.6rem; border-radius: 2px; white-space: nowrap;
     }
-    .project-body p + p { margin-top: 0.75rem; }
+    .badge-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+    /* S/E/E/D: Design→forest, Evaluate→gold, Explore→ink-mid */
+    .b-design   { background: var(--forest-dim); color: var(--forest); border: 1px solid var(--forest-border); }
+    .b-evaluate { background: var(--gold-dim);   color: var(--gold);   border: 1px solid var(--gold-border); }
+    .b-explore  { background: transparent; color: var(--ink-mid); border: 1px solid var(--rule); }
+    .b-dnda     { background: var(--amber-dim);  color: var(--amber);  border: 1px solid var(--amber-border); }
 
-    .project-tags {
-      display: flex; flex-wrap: wrap; gap: 0.4rem;
-      margin-bottom: 1.25rem;
-    }
-    .tag {
-      font-family: var(--font-mono); font-size: 10px;
-      letter-spacing: 0.06em; color: var(--color-mid);
-      border: 1px solid var(--color-rule);
-      padding: 3px 9px; display: inline-block;
-    }
-    .tag-p { color: var(--color-processes); border-color: rgba(200,105,42,0.3); }
-    .tag-r { color: var(--color-resources); border-color: rgba(58,107,138,0.3); }
-    .tag-v { color: var(--color-values); border-color: rgba(74,124,89,0.3); }
+    /* tags */
+    .card-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
 
-    .project-links { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
-    .project-link {
-      font-family: var(--font-mono); font-size: 10px;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      text-decoration: none; padding-bottom: 1px;
-      border-bottom: 1px solid; transition: color 0.15s, border-color 0.15s;
-      display: inline-flex; align-items: center; gap: 0.3rem;
+    /* RQ */
+    .rq { margin-bottom: 1.6rem; }
+    .rq-label {
+      font-family: 'DM Mono', monospace; font-size: 8.5px;
+      letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.45rem;
     }
-    .link-mitacs { color: var(--color-values); border-color: rgba(74,124,89,0.35); }
-    .link-mitacs:hover { color: var(--color-ink); border-color: var(--color-ink); }
-    .link-site { color: var(--color-resources); border-color: rgba(58,107,138,0.35); }
-    .link-site:hover { color: var(--color-ink); border-color: var(--color-ink); }
-    .link-pending {
-      font-family: var(--font-mono); font-size: 10px;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--color-mid);
+    .rq-body {
+      font-style: italic; font-size: 1rem; line-height: 1.68; color: var(--ink);
+      border-left: 2px solid var(--rule); padding-left: 1rem;
     }
 
-    /* ── COMPOSITIONS ── */
-    .compositions-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1px; background: var(--color-rule);
-      border: 1px solid var(--color-rule); margin-top: 2rem;
+    /* body prose */
+    .prose { font-size: 0.94rem; color: var(--ink-mid); line-height: 1.78; margin-bottom: 1.6rem; }
+    .prose p + p { margin-top: 0.85rem; }
+    .prose strong { color: var(--ink); font-weight: 600; }
+
+    /* two-col detail */
+    .detail { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.6rem; }
+
+    /* meta grid */
+    .meta { border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+    .meta-title {
+      font-family: 'DM Mono', monospace; font-size: 8.5px;
+      letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-light);
+      padding: 0.7rem 1rem 0.5rem; border-bottom: 1px solid var(--rule); background: var(--parchment);
     }
-    .composition-card {
-      background: var(--color-cream); padding: 1.75rem;
-      transition: background 0.15s;
+    .meta-row { display: flex; gap: 0; border-bottom: 1px solid var(--rule); }
+    .meta-row:last-child { border-bottom: none; }
+    .mk {
+      font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--ink-light);
+      padding: 0.6rem 0.8rem; min-width: 88px; border-right: 1px solid var(--rule);
+      display: flex; align-items: center; background: rgba(0,0,0,0.012);
     }
-    .composition-card:hover { background: var(--color-parchment); }
-    .composition-operator {
-      font-family: var(--font-serif); font-size: 1.5rem;
-      font-style: italic; color: var(--color-mid);
-      margin: 0.5rem 0;
+    .mv {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.78rem;
+      font-weight: 500; color: var(--ink); padding: 0.6rem 0.8rem; line-height: 1.4; flex: 1;
     }
-    .composition-name {
-      font-family: var(--font-mono); font-size: 9px;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--color-mid); margin-bottom: 0.6rem;
+    .mv.p { color: var(--ink-mid); font-weight: 400; font-style: italic; }
+    .mv.c { color: var(--forest); }
+
+    /* lens align */
+    .lens-align { border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+    .la-title {
+      font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--ink-light);
+      padding: 0.7rem 1rem 0.5rem; border-bottom: 1px solid var(--rule); background: var(--parchment);
     }
-    .composition-title {
-      font-family: var(--font-serif); font-size: 1.15rem;
-      font-weight: 500; color: var(--color-ink);
-      margin-bottom: 0.75rem; line-height: 1.3;
+    .la-row { padding: 0.75rem 1rem; border-bottom: 1px solid var(--rule); }
+    .la-row:last-child { border-bottom: none; }
+    .la-key {
+      font-family: 'DM Mono', monospace; font-size: 8px;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.2rem;
     }
-    .composition-desc {
-      font-size: 13.5px; color: #3a3830; line-height: 1.7;
+    .la-val {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.82rem;
+      font-weight: 700; line-height: 1.25;
+    }
+    .la-val.rpv-c  { color: var(--slate); }
+    .la-val.fdsl-c { color: var(--gold); }
+    .la-val.ev-c   { color: var(--forest); }
+    .la-val.ex-c   { color: var(--ink-mid); }
+    .la-sub {
+      font-size: 0.75rem; font-weight: 400; color: var(--ink-mid);
+      font-family: 'Cormorant Garamond', serif; font-style: italic; margin-top: 0.12rem;
+    }
+
+    /* exchange value block */
+    .ev-block {
+      border: 1px solid var(--gold-border); border-radius: 3px;
+      background: var(--gold-dim); margin-bottom: 1.6rem; overflow: hidden;
+    }
+    .ev-block-hd {
+      padding: 0.75rem 1.1rem; border-bottom: 1px solid var(--gold-border);
+      font-family: 'DM Mono', monospace; font-size: 8.5px;
+      letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);
+    }
+    .ev-block-body {
+      padding: 1rem 1.1rem; font-size: 0.88rem; color: var(--ink-mid); line-height: 1.7;
+    }
+    .ev-block-body strong { color: var(--ink); font-weight: 600; }
+
+    /* contribution block */
+    .contrib { border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; margin-bottom: 1.6rem; }
+    .contrib-hd {
+      background: var(--parchment); border-bottom: 1px solid var(--rule);
+      padding: 0.8rem 1.1rem; display: flex; align-items: center;
+      justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    }
+    .contrib-label {
+      font-family: 'DM Mono', monospace; font-size: 8.5px;
+      letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-mid);
+    }
+    .tiers { display: flex; gap: 0; }
+    .tier { padding: 0.9rem 1.1rem; border-right: 1px solid var(--rule); flex: 1; }
+    .tier:last-child { border-right: none; }
+    .tier-amt {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.05rem;
+      font-weight: 800; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 0.15rem;
+    }
+    .tier-name {
+      font-family: 'DM Mono', monospace; font-size: 8px;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem;
+    }
+    .tier-desc { font-size: 0.78rem; color: var(--ink-mid); line-height: 1.5; }
+    .contrib-ft {
+      padding: 0.9rem 1.1rem; border-top: 1px solid var(--rule);
+      background: rgba(0,0,0,0.01);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 0.8rem;
+    }
+    .contrib-note { font-size: 0.8rem; color: var(--ink-mid); font-style: italic; }
+    .contrib-cta {
+      font-family: 'DM Mono', monospace; font-size: 9px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); text-decoration: none;
+      border-bottom: 1px solid var(--gold-border); padding-bottom: 1px; transition: color 0.18s;
+    }
+    .contrib-cta:hover { color: var(--ink); border-color: var(--rule); }
+
+    /* outcomes */
+    .outcomes {
+      border: 1px solid var(--rule); border-radius: 3px;
+      padding: 1rem 1.1rem; background: var(--parchment);
+    }
+    .outcomes-label {
+      font-family: 'DM Mono', monospace; font-size: 8.5px;
+      letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.7rem;
+    }
+    .outcome { display: flex; gap: 0.7rem; align-items: baseline; margin-bottom: 0.45rem; }
+    .outcome:last-child { margin-bottom: 0; }
+    .oa { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--gold); flex-shrink: 0; }
+    .ot { font-size: 0.87rem; color: var(--ink); line-height: 1.55; }
+    .ot strong { font-weight: 600; }
+
+    /* ── AI LAYER ── */
+    .ai-layer {
+      border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; margin: 3rem 0 0;
+    }
+    .ai-hd {
+      background: var(--parchment); border-bottom: 1px solid var(--rule);
+      padding: 1.2rem 1.4rem; display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    }
+    .ai-eyebrow {
+      font-family: 'DM Mono', monospace; font-size: 8.5px;
+      letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.3rem;
+    }
+    .ai-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.35rem;
+      font-weight: 400; color: var(--ink); letter-spacing: -0.01em;
+    }
+    .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    .ai-col {
+      padding: 1.2rem 1.4rem; border-right: 1px solid var(--rule);
+    }
+    .ai-col:last-child { border-right: none; }
+    .ai-col-label {
+      font-family: 'DM Mono', monospace; font-size: 8.5px;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.5rem;
+    }
+    .ai-col-body { font-size: 0.88rem; color: var(--ink-mid); line-height: 1.7; }
+    .ai-col-body p + p { margin-top: 0.75rem; }
+    .ai-col-body strong { color: var(--ink); font-weight: 600; }
+    .ai-ft {
+      border-top: 1px solid var(--rule); padding: 0.85rem 1.4rem;
+      font-family: 'DM Mono', monospace; font-size: 8.5px;
+      letter-spacing: 0.13em; color: var(--ink-light);
+    }
+
+    /* ── PIPELINE ── */
+    .pipeline { border-top: 1px solid var(--rule); padding: 3rem 0 0; margin-top: 3.5rem; }
+    .pipeline-label {
+      font-family: 'DM Mono', monospace; font-size: 9px;
+      letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 1.4rem;
+    }
+    .p-flow { display: flex; align-items: stretch; overflow-x: auto; scrollbar-width: none; }
+    .p-flow::-webkit-scrollbar { display: none; }
+    .p-node {
+      flex: 1; min-width: 130px; padding: 1rem 1.1rem;
+      border: 1px solid var(--rule); border-right: none; background: var(--parchment);
+    }
+    .p-node:first-child { border-radius: 3px 0 0 3px; }
+    .p-node:last-child  { border-right: 1px solid var(--rule); border-radius: 0 3px 3px 0; }
+    .p-node.here {
+      background: var(--cream); border-color: var(--gold); border-right: 1px solid var(--gold);
+    }
+    .p-node.here + .p-sep { background: var(--cream); }
+    .p-stage {
+      font-family: 'DM Mono', monospace; font-size: 8px;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.35rem;
+    }
+    .p-name {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem;
+      font-weight: 700; color: var(--ink); line-height: 1.3; margin-bottom: 0.2rem;
+    }
+    .p-sub { font-size: 0.72rem; color: var(--ink-mid); font-family: 'Cormorant Garamond', serif; font-style: italic; }
+    .p-sep {
+      display: flex; align-items: center; padding: 0 0.3rem;
+      font-size: 0.75rem; color: var(--ink-light); flex-shrink: 0;
+      background: var(--parchment);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
     }
 
     /* ── FOOTER ── */
-    .site-footer {
-      border-top: 1px solid var(--color-rule);
-      padding: 2.5rem 2rem; max-width: 1100px; margin: 0 auto;
-      display: flex; justify-content: space-between;
-      align-items: center; flex-wrap: wrap; gap: 1rem;
+    .site-footer { border-top: 1px solid var(--rule); }
+    .site-footer-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 1.8rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
     }
-    .footer-note {
-      font-family: var(--font-mono); font-size: 10px;
-      letter-spacing: 0.12em; color: var(--color-mid);
+    .footer-id {
+      font-family: 'DM Mono', monospace; font-size: 8.5px;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-light); line-height: 1.8;
     }
-    .footer-links { display: flex; gap: 1.5rem; }
-    .footer-link {
-      font-family: var(--font-mono); font-size: 10px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--color-mid); text-decoration: none;
-      transition: color 0.15s;
+    .footer-links { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+    .footer-links a {
+      font-family: 'DM Mono', monospace; font-size: 8.5px;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mid);
+      text-decoration: none; transition: color 0.18s;
     }
-    .footer-link:hover { color: var(--color-ink); }
+    .footer-links a:hover { color: var(--gold); }
 
-    /* ── REVEAL ── */
-    .reveal {
-      opacity: 0; transform: translateY(20px);
-      transition: opacity 0.7s, transform 0.7s;
+    /* ── ANIMATION ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .card { animation: fadeUp 0.48s ease both; }
+    .card:nth-child(1) { animation-delay: 0.04s; }
+    .card:nth-child(2) { animation-delay: 0.10s; }
+    .card:nth-child(3) { animation-delay: 0.16s; }
 
-    @media (max-width: 640px) {
-      .hero { padding: 3rem 1.25rem 2.5rem; }
-      .page-body { padding: 0 1.25rem 4rem; }
-      .project-header { flex-direction: column; gap: 0.75rem; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .page-header  { padding: 2.4rem 1.2rem 1.8rem; }
+      .main         { padding: 0 1.2rem 4rem; }
+      .ev-frame-inner { grid-template-columns: 1fr; padding: 1.5rem 1.2rem; }
+      .ev-col       { padding: 0; border-right: none; border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
+      .ev-col:last-child { border-bottom: none; padding-bottom: 0; }
+      .detail       { grid-template-columns: 1fr; }
+      .tiers        { flex-direction: column; }
+      .tier         { border-right: none; border-bottom: 1px solid var(--rule); }
+      .tier:last-child { border-bottom: none; }
+      .ai-grid      { grid-template-columns: 1fr; }
+      .ai-col       { border-right: none; border-bottom: 1px solid var(--rule); }
+      .ai-col:last-child { border-bottom: none; }
+      .topbar-inner { padding: 0 1.2rem; }
+      .lens-banner-inner { padding: 0.85rem 1.2rem; }
+      .card.lead    { margin: 0; padding: 2.5rem 0 2.5rem; border-left: none; border-top: 2px solid var(--gold); }
+      .site-footer-inner { padding: 1.4rem 1.2rem; }
     }
   </style>
 </head>
 <body>
 
+<!-- TOPBAR -->
 <nav class="topbar">
   <div class="topbar-inner">
-    <a href="https://crooney.ca" class="topbar-home">crooney.ca</a>
+    <a href="https://crooney.ca" class="topbar-brand">
+      <span class="topbar-brand-kicker">Crooney Interactive</span>
+      <span class="topbar-brand-name">Research Projects</span>
+    </a>
     <div class="subnav">
-      <a href="#stratalab" class="subnav-link active">Stratalab</a>
-      <a href="#vanisle" class="subnav-link">VanIsle</a>
-      <a href="#compositions" class="subnav-link">Compositions</a>
-      <a href="https://lab.crooney.ca" class="subnav-link">Lab ↗</a>
-      <a href="https://phd.crooney.ca" class="subnav-link">PhD ↗</a>
-      <a href="https://aries.crooney.ca" class="subnav-link">ARIES ↗</a>
+      <a href="https://crooney.ca"           class="subnav-link">Home</a>
+      <a href="https://lab.crooney.ca"       class="subnav-link">Lab</a>
+      <a href="https://projects.crooney.ca"  class="subnav-link active">Projects</a>
+      <a href="https://phd.crooney.ca"       class="subnav-link">PhD</a>
+      <a href="https://aries.crooney.ca"     class="subnav-link">ARIES</a>
+      <a href="https://vanisle.crooney.ca"   class="subnav-link">Van Isle</a>
+      <a href="https://soundtrap.crooney.ca" class="subnav-link">Soundtrap</a>
     </div>
   </div>
 </nav>
 
-<header class="hero">
-  <p class="hero-eyebrow">projects.crooney.ca · 1730 Technology Consulting Inc. · Stratalab™</p>
-  <h1>Formal Research Projects<br><em>with Funding Instruments</em></h1>
-  <p class="hero-lead">Mitacs Accelerate Entrepreneur applications, RTRI proposals, and MOU-linked deployments. Each project here has a formal funding instrument or is in active development toward one — linked to the Mitacs review protocol where available.</p>
+<!-- PAGE HEADER -->
+<header style="border-bottom: 1px solid var(--rule);">
+  <div class="page-header">
+    <div class="eyebrow">projects.crooney.ca</div>
+    <h1>The Formalized Research Layer.<br><em>Exchange Value as Funding Mechanism.</em></h1>
+    <p class="page-header-desc">
+      Projects here have cleared the VFD/RPV threshold: research questions defined, 
+      industry partners confirmed, HQPs identified, and Mitacs Accelerate applications 
+      structured or submitted. Each project operationalizes the same governance problem 
+      at institutional scale — who controls the conditions under which irreplaceable 
+      practitioner knowledge becomes a circulating research output — and feeds upward 
+      into the PhD integrated article thesis.
+    </p>
+  </div>
 </header>
 
-<main class="page-body">
+<!-- EXCHANGE VALUE FRAME -->
+<div class="ev-frame">
+  <div class="ev-frame-inner">
+    <div class="ev-col">
+      <div class="ev-col-label">Cult Value</div>
+      <div class="ev-col-heading">The practitioner's knowledge capacity</div>
+      <div class="ev-col-body">
+        The irreplaceable identity — accumulated operational practice, theoretical development, 
+        and institutional relationship that cannot be transferred to a bureaucratic agency. 
+        The autopoietic self that produced the research problem.
+      </div>
+    </div>
+    <div class="ev-col">
+      <div class="ev-col-label">Exhibition Value</div>
+      <div class="ev-col-heading">The research output that circulates</div>
+      <div class="ev-col-body">
+        The published paper, the Mitacs deliverable, the ARIES module, the platform 
+        deployment — the reproducible artifact that moves through the institutional ecosystem 
+        independently of its origin. What the research produces that can be shared, cited, taught.
+      </div>
+    </div>
+    <div class="ev-col">
+      <div class="ev-col-label">Exchange Value</div>
+      <div class="ev-col-heading">The designed funding mechanism</div>
+      <div class="ev-col-body">
+        How a funder invests in the research output they want to see produced — and what 
+        they receive in return. The designed exchange sits alongside Mitacs as a lightweight 
+        proof-of-concept: the governance mechanism operating in an uncontrolled real-world 
+        context. The dissertation's Chapter 5 running live.
+      </div>
+    </div>
+  </div>
+  <div class="ev-footnote">
+    Benjamin (1935) cult value / exhibition value dialectic · Extended with exchange value as governing third lens — Flynn (2006) MASc thesis ·
+    The same three-lens framework governs the song request mechanism on crooney.ca at micro scale and the project contribution mechanism here at institutional scale ·
+    Flynn (forthcoming-a, forthcoming-b) · The governance problem is identical at both scales
+  </div>
+</div>
 
-  <!-- STRATALAB PROJECTS -->
-  <section id="stratalab">
-    <div class="section-header reveal">
-      <p class="section-eyebrow">Stratalab™ · Sound · Food · Drink</p>
-      <h2 class="section-title">Platform Deployments</h2>
-      <p class="section-desc">Three Mitacs Accelerate Entrepreneur applications addressing the |F|D|S|L| platform governance problem across the Sound and Food + Drink registers.</p>
+<!-- LENS BANNER -->
+<div class="lens-banner">
+  <div class="lens-banner-inner">
+    <span class="lens-banner-label">Analytical Lenses</span>
+    <span class="pill rpv">RPV · Lens 1 (Christensen / Beer / Flynn 2010)</span>
+    <span class="pill fdsl">|F|D|S|L| · Lens 2 (Flynn 2020–present)</span>
+    <span class="pill mitacs">Mitacs Accelerate Entrepreneur</span>
+    <span class="pill dnda">DNDA26</span>
+    <span class="pill note">Lenses coordinated, not unified — Cole (1996)</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- SECTION: LEAD -->
+  <div class="sec">
+    <div class="sec-kicker">Lead Project · Priority Submission</div>
+    <h2>Mitacs Accelerate Entrepreneur + Don Norman Design Award 2026</h2>
+  </div>
+
+  <!-- PROJECT 01 -->
+  <div class="card lead">
+
+    <div class="card-head">
+      <div class="card-head-left">
+        <span class="card-num">01</span>
+        <div>
+          <div class="card-title">Audiofish™ / Megaband™ —<br><em>Community Live Music Optimization</em></div>
+          <div class="card-org">Stratalab™ · 1730 Technology Consulting Inc. · Carleton TIM</div>
+        </div>
+      </div>
+      <div class="card-badges">
+        <span class="badge b-design"><span class="badge-dot"></span>Evaluate → Design</span>
+        <span class="badge b-dnda">DNDA26 · Education</span>
+      </div>
     </div>
 
-    <div class="projects-grid">
-
-      <!-- MEGABAND -->
-      <div class="project-card reveal">
-        <div class="project-header">
-          <div class="project-title-group">
-            <p class="project-umbrella" style="color: var(--color-resources);">Stratalab™ · Sound Register · RPV Resources Layer</p>
-            <h3 class="project-title">Megaband™</h3>
-          </div>
-          <span class="mitacs-badge badge-development">Mitacs · In Development</span>
-        </div>
-        <div class="project-body">
-          <p>Distributed musician registry that resolves the Resources-layer failure diagnosed in Paper 1 of the dissertation — the concentration of cult value in one irreplaceable performing group. Megaband distributes musician cult value across a registered community; musicians submit ranked song lists by desire and proficiency, surfacing the Desirability/Feasibility tension at the participant level.</p>
-          <p>Phase 3a deployment: The Alcove Lounge, East Vancouver (May–September) and Match Public House, Chances Casino, Campbell River (October–February) — via Evoke International Design as venue integration partner.</p>
-        </div>
-        <div class="project-tags">
-          <span class="tag tag-r">Resources Layer</span>
-          <span class="tag">Sound Register</span>
-          <span class="tag">Musician Registry</span>
-          <span class="tag">Alcove Lounge · Match Public House</span>
-          <span class="tag">Evoke International Design</span>
-        </div>
-        <div class="project-links">
-          <span class="link-pending">↳ Mitacs proposal in development</span>
-          <a href="https://projects.crooney.ca/audiofish/" class="project-link link-site">Platform →</a>
-        </div>
-      </div>
-
-      <!-- AUDIOFISH -->
-      <div class="project-card reveal">
-        <div class="project-header">
-          <div class="project-title-group">
-            <p class="project-umbrella" style="color: var(--color-resources);">Stratalab™ · Sound Register · RPV Resources Layer</p>
-            <h3 class="project-title">Audiofish™</h3>
-          </div>
-          <span class="mitacs-badge badge-development">Mitacs · In Development</span>
-        </div>
-        <div class="project-body">
-          <p>Digital karaoke platform deploying the Resources layer of the Stratalab Sound register architecture. The proposed technical architecture centres on a fish.audio Siri-style agentic AI voice interface — a primary artifact whose affordance design is grounded in Norman (1988). The Mitacs research question: does the proposed voice interface architecture produce the predicted affordance outcomes for musician cult value distribution?</p>
-          <p>Companion platform to Megaband — together they form the complete Sound register deployment. Technology partners: fish.audio (AI voice — proposed), Singa (karaoke catalogue), Soundtrap (musician onboarding).</p>
-        </div>
-        <div class="project-tags">
-          <span class="tag tag-r">Resources Layer</span>
-          <span class="tag">Sound Register</span>
-          <span class="tag">fish.audio · Singa · Soundtrap</span>
-          <span class="tag">HCD+ · Anusha AI parallel</span>
-          <span class="tag">Norman (1988) · Affordance</span>
-        </div>
-        <div class="project-links">
-          <span class="link-pending">↳ Mitacs Accelerate Entrepreneur proposal in development</span>
-        </div>
-      </div>
-
-      <!-- TABLESET -->
-      <div class="project-card reveal">
-        <div class="project-header">
-          <div class="project-title-group">
-            <p class="project-umbrella" style="color: var(--color-processes);">Stratalab™ · Food + Drink Registers · RPV Processes Layer</p>
-            <h3 class="project-title">TableSet</h3>
-          </div>
-          <span class="mitacs-badge badge-development">Mitacs · In Development</span>
-        </div>
-        <div class="project-body">
-          <p>Hospitality booking platform pairing chef and bartender as matched professionals — the Food + Drink register companion to Megaband. TableSet addresses the variety engineering problem at the RPV Processes layer: resources (chefs, bartenders, kitchens) are assumed present; the unsolved problem is governing the encounter between professional cult value and guest preference without destroying what makes the professional irreplaceable.</p>
-          <p>The exchange value app is the attenuation mechanism — specifying the pattern (culinary concept matched to property and guest profile) while delegating content to local professional decision. Pilot property: SeaBaby Estates, Summerlin NV — Blau + Associates as curatorial partner. Beer (1973) Designing Freedom as primary theoretical source — Canadian provenance via CBC Massey Lectures.</p>
-        </div>
-        <div class="project-tags">
-          <span class="tag tag-p">Processes Layer</span>
-          <span class="tag">Food + Drink Registers</span>
-          <span class="tag">Beer / Ashby · Variety Engineering</span>
-          <span class="tag">Chef + Bartender · Matched Professionals</span>
-          <span class="tag">Blau + Associates · SeaBaby Estates</span>
-        </div>
-        <div class="project-links">
-          <span class="link-pending">↳ Mitacs Accelerate Entrepreneur proposal in development</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- VANISLE PROJECTS -->
-  <section id="vanisle">
-    <div class="section-header reveal">
-      <p class="section-eyebrow">VanIsle · Campbell River · Coastal BC</p>
-      <h2 class="section-title">VanIsle Ecosystem</h2>
-      <p class="section-desc">Applied research deployments in the Vancouver Island and coastal BC region — anchored at NIC CARTI, Campbell River, under the NIC CARTI / Carleton TIM MOU.</p>
+    <div class="card-tags">
+      <span class="pill fdsl">|S| Sound</span>
+      <span class="pill rpv">RPV · Processes Layer</span>
+      <span class="pill mitacs">Mitacs Accelerate Entrepreneur</span>
+      <span class="pill dnda">DNDA26 · HCD+ Methodology</span>
     </div>
 
-    <div class="projects-grid">
-
-      <!-- VICSS -->
-      <div class="project-card reveal">
-        <div class="project-header">
-          <div class="project-title-group">
-            <p class="project-umbrella" style="color: var(--color-values);">VanIsle · All RPV Layers · Chapter 5 Applied Ecosystem</p>
-            <h3 class="project-title">VICSS — VanIsle Craft Spirits Society</h3>
-          </div>
-          <span class="mitacs-badge badge-pipeline">RTRI · Mitacs Pipeline</span>
-        </div>
-        <div class="project-body">
-          <p>The VanIsle Craft Spirits Society is the dissertation's Chapter 5 applied ecosystem — all three RPV lenses operating simultaneously in uncontrolled conditions. VICSS coordinates Vancouver Island craft distillers through a cooperative governance framework, converting competitive variety among distillers into structural collaboration.</p>
-          <p>Two-level Beer/Ashby attenuation: Level 1 — Regulatory attenuation (LCRB, DFO water rights, zoning, heritage, capital requirements) reduces the on-site distillery concept to white-label production at an established Vancouver Island distillery. Level 2 — VICSS cooperative governance attenuates competitive variety among Island distillers into structural collaboration. The Clearwater Spirits five-expression brand family instantiates the |F|D|S|L| schema at the product design level — each expression a Wartofsky tertiary artifact encoding the collective memory of a site.</p>
-        </div>
-        <div class="project-tags">
-          <span class="tag tag-r">Resources</span>
-          <span class="tag tag-p">Processes</span>
-          <span class="tag tag-v">Values</span>
-          <span class="tag">Two-Level Beer/Ashby Attenuation</span>
-          <span class="tag">Clearwater Spirits · |F|D|S|L|</span>
-          <span class="tag">NIC CARTI · Carleton TIM MOU</span>
-          <span class="tag">Chapter 5 · Dissertation</span>
-        </div>
-        <div class="project-links">
-          <a href="https://projects.crooney.ca/funding/overview.html" class="project-link link-mitacs">Funding overview →</a>
-          <a href="https://vanisle.crooney.ca" class="project-link link-site">VanIsle →</a>
-        </div>
+    <div class="rq">
+      <div class="rq-label">Central Research Question</div>
+      <div class="rq-body">
+        Does a community league model for live music — in which catalogue management is distributed 
+        across a registered musician network and coordinated by an AI-assisted optimization engine — 
+        sustain the participatory live karaoke format better than a single band attempting an 
+        expansive catalogue alone?
       </div>
-
-      <!-- LODGE AND LAB -->
-      <div class="project-card reveal">
-        <div class="project-header">
-          <div class="project-title-group">
-            <p class="project-umbrella" style="color: var(--color-resources);">MML Partnership · VICSS · VanIsle · Campbell River · Light Register</p>
-            <h3 class="project-title">Lodge and Lab — AI Previsualization for Heritage Hospitality</h3>
-          </div>
-          <span class="mitacs-badge badge-pipeline">Mitacs · Pipeline</span>
-        </div>
-        <div class="project-body">
-          <p>Mitacs Accelerate Entrepreneur application with Multimodal Media Lab (MML, Vancouver) as industry partner. Research question: what systematic AI previsualization methodology creates measurable decision-making and marketing value for small heritage hospitality proprietors — and under what conditions does that methodology generate cross-promotional reach that extends beyond the immediate client relationship?</p>
-          <p>Case study: Campbell River Lodge / Goose &amp; Gander, Campbell River BC — previsualized as <em>Lodge and Lab</em>, with River Lodge Whisky and the Clearwater Spirits distillery concept as the brand content. The previsualization suite functions simultaneously as a feasibility instrument (evaluating on-site distillery viability before capital commitment), a marketing asset (the renders are the tourism promotion), and an MML portfolio case study (generating discovery reach for the Campbell River region among MML's hospitality client network). A four-venue ClearLED integration evaluation — Campbell River Lodge, Naturally Pacific Resort, Match Public House / Chances Casino, Painter's Lodge — forms the comparative research component.</p>
-          <p>Outputs: peer-reviewed paper submitted to TIM Review (Carleton); previsualization deliverable suite D1–D9 (bottle/label, interior renders, stage design, ClearLED integration, distillery vision); methodology documentation for replication across BC destination hospitality venues.</p>
-        </div>
-        <div class="project-tags">
-          <span class="tag tag-r">MML · Industry Partner</span>
-          <span class="tag tag-p">Pre-Visualization · AI Pipeline</span>
-          <span class="tag">Campbell River Lodge · Goose &amp; Gander</span>
-          <span class="tag">River Lodge Whisky · Clearwater Spirits</span>
-          <span class="tag">VICSS · VanIsle Spirits</span>
-          <span class="tag">ClearLED · Evoke · Naturally Pacific</span>
-          <span class="tag tag-v">TIM Review · Peer-Reviewed Output</span>
-          <span class="tag">1730 Technology Consulting Inc.</span>
-        </div>
-        <div class="project-links">
-          <span class="link-pending">↳ Mitacs application in development — awaiting MML partner confirmation</span>
-        </div>
-      </div>
-
     </div>
-  </section>
 
-  <!-- SYSTEM COMPOSITIONS -->
-  <section id="compositions">
-    <div class="section-header reveal">
-      <p class="section-eyebrow">System Compositions · Where Projects Combine</p>
-      <h2 class="section-title">Composed Architectures</h2>
-      <p class="section-desc">Some projects gain new meaning when composed. Each composition produces a system architecture neither component could realize alone. Working names provisional.</p>
+    <div class="prose">
+      <p>
+        <strong>The diagnostic origin:</strong> Rockaoke Live! feat. The Naturals (2014–2024) 
+        maintained a catalogue of over 500 songs — simultaneously its primary value proposition 
+        and its central operational liability. By IDEO's DFV framework the system was viable, 
+        feasible, and desirable right up until collapse. <strong>Flynn (forthcoming-a)</strong> 
+        identifies a <strong>Processes-layer failure misread by DFV's miscategorized lenses</strong> — 
+        the infrastructure required to sustain the format didn't yet exist. This is not a concept 
+        failure. It is a Resources-layer failure in a format the market has since validated at scale.
+      </p>
+      <p>
+        <strong>The architectural response:</strong> Audiofish™ is a participatory music trivia 
+        and Go Fish-based card game platform — music knowledge earns credits redeemable for 
+        performance slots, prize payouts, or charitable contribution to confirmed charity partner 
+        <strong>HeadsUpGuys Society</strong>. Megaband™ is the advanced tier: once a regional 
+        musician registry reaches critical mass, an optimization engine assembles the best available 
+        lineup song-by-song from the community. The system achieves requisite variety by 
+        <strong>distribution</strong>, not attenuation — the catalogue is the community.
+      </p>
+      <p>
+        BC proof-of-concept proceeds in two phases: Phase 3a at <strong>The Alcove Lounge, 
+        Vancouver</strong> (May–September) and <strong>Match Public House, Campbell River</strong> 
+        (October–February). Phase 3b at <strong>Painter's Lodge, Campbell River</strong> is the 
+        identified Phase 2 deployment site. Technology partners include <strong>Singa</strong> 
+        (karaoke catalogue), <strong>Soundtrap</strong> (musician onboarding), and 
+        <strong>fish.audio</strong> (AI voice infrastructure — proposed for emcee and coordination 
+        layer; design intent, pre-deployment).
+      </p>
     </div>
-    <div class="compositions-grid reveal">
 
-      <div class="composition-card">
-        <p class="composition-name">IslandCamp × VICSS</p>
-        <p class="composition-operator">×</p>
-        <p class="composition-title">VanIsleCamp</p>
-        <p class="composition-desc">Car-free camping experiences on Vancouver Island embedded with craft distillery visits — converting place-based experience into export-ready Clearwater Spirits expressions as coherent collectible artifacts. The |F|D|S|L| schema operating at the tourism product design level.</p>
+    <div class="detail">
+      <div class="meta">
+        <div class="meta-title">Project Parameters</div>
+        <div class="meta-row"><div class="mk">Industry Partner</div><div class="mv">1730 Technology Consulting Inc.</div></div>
+        <div class="meta-row"><div class="mk">Supervisor</div><div class="mv p">Eduardo Bailetti · Carleton TIM</div></div>
+        <div class="meta-row"><div class="mk">HQP</div><div class="mv p">TBD</div></div>
+        <div class="meta-row"><div class="mk">Phase 3a</div><div class="mv">Alcove Lounge (Vancouver) + Match Pub (Campbell River)</div></div>
+        <div class="meta-row"><div class="mk">Phase 3b</div><div class="mv">Painter's Lodge, Campbell River</div></div>
+        <div class="meta-row"><div class="mk">Charity Partner</div><div class="mv c">HeadsUpGuys Society · Confirmed</div></div>
       </div>
-
-      <div class="composition-card">
-        <p class="composition-name">IslandCamp × Megaband</p>
-        <p class="composition-operator">×</p>
-        <p class="composition-title">CampfireJam</p>
-        <p class="composition-desc">Camping systems integrated with distributed cultural performances across Vancouver Island — the access layer composed with the Sound register cult value layer. Megaband's musician registry provides the cultural programme; IslandCamp provides the place-based logistics.</p>
+      <div class="lens-align">
+        <div class="la-title">Coordinated Lens Alignment</div>
+        <div class="la-row">
+          <div class="la-key">RPV · Lens 1</div>
+          <div class="la-val rpv-c">Processes Layer</div>
+          <div class="la-sub">Community registry as coordination infrastructure replacing single-band catalogue management</div>
+        </div>
+        <div class="la-row">
+          <div class="la-key">|F|D|S|L| · Lens 2</div>
+          <div class="la-val fdsl-c">|S| Sound</div>
+          <div class="la-sub">Live music as primary register; Light as the Megaband™ horizon tier</div>
+        </div>
+        <div class="la-row">
+          <div class="la-key">S/E/E/D Phase</div>
+          <div class="la-val ev-c">Evaluate → Design</div>
+          <div class="la-sub">Paper prototype → BC digital deployment → Mitacs submitted</div>
+        </div>
       </div>
-
-      <div class="composition-card">
-        <p class="composition-name">TableSet × VICSS</p>
-        <p class="composition-operator">×</p>
-        <p class="composition-title">Clearwater Table</p>
-        <p class="composition-desc">Private dining experiences at Campbell River Lodge with Clearwater Spirits pairings — chef and bartender as matched professionals governed by TableSet, with Clearwater expressions as the Drink register tertiary artifact frame. The Food + Drink |F|D|S|L| registers operating with distillery-grounded cult value.</p>
-      </div>
-
     </div>
-  </section>
+
+    <div class="ev-block">
+      <div class="ev-block-hd">Exchange Value Connection — Flynn (2006) Three-Lens Framework</div>
+      <div class="ev-block-body">
+        Audiofish™ is the institutional-scale version of the same exchange value mechanism 
+        operating on crooney.ca at micro scale. On crooney.ca: cult value = George Crooney's 
+        discretion in the room; exhibition value = the Soundtrap session; exchange value = the 
+        donation-as-request. Here: cult value = the practitioner-researcher's operational knowledge; 
+        exhibition value = the published paper and platform deployment; 
+        <strong>exchange value = the funder's contribution to the research output they want 
+        to see produced</strong>. The governance problem — who controls the line between the 
+        reproducible output and the autopoietic identity that produced it — is identical at both scales.
+      </div>
+    </div>
+
+    <div class="contrib">
+      <div class="contrib-hd">
+        <span class="contrib-label">Contribution Pathway — Invest in This Research</span>
+        <span class="pill note">Alongside Mitacs · Not a Replacement</span>
+      </div>
+      <div class="tiers">
+        <div class="tier">
+          <div class="tier-amt">$500</div>
+          <div class="tier-name">Research Partner</div>
+          <div class="tier-desc">Access to project update feed as Mitacs milestones are reached. Contribution documented.</div>
+        </div>
+        <div class="tier">
+          <div class="tier-amt">$2,500</div>
+          <div class="tier-name">Field Site Sponsor</div>
+          <div class="tier-desc">Research Partner access + named acknowledgement in published deliverables. Early access to findings.</div>
+        </div>
+        <div class="tier">
+          <div class="tier-amt">$10,000</div>
+          <div class="tier-name">Co-Investment</div>
+          <div class="tier-desc">Aligned with Mitacs co-investment logic. Named industry partner status. Direct researcher access.</div>
+        </div>
+      </div>
+      <div class="contrib-ft">
+        <span class="contrib-note">This is a structured exchange, not a donation. You invest in the research output you want to see produced.</span>
+        <a href="mailto:joel@1730technology.com" class="contrib-cta">Discuss a Contribution →</a>
+      </div>
+    </div>
+
+    <div class="outcomes">
+      <div class="outcomes-label">Named Outcomes</div>
+      <div class="outcome">
+        <span class="oa">→</span>
+        <span class="ot"><strong>Mitacs Accelerate Entrepreneur</strong> — application in progress. <em>Miscategorized by Design: A Theoretical Correction to IDEO's DFV Framework Using Christensen's RPV Theory.</em> Peer-reviewed journal article + empirical platform deployment as co-equal outputs.</span>
+      </div>
+      <div class="outcome">
+        <span class="oa">→</span>
+        <span class="ot"><strong>Don Norman Design Award 2026 — Education Category</strong> (dnda.design). Audiofish™ / Megaband™ entered as DNDA26 candidate via the HCD+ methodology framework. The paper prototype phase is where the design earns its HCD+ credentials.</span>
+      </div>
+      <div class="outcome">
+        <span class="oa">→</span>
+        <span class="ot"><strong>PhD Paper 1 (Flynn forthcoming-a)</strong> — RPV reordering of the DFV framework, grounded in the Rockaoke Live! feat. The Naturals diagnostic. Feeds into the integrated article thesis (Flynn 2026).</span>
+      </div>
+    </div>
+
+  </div><!-- /card.lead -->
+
+  <!-- SECTION: ACTIVE -->
+  <div class="sec" style="margin-top:1rem;">
+    <div class="sec-kicker">Active Research Projects</div>
+    <h2>Mitacs Accelerate · Applications Structuring</h2>
+  </div>
+
+  <!-- PROJECT 02 -->
+  <div class="card">
+
+    <div class="card-head">
+      <div class="card-head-left">
+        <span class="card-num">02</span>
+        <div>
+          <div class="card-title">The National Archives —<br><em>Live Performance Recording as Research Dataset</em></div>
+          <div class="card-org">Multimodal Media Lab (MML) · Straight & Narrow Artist Management</div>
+        </div>
+      </div>
+      <div class="card-badges">
+        <span class="badge b-evaluate"><span class="badge-dot"></span>Evaluate</span>
+      </div>
+    </div>
+
+    <div class="card-tags">
+      <span class="pill fdsl">|S| Sound</span>
+      <span class="pill fdsl-l">|L| Light</span>
+      <span class="pill rpv">RPV · Resources Layer</span>
+      <span class="pill mitacs">Mitacs Accelerate Entrepreneur</span>
+    </div>
+
+    <div class="rq">
+      <div class="rq-label">Research Question</div>
+      <div class="rq-body">
+        What are the comparative value propositions — restoration, enhancement, and commercialization — 
+        for a 20-year archival dataset of live performance recordings, and how does the RPV framework 
+        diagnose the organizational capacity required to realize each pathway?
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>
+        The National Archives is a 20-year dataset of live performance recordings from the Commodore 
+        Ballroom, Vancouver — captured by a student team during Joel Flynn's SFU teaching position, 
+        which enabled the multi-camera capability the project required. <strong>Brandon Reid</strong> 
+        (Straight & Narrow Artist Management; former sound engineer for The National) anchors the 
+        commercial development relationship.
+      </p>
+      <p>
+        The research activates the <strong>Resources layer</strong>: the archival dataset is the 
+        resource pool. What organizational processes and value architecture transform a 
+        consumer-recorded archive into a commercially and academically viable asset — and what 
+        different answers emerge depending on whether restoration, enhancement, or commercialization 
+        governs the objective? The project also activates the <strong>Light register</strong>: 
+        can archival video from a live performance context be enhanced and repurposed as an 
+        immersive LBE experience?
+      </p>
+    </div>
+
+    <div class="detail">
+      <div class="meta">
+        <div class="meta-title">Project Parameters</div>
+        <div class="meta-row"><div class="mk">Industry Partner</div><div class="mv">Brandon Reid · Straight & Narrow Artist Mgmt</div></div>
+        <div class="meta-row"><div class="mk">HQP</div><div class="mv c">Kendyll Carr · Proposed</div></div>
+        <div class="meta-row"><div class="mk">Supervisor</div><div class="mv p">Dr. Parra Pennefather (on leave Jan 2027) · Contingency TBD</div></div>
+        <div class="meta-row"><div class="mk">Institution</div><div class="mv">MML · 375 Water St Room 645, Vancouver</div></div>
+        <div class="meta-row"><div class="mk">Output Domain</div><div class="mv">thecommodore.com</div></div>
+        <div class="meta-row"><div class="mk">CCPC Vehicle</div><div class="mv">1730 Technology Consulting Inc.</div></div>
+      </div>
+      <div class="lens-align">
+        <div class="la-title">Coordinated Lens Alignment</div>
+        <div class="la-row">
+          <div class="la-key">RPV · Lens 1</div>
+          <div class="la-val rpv-c">Resources Layer</div>
+          <div class="la-sub">Archival dataset as resource pool — what capacity is required to transform it?</div>
+        </div>
+        <div class="la-row">
+          <div class="la-key">|F|D|S|L| · Lens 2</div>
+          <div class="la-val fdsl-c">|S| Sound + |L| Light</div>
+          <div class="la-sub">Sound primary; Light as enhancement and LBE repurposing potential</div>
+        </div>
+        <div class="la-row">
+          <div class="la-key">S/E/E/D Phase</div>
+          <div class="la-val" style="color:var(--gold); font-family:'Plus Jakarta Sans',sans-serif; font-size:0.82rem; font-weight:700;">Evaluate</div>
+          <div class="la-sub">Mitacs proposal developed · Pending submission · Supervisory confirmation required</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ev-block">
+      <div class="ev-block-hd">Exchange Value Connection — Flynn (2006) Three-Lens Framework</div>
+      <div class="ev-block-body">
+        The archival dataset is <strong>exhibition value</strong> — the reproducible copy that circulates. 
+        The restoration and enhancement process is where <strong>cult value</strong> (the original 
+        irreplaceable encounter between performer and room) is recovered or lost. The commercialization 
+        question is the <strong>exchange value governance problem</strong>: who controls what the archive 
+        is worth, on what terms, and whose consent architecture governs access to the original encounter.
+      </div>
+    </div>
+
+    <div class="contrib">
+      <div class="contrib-hd">
+        <span class="contrib-label">Contribution Pathway — Invest in This Research</span>
+        <span class="pill note">Alongside Mitacs · Not a Replacement</span>
+      </div>
+      <div class="tiers">
+        <div class="tier">
+          <div class="tier-amt">$500</div>
+          <div class="tier-name">Research Partner</div>
+          <div class="tier-desc">Access to project update feed as milestones are reached.</div>
+        </div>
+        <div class="tier">
+          <div class="tier-amt">$2,500</div>
+          <div class="tier-name">Archive Sponsor</div>
+          <div class="tier-desc">Named acknowledgement in deliverables. Early access to restoration findings.</div>
+        </div>
+        <div class="tier">
+          <div class="tier-amt">$10,000</div>
+          <div class="tier-name">Co-Investment</div>
+          <div class="tier-desc">Named industry partner status. Input into the value proposition architecture.</div>
+        </div>
+      </div>
+      <div class="contrib-ft">
+        <span class="contrib-note">A structured exchange. You invest in the research output and value pathway you want to see realized.</span>
+        <a href="mailto:joel@1730technology.com" class="contrib-cta">Discuss a Contribution →</a>
+      </div>
+    </div>
+
+    <div class="outcomes">
+      <div class="outcomes-label">Named Outcomes</div>
+      <div class="outcome">
+        <span class="oa">→</span>
+        <span class="ot"><strong>Mitacs Accelerate Entrepreneur</strong> — proposal developed, pending submission. Supervisory confirmation required before filing.</span>
+      </div>
+      <div class="outcome">
+        <span class="oa">→</span>
+        <span class="ot"><strong>PhD Paper 2 / Chapter 4 contribution</strong> — archival dataset as RPV Resources-layer case study. Sound + Light register activation.</span>
+      </div>
+      <div class="outcome">
+        <span class="oa">→</span>
+        <span class="ot"><strong>thecommodore.com</strong> — public-facing project domain for commercialization outputs.</span>
+      </div>
+    </div>
+
+  </div><!-- /card 02 -->
+
+  <!-- PROJECT 03 -->
+  <div class="card">
+
+    <div class="card-head">
+      <div class="card-head-left">
+        <span class="card-num">03</span>
+        <div>
+          <div class="card-title">Light Register / LBE —<br><em>Designed Visual Engagement in Hospitality Venues</em></div>
+          <div class="card-org">Multimodal Media Lab (MML) · evoke.ca · Gateway Casinos</div>
+        </div>
+      </div>
+      <div class="card-badges">
+        <span class="badge b-explore"><span class="badge-dot"></span>Explore → Evaluate</span>
+      </div>
+    </div>
+
+    <div class="card-tags">
+      <span class="pill fdsl-l">|L| Light</span>
+      <span class="pill rpv">RPV · Processes Layer</span>
+      <span class="pill mitacs" style="opacity:0.65;">Mitacs — Proposal In Development</span>
+    </div>
+
+    <div class="rq">
+      <div class="rq-label">Research Question</div>
+      <div class="rq-body">
+        How can the existing AV and lighting infrastructure of a restaurant or lounge be used to 
+        create designed visual engagement as an add-on layer to the Food, Drink, and Sound 
+        experience — and under what conditions does this constitute a designed |L| Light register 
+        in the |F|D|S|L| schema?
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>
+        The Light register is architecturally dependent: Sound must exist first. Light restructures 
+        perception of Sound without displacing it. This is the |F|D|S|L| schema's foundational 
+        principle, confirmed in the prior art of the <strong>Desolation Sound System</strong> 
+        (Flynn, 2006 MASc thesis, Artifact 5.12) — audio primary, sequential visual chapters as 
+        the Light layer — and theoretically grounded in Berger's <em>Ways of Seeing</em> (1972) 
+        and Vertov's (1923) mechanical eye.
+      </p>
+      <p>
+        Two deployment tracks: (1) programming and coordinating <strong>existing AV and lighting 
+        infrastructure</strong>; (2) introducing <strong>portable or temporary equipment</strong> 
+        for venues without sufficient built-in infrastructure. <strong>evoke.ca</strong> (Gateway 
+        Casinos / Match Pub and Eatery, Campbell River) is the identified industry partner. 
+        <strong>ClearLED transparent LED</strong> — theoretically motivated by Berger's reciprocity 
+        principle — is an active technology integration thread.
+      </p>
+    </div>
+
+    <div class="detail">
+      <div class="meta">
+        <div class="meta-title">Project Parameters</div>
+        <div class="meta-row"><div class="mk">Industry Partners</div><div class="mv">MML + evoke.ca (Gateway Casinos)</div></div>
+        <div class="meta-row"><div class="mk">Preferred HQP</div><div class="mv p">Kevin Friel · Pending availability</div></div>
+        <div class="meta-row"><div class="mk">Supervisor</div><div class="mv p">TBD</div></div>
+        <div class="meta-row"><div class="mk">Technology</div><div class="mv">ClearLED Transparent LED (active thread)</div></div>
+        <div class="meta-row"><div class="mk">Field Site</div><div class="mv">Match Public House, Campbell River</div></div>
+        <div class="meta-row"><div class="mk">Prior Art</div><div class="mv">Desolation Sound System · Flynn (2006) Artifact 5.12</div></div>
+      </div>
+      <div class="lens-align">
+        <div class="la-title">Coordinated Lens Alignment</div>
+        <div class="la-row">
+          <div class="la-key">RPV · Lens 1</div>
+          <div class="la-val rpv-c">Processes Layer</div>
+          <div class="la-sub">AV/lighting infrastructure as coordination and execution layer enabling the Light register</div>
+        </div>
+        <div class="la-row">
+          <div class="la-key">|F|D|S|L| · Lens 2</div>
+          <div class="la-val fdsl-c">|L| Light</div>
+          <div class="la-sub">Value-adding layer; Sound must precede. Light restructures perception without displacing it.</div>
+        </div>
+        <div class="la-row">
+          <div class="la-key">S/E/E/D Phase</div>
+          <div class="la-val ex-c">Explore → Evaluate</div>
+          <div class="la-sub">Partners identified · Proposal in development · Partner confirmation before submission</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ev-block">
+      <div class="ev-block-hd">Exchange Value Connection — Flynn (2006) Three-Lens Framework</div>
+      <div class="ev-block-body">
+        The Light register adds <strong>exhibition value</strong> to the live encounter without 
+        displacing the <strong>cult value</strong> of the Sound layer — this is the |F|D|S|L| 
+        theoretical claim operating in a venue context. The funder investing in Light register 
+        infrastructure is investing in the designed amplification of the encounter's 
+        <strong>exchange value</strong>: the mechanism by which the irreplaceable experience 
+        circulates beyond the room.
+      </div>
+    </div>
+
+    <div class="contrib">
+      <div class="contrib-hd">
+        <span class="contrib-label">Contribution Pathway — Invest in This Research</span>
+        <span class="pill note">Proposal In Development · Discuss Early</span>
+      </div>
+      <div class="tiers">
+        <div class="tier">
+          <div class="tier-amt">$500</div>
+          <div class="tier-name">Research Partner</div>
+          <div class="tier-desc">Access to project update feed when Mitacs begins.</div>
+        </div>
+        <div class="tier">
+          <div class="tier-amt">$2,500</div>
+          <div class="tier-name">Venue Sponsor</div>
+          <div class="tier-desc">Named in field site deployment documentation. Early access to LBE design findings.</div>
+        </div>
+        <div class="tier">
+          <div class="tier-amt">$10,000</div>
+          <div class="tier-name">Co-Investment</div>
+          <div class="tier-desc">Input into deployment site selection and AV infrastructure design decisions. Named partner status.</div>
+        </div>
+      </div>
+      <div class="contrib-ft">
+        <span class="contrib-note">Early contribution discussions welcome — partner input is part of the design process.</span>
+        <a href="mailto:joel@1730technology.com" class="contrib-cta">Discuss a Contribution →</a>
+      </div>
+    </div>
+
+    <div class="outcomes">
+      <div class="outcomes-label">Named Outcomes</div>
+      <div class="outcome">
+        <span class="oa">→</span>
+        <span class="ot"><strong>Mitacs Accelerate</strong> — proposal in development. Partner confirmation required before submission.</span>
+      </div>
+      <div class="outcome">
+        <span class="oa">→</span>
+        <span class="ot"><strong>PhD Paper 3</strong> — Light register in hospitality LBE contexts. Engeström Change Laboratory framing.</span>
+      </div>
+      <div class="outcome">
+        <span class="oa">→</span>
+        <span class="ot"><strong>Painter's Lodge Phase 2</strong> — identified subsequent deployment site once Match Public House proof-of-concept is established.</span>
+      </div>
+    </div>
+
+  </div><!-- /card 03 -->
+
+  <!-- AI TRANSLATION LAYER -->
+  <div class="ai-layer">
+    <div class="ai-hd">
+      <div>
+        <div class="ai-eyebrow">Exchange Value Amplifier · In Development</div>
+        <div class="ai-title">AI Translation Layer — Reducing Bureaucratic Friction</div>
+      </div>
+      <span class="badge b-explore" style="flex-shrink:0;"><span class="badge-dot"></span>Buildable · Pending Card Lock</span>
+    </div>
+    <div class="ai-grid">
+      <div class="ai-col">
+        <div class="ai-col-label">What It Does</div>
+        <div class="ai-col-body">
+          <p>The AI component increases exchange value by reducing the bureaucratic friction 
+          between a funder's interest and a matched research project. It translates 
+          <strong>funder inputs</strong> (sector, geography, research focus, investment level) 
+          into matched project recommendations and generates a plain-language project brief 
+          tailored to the funder's institutional context — not academic jargon.</p>
+          <p>It also produces a contribution confirmation that documents the exchange in terms 
+          legible to the funder's reporting requirements, and generates structured progress 
+          updates when Mitacs milestones are reached.</p>
+        </div>
+      </div>
+      <div class="ai-col">
+        <div class="ai-col-label">The Theoretical Claim</div>
+        <div class="ai-col-body">
+          <p>AI as <strong>exchange value amplifier</strong> in the Benjamin/Flynn framework. 
+          The AI layer does not produce the research (cult value) or the published output 
+          (exhibition value) — it reduces the transaction cost of placing a price on access 
+          to the encounter between funder and practitioner-researcher.</p>
+          <p>This is a theoretical contribution in itself: AI operating at the exchange value 
+          layer rather than at the cult value or exhibition value layers is architecturally 
+          distinct from AI as creative or publishing tool. Hold for phd.crooney.ca and 
+          ARIES framing.</p>
+        </div>
+      </div>
+    </div>
+    <div class="ai-ft">
+      Build status: Claude API integration designed · Pending project card design lock ·
+      NFT / tax receipt feasibility: theoretical — same open question as HeadsUpGuys on crooney.ca; resolve in parallel
+    </div>
+  </div>
+
+  <!-- PIPELINE -->
+  <div class="pipeline">
+    <div class="pipeline-label">Lab → Projects → PhD — The Autopoietic Return</div>
+    <div class="p-flow">
+      <div class="p-node">
+        <div class="p-stage">Explore</div>
+        <div class="p-name">lab.crooney.ca</div>
+        <div class="p-sub">In the wild — Doctor Obscurity layer</div>
+      </div>
+      <div class="p-sep">→</div>
+      <div class="p-node here">
+        <div class="p-stage">Evaluate → Design</div>
+        <div class="p-name">projects.crooney.ca</div>
+        <div class="p-sub">Formalized — Mitacs + exchange value mechanism</div>
+      </div>
+      <div class="p-sep">→</div>
+      <div class="p-node">
+        <div class="p-stage">Design</div>
+        <div class="p-name">phd.crooney.ca</div>
+        <div class="p-sub">Published outputs — integrated thesis</div>
+      </div>
+      <div class="p-sep">→</div>
+      <div class="p-node">
+        <div class="p-stage">Re-invest (Study)</div>
+        <div class="p-name">aries.crooney.ca</div>
+        <div class="p-sub">Applied pedagogy — the autopoietic return</div>
+      </div>
+    </div>
+  </div>
 
 </main>
 
-<footer>
-  <div class="site-footer">
-    <span class="footer-note">projects.crooney.ca · 1730 Technology Consulting Inc. · Stratalab™</span>
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-id">
+      <div>Crooney Interactive · Joel Flynn · 1730 Technology Consulting Inc.</div>
+      <div>Multimodal Media Lab · 375 Water Street Room 645, Vancouver BC</div>
+      <div>joel@1730technology.com</div>
+    </div>
     <div class="footer-links">
-      <a href="https://lab.crooney.ca" class="footer-link">Lab</a>
-      <a href="https://phd.crooney.ca" class="footer-link">PhD</a>
-      <a href="https://aries.crooney.ca" class="footer-link">ARIES</a>
-      <a href="https://crooney.ca" class="footer-link">crooney.ca</a>
+      <a href="https://lab.crooney.ca">Lab</a>
+      <a href="https://phd.crooney.ca">PhD</a>
+      <a href="https://aries.crooney.ca">ARIES</a>
+      <a href="https://vanisle.crooney.ca">Van Isle</a>
+      <a href="https://dnda.design">DNDA26</a>
+      <a href="https://mitacs.ca">Mitacs</a>
     </div>
   </div>
 </footer>
 
-<script>
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  const sections = ['stratalab', 'vanisle', 'compositions'];
-  const navLinks = document.querySelectorAll('.subnav-link');
-  const sectObserver = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        const match = document.querySelector(`.subnav-link[href="#${e.target.id}"]`);
-        if (match) match.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  sections.forEach(id => { const el = document.getElementById(id); if (el) sectObserver.observe(el); });
-</script>
 </body>
 </html>
